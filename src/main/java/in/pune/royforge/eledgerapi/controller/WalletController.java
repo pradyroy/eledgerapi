@@ -17,7 +17,7 @@ public class WalletController {
 	WalletService walletEntityService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void createaaccount(@RequestBody Wallet wallet) {
+	public void createWallet(@RequestBody Wallet wallet) {
 		walletEntityService.save(wallet);
 	}
 }
