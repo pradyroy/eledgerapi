@@ -8,7 +8,7 @@ public class TransactionString {
 
 	private long walletId;
 
-	private String landlordId;
+	private String lenderId;
 
 	private String borrowerId;
 
@@ -34,12 +34,12 @@ public class TransactionString {
 		this.walletId = walletId;
 	}
 
-	public String getLandlordId() {
-		return landlordId;
+	public String getlenderId() {
+		return lenderId;
 	}
 
-	public void setLandlordId(String landlordId) {
-		this.landlordId = landlordId;
+	public void setlenderId(String lenderId) {
+		this.lenderId = lenderId;
 	}
 
 	public String getBorrowerId() {
