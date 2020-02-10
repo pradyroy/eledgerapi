@@ -19,7 +19,7 @@ public class WalletEntity implements Serializable {
 	private Long walletId;
 
 	@Column
-	private String landlordId;
+	private String lenderId;
 
 	@Column
 	private String borrowId;
@@ -43,12 +43,12 @@ public class WalletEntity implements Serializable {
 		this.walletId = walletId;
 	}
 
-	public String getLandlordId() {
-		return landlordId;
+	public String getLenderId() {
+		return lenderId;
 	}
 
-	public void setLandlordId(String landlordId) {
-		this.landlordId = landlordId;
+	public void setLenderId(String lenderId) {
+		this.lenderId = lenderId;
 	}
 
 	public String getBorrowId() {

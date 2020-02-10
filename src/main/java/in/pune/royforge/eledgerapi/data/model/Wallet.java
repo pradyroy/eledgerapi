@@ -6,13 +6,13 @@ public class Wallet {
 
 	private Long walletId;
 
-	private String landlordId;
+	private String lenderId;
 
 	private String borrowId;
 
-	private Double balance;
-
 	private Double amount;
+
+	private TransactionType txnType;
 
 	private Date createdDate;
 
@@ -26,12 +26,12 @@ public class Wallet {
 		this.walletId = walletId;
 	}
 
-	public String getLandlordId() {
-		return landlordId;
+	public String getLenderId() {
+		return lenderId;
 	}
 
-	public void setLandlordId(String landlordId) {
-		this.landlordId = landlordId;
+	public void setLenderId(String lenderId) {
+		this.lenderId = lenderId;
 	}
 
 	public String getBorrowId() {
@@ -42,20 +42,20 @@ public class Wallet {
 		this.borrowId = borrowId;
 	}
 
-	public Double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(Double balance) {
-		this.balance = balance;
-	}
-
 	public Double getAmount() {
 		return amount;
 	}
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+
+	public TransactionType getTxnType() {
+		return txnType;
+	}
+
+	public void setTxnType(TransactionType txnType) {
+		this.txnType = txnType;
 	}
 
 	public Date getCreatedDate() {
