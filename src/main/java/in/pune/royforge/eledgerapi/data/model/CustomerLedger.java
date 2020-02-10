@@ -24,26 +24,26 @@ public class CustomerLedger implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column
 	private String merchantid;
-	
+
 	@Column
 	private String customerid;
-	
+
 	@Column
 	private Double credit;
-	
+
 	@Column
 	private Double debit;
-	
+
 	@Column
 	private Double balance;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column
 	private Date timestamp;
-	
+
 	@Column
 	private String comments;
 
