@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.pune.royforge.eledgerapi.data.entity.TransactionStringEntity;
 import in.pune.royforge.eledgerapi.data.model.CustomerLedger;
 import in.pune.royforge.eledgerapi.data.repo.CustomerLedgerRepository;
+import in.pune.royforge.eledgerapi.data.repo.TransactionLogRepo;
 
 /**
  * 
@@ -25,6 +27,7 @@ import in.pune.royforge.eledgerapi.data.repo.CustomerLedgerRepository;
 public class EledgerController {	
 	
 	@Autowired
+	TransactionLogRepo transactionLogRepo;
 	CustomerLedgerRepository customerLedgerRepository;
 	
 	@RequestMapping(value="heartbeat",method = RequestMethod.GET)
@@ -96,5 +99,14 @@ public class EledgerController {
 		
 		return totalBalance;
 	}
+	
+	@RequestMapping(value = "transactionlog", method = RequestMethod.POST)
+	public TransactionStringEntity createTxn(@RequestBody TransactionStringEntity tt) {
+		Date currentDate = new Date();
+		tt.setDate(currentDate);
+		TransactionStringEntity tsr = transactionLogRepo.save(tt);
+		return tsr;
+	}
+	
 
 }
