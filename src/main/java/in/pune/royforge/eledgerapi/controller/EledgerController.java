@@ -101,11 +101,11 @@ public class EledgerController {
 	}
 	
 	@RequestMapping(value = "transactionlog", method = RequestMethod.POST)
-	public TransactionStringEntity createTxn(@RequestBody TransactionStringEntity tt) {
+	public TransactionStringEntity createTxn(@RequestBody TransactionStringEntity transactionStringEntity) {
 		Date currentDate = new Date();
-		tt.setDate(currentDate);
-		TransactionStringEntity tsr = transactionLogRepo.save(tt);
-		return tsr;
+		transactionStringEntity.setDate(currentDate);
+		TransactionStringEntity transactionLog = transactionLogRepo.save(transactionStringEntity);
+		return transactionLog;
 	}
 	
 

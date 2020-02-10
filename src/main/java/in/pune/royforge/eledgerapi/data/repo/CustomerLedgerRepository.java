@@ -16,7 +16,7 @@ public interface CustomerLedgerRepository extends PagingAndSortingRepository<Cus
 	
 	public Iterable<CustomerLedger> findByMerchantid(String merchantid);
 
-	public Iterable<TransactionStringEntity> findBytransactionId(long transactionId);
+	
 
 //	public TransactionStringEntity save(TransactionStringEntity customerLedger);
 
