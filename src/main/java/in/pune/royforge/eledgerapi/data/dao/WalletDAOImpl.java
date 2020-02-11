@@ -40,27 +40,30 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 		
 	@Override
-	public WalletData listOfWallet(){
-		WalletData walletData = new WalletData();
-		List<WalletEntity> listOfWallets = new ArrayList<WalletEntity>();
+	public List<WalletData> getWallets(){
+		List<WalletData> wallets = new ArrayList<>();
 		Iterable<WalletEntity> walletsList =  walletEntityRepository.findAll();
-			
 		for(WalletEntity walletEntity:walletsList) {
-			listOfWallets.add(walletEntity);
+			WalletData walletData = new WalletData();
+			setWalletData(walletEntity, walletData);
+			wallets.add(walletData);
 		}
-		
-		walletData.setListOfWallets(listOfWallets);
-		
-		return walletData;
-		
+		return wallets;
+	}
+
+	private void setWalletData(WalletEntity walletEntity, WalletData walletData) {
+		walletData.setBalance(walletEntity.getBalance());
+		walletData.setBorrowId(walletEntity.getBorrowId());
+		walletData.setCreatedDate(walletEntity.getCreatedDate());
+		walletData.setLenderId(walletEntity.getLenderId());
+		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
+		walletData.setWalletId(walletEntity.getWalletId());
 	}
 
 	@Override
 	public WalletData getAWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
-
 		WalletData walletData = new WalletData();
-
 		walletData.setWalletId(walletEntity.get().getWalletId());
 		walletData.setLenderId(walletEntity.get().getLenderId());
 		walletData.setBorrowId(walletEntity.get().getBorrowId());
@@ -70,6 +73,5 @@ public class WalletDAOImpl implements IWalletDAO {
 
 		return walletData;
 	}
+	
 }
-
-

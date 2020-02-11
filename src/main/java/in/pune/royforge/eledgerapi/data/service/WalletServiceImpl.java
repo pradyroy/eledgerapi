@@ -1,5 +1,7 @@
 package in.pune.royforge.eledgerapi.data.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import in.pune.royforge.eledgerapi.data.dao.IWalletDAO;
@@ -23,7 +25,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public WalletData listOfWallet() {
-		return walletEntityDAO.listOfWallet();
+	public List<WalletData> getWallets() {
+		return walletEntityDAO.getWallets();
 	}
 }

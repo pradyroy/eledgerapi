@@ -1,15 +1,10 @@
 package in.pune.royforge.eledgerapi.data.model;
 
-import java.util.List;
 import java.util.Date;
 
 
-import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
-
 public class WalletData {
 	
-	private List<WalletEntity> listOfWallets;
-
 	private Long walletId;
 
 	private String lenderId;
@@ -21,14 +16,6 @@ public class WalletData {
 	private Date createdDate;
 
 	private Date updatedDate;
-
-	public List<WalletEntity> getListOfWallets() {
-		return listOfWallets;
-	}
-
-	public void setListOfWallets(List<WalletEntity> listOfWallets2) {
-		this.listOfWallets = listOfWallets2;
-	}
 
 	public Long getWalletId() {
 		return walletId;
