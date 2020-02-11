@@ -40,7 +40,8 @@ public class TransactionEntity implements Serializable {
 	@Column
 	private Date date;
 	
-	private TransactionType type;
+	@Column
+	private String type;
 
 	public long getTransactionId() {
 		return transactionId;
@@ -98,17 +99,13 @@ public class TransactionEntity implements Serializable {
 		this.date = date;
 	}
 
-	public TransactionType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(TransactionType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
-	
-
 	
 	
 }

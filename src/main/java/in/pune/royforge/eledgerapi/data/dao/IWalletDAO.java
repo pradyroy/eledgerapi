@@ -1,9 +1,11 @@
 package in.pune.royforge.eledgerapi.data.dao;
 
-import in.pune.royforge.eledgerapi.data.model.Wallet;
+import in.pune.royforge.eledgerapi.data.model.WalletData;
+import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
 public interface IWalletDAO {
 
-	void save(Wallet wallet);
+	void save(WalletTransaction wallet);
 
+	WalletData getAWallet(Long walletId);
 }

@@ -2,7 +2,7 @@ package in.pune.royforge.eledgerapi.data.model;
 
 import java.util.Date;
 
-public class Wallet {
+public class WalletTransaction {
 
 	private Long walletId;
 
@@ -83,7 +83,5 @@ public class Wallet {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
-	
 
 }
