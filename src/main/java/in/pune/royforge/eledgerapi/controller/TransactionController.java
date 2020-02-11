@@ -8,17 +8,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.pune.royforge.eledgerapi.data.entity.TransactionStringEntity;
-import in.pune.royforge.eledgerapi.data.repo.TransactionLogRepo;
+import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
+import in.pune.royforge.eledgerapi.data.model.Wallet;
+import in.pune.royforge.eledgerapi.data.repo.TransactionLogRepository;
+import in.pune.royforge.eledgerapi.data.service.WalletService;
 
 @RestController
 @RequestMapping("/tansactionlog")
 
 public class TransactionController {
-	
+		
 	@Autowired
-	TransactionLogRepo transactionLogRepo;
-	
+	WalletService walletEntityService;
 
+//	@RequestMapping(method = RequestMethod.GET)
+//	public void transactionlog() {
+//		walletEntityService.save(wallet);
+//	}
+	
 
 }

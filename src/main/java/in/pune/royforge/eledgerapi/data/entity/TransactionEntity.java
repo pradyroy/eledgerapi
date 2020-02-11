@@ -1,22 +1,46 @@
-package in.pune.royforge.eledgerapi.data.model;
+package in.pune.royforge.eledgerapi.data.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TransactionString {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import in.pune.royforge.eledgerapi.data.model.TransactionType;
+
+@Entity
+public class TransactionEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long transactionId;
-
+	
+	@Column
 	private long walletId;
-
+	
+	@Column
 	private String lenderId;
 
+	@Column
 	private String borrowerId;
 
+	@Column
 	private String comment;
-
+	
+	@Column
 	private double amount;
-
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column
 	private Date date;
+	
+	private TransactionType type;
 
 	public long getTransactionId() {
 		return transactionId;
@@ -74,4 +98,17 @@ public class TransactionString {
 		this.date = date;
 	}
 
+	public TransactionType getType() {
+		return type;
+	}
+
+	public void setType(TransactionType type) {
+		this.type = type;
+	}
+	
+	
+	
+
+	
+	
 }
