@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
-import in.pune.royforge.eledgerapi.data.repo.TransactionLogRepository;
+import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
 import in.pune.royforge.eledgerapi.data.service.WalletService;
 
 @RestController
@@ -20,11 +20,6 @@ public class TransactionController {
 		
 	@Autowired
 	WalletService walletEntityService;
-
-//	@RequestMapping(method = RequestMethod.GET)
-//	public void transactionlog() {
-//		walletEntityService.save(wallet);
-//	}
 	
 
 }
