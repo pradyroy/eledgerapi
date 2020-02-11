@@ -1,39 +1,61 @@
 package in.pune.royforge.eledgerapi.data.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
-import in.pune.royforge.eledgerapi.data.model.Wallet;
+import in.pune.royforge.eledgerapi.data.model.WalletData;
+import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 import in.pune.royforge.eledgerapi.data.repo.WalletEntityRepository;
 
 @Repository
-public class WalletDAOImpl implements WalletDAO {
+public class WalletDAOImpl implements IWalletDAO {
 
 	@Autowired
 	WalletEntityRepository walletEntityRepository;
 
 	@Override
-	public void save(Wallet wallet) {
+	public void save(WalletTransaction walletTransaction) {
 
-		if (wallet.getWalletId() == null) {
+		if (walletTransaction.getWalletId() == null) {
 			WalletEntity walletEntity = new WalletEntity();
-			createWallet(walletEntity, wallet);
+			createWallet(walletEntity, walletTransaction);
 			WalletEntity walletEntityobj = walletEntityRepository.save(walletEntity);
 		}
 
 	}
 
-	private void createWallet(WalletEntity walletEntity, Wallet wallet) {
+	private void createWallet(WalletEntity walletEntity, WalletTransaction walletTransaction) {
 		Date currentDate = new Date();
-		walletEntity.setLenderId(wallet.getLenderId());
-		walletEntity.setBorrowId(wallet.getBorrowId());
-		walletEntity.setBalance(wallet.getAmount());
+		walletEntity.setLenderId(walletTransaction.getLenderId());
+		walletEntity.setBorrowId(walletTransaction.getBorrowId());
+		walletEntity.setBalance(walletTransaction.getAmount());
 		walletEntity.setCreatedDate(currentDate);
 		walletEntity.setUpdatedDate(currentDate);
-
+	}
+		
+	@Override
+	public WalletData listOfWallet(){
+		WalletData walletData = new WalletData();
+		List<WalletEntity> listOfWallets = new ArrayList<WalletEntity>();
+		Iterable<WalletEntity> walletsList =  walletEntityRepository.findAll();
+			
+		for(WalletEntity walletEntity:walletsList) {
+			listOfWallets.add(walletEntity);
+		}
+		
+		walletData.setListOfWallets(listOfWallets);
+		
+		return walletData;
+		
 	}
 
+
+
 }
+
+
