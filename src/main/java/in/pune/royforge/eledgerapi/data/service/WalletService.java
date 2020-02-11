@@ -9,4 +9,6 @@ public interface WalletService {
 
 	WalletData listOfWallet();
 
+
+	WalletData getAWallet(Long walletId);
 }

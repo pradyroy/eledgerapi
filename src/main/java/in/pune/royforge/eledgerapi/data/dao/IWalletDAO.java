@@ -6,7 +6,9 @@ import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 public interface IWalletDAO {
 
 	void save(WalletTransaction wallet);
+
 	
 	WalletData listOfWallet();
 	
+
 }

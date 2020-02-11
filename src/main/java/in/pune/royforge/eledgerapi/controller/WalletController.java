@@ -1,6 +1,7 @@
 package in.pune.royforge.eledgerapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ public class WalletController {
 	WalletService walletEntityService;
 
 	@RequestMapping(method = RequestMethod.POST)
+
 	public void createWallet(@RequestBody WalletTransaction walletTransaction) {
 		walletEntityService.save(walletTransaction);
 	}
@@ -25,5 +27,11 @@ public class WalletController {
 	@RequestMapping(method = RequestMethod.GET)
 	public WalletData list() {
 		return walletEntityService.listOfWallet();
+
+	}
+
+	@RequestMapping(value = "/{walletId}", method = RequestMethod.GET)
+	public WalletData getWallet(@PathVariable(value = "walletId") Long walletId) {
+		return walletEntityService.getAWallet(walletId);
 	}
 }

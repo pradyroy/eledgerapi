@@ -74,4 +74,5 @@ public class WalletTransaction {
 		this.updatedDate = updatedDate;
 	}
 
+
 }
