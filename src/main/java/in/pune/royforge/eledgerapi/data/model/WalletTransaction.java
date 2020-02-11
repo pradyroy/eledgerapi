@@ -2,7 +2,7 @@ package in.pune.royforge.eledgerapi.data.model;
 
 import java.util.Date;
 
-public class Wallet {
+public class WalletTransaction {
 
 	private Long walletId;
 
@@ -17,6 +17,8 @@ public class Wallet {
 	private Date createdDate;
 
 	private Date updatedDate;
+	
+	private String comment;
 
 	public Long getWalletId() {
 		return walletId;
@@ -74,4 +76,13 @@ public class Wallet {
 		this.updatedDate = updatedDate;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	
 }
