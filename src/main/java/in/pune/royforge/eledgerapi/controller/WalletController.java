@@ -25,7 +25,6 @@ public class WalletController {
 
 	@RequestMapping(value = "/{walletId}", method = RequestMethod.GET)
 	public WalletData getWallet(@PathVariable(value = "walletId") Long walletId) {
-		WalletData walletData = walletEntityService.getAWallet(walletId);
-		return walletData;
+		return walletEntityService.getAWallet(walletId);
 	}
 }

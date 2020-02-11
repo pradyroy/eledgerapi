@@ -15,7 +15,6 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public void save(WalletTransaction wallet) {
 		walletEntityDAO.save(wallet);
-
 	}
 
 	@Override
