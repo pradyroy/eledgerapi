@@ -3,6 +3,7 @@ package in.pune.royforge.eledgerapi.data.dao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,10 +27,10 @@ public class WalletDAOImpl implements IWalletDAO {
 			createWallet(walletEntity, walletTransaction);
 			WalletEntity walletEntityobj = walletEntityRepository.save(walletEntity);
 		}
-
 	}
 
 	private void createWallet(WalletEntity walletEntity, WalletTransaction walletTransaction) {
+
 		Date currentDate = new Date();
 		walletEntity.setLenderId(walletTransaction.getLenderId());
 		walletEntity.setBorrowId(walletTransaction.getBorrowId());
@@ -54,8 +55,21 @@ public class WalletDAOImpl implements IWalletDAO {
 		
 	}
 
+	@Override
+	public WalletData getAWallet(Long walletId) {
+		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 
+		WalletData walletData = new WalletData();
 
+		walletData.setWalletId(walletEntity.get().getWalletId());
+		walletData.setLenderId(walletEntity.get().getLenderId());
+		walletData.setBorrowId(walletEntity.get().getBorrowId());
+		walletData.setBalance(walletEntity.get().getBalance());
+		walletData.setCreatedDate(walletEntity.get().getCreatedDate());
+		walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+
+		return walletData;
+	}
 }
 
 

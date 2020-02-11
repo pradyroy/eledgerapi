@@ -9,4 +9,7 @@ public interface IWalletDAO {
 	
 	WalletData listOfWallet();
 	
+
+
+	WalletData getAWallet(Long walletId);
 }
