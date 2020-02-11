@@ -18,6 +18,8 @@ public class Wallet {
 
 	private Date updatedDate;
 
+	private String comment;
+
 	public Long getWalletId() {
 		return walletId;
 	}
@@ -73,5 +75,15 @@ public class Wallet {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
+	
 
 }
