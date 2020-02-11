@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import in.pune.royforge.eledgerapi.data.dao.WalletDAO;
+import in.pune.royforge.eledgerapi.data.dao.IWalletDAO;
 import in.pune.royforge.eledgerapi.data.model.Wallet;
 
 @Transactional
@@ -12,7 +12,7 @@ import in.pune.royforge.eledgerapi.data.model.Wallet;
 public class WalletServiceImpl implements WalletService {
 
 	@Autowired
-	private WalletDAO walletEntityDAO;
+	private IWalletDAO walletEntityDAO;
 
 	@Transactional
 	@Override

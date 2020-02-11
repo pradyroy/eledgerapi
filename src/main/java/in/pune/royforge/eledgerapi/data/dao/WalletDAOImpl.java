@@ -10,7 +10,7 @@ import in.pune.royforge.eledgerapi.data.model.Wallet;
 import in.pune.royforge.eledgerapi.data.repo.WalletEntityRepository;
 
 @Repository
-public class WalletDAOImpl implements WalletDAO {
+public class WalletDAOImpl implements IWalletDAO {
 
 	@Autowired
 	WalletEntityRepository walletEntityRepository;
