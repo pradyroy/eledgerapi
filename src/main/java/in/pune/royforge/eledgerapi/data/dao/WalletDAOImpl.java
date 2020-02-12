@@ -22,7 +22,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	@Autowired
 	WalletEntityRepository walletEntityRepository;
 	@Autowired
-	ITransactionLogRepository iTransactionLogRepository;
+	ITransactionLogRepository transactionLogRepository;
 
 	@Override
 
@@ -37,6 +37,7 @@ public class WalletDAOImpl implements IWalletDAO {
 
 		TransactionEntity transactionEntity = new TransactionEntity();
 		transactionLogCreate(transactionEntity, wallet, walletEntityobj.getWalletId());
+		transactionLogRepository.save(transactionEntity);
 
 	}
 
