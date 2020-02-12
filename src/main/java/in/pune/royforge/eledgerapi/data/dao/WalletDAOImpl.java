@@ -26,6 +26,11 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	@Override
 
+	/*
+	 * Input: save(WalletTransaction wallet) method is used to create or update the
+	 * wallet in the database. 
+	 * Output: save the walletEntity in the repository.
+	 */
 	public void save(WalletTransaction wallet) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
@@ -44,6 +49,11 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	}
 
+	/*
+	 * Input: createWallet([walletEntity], [walletTransaction]) method is used to
+	 * create the wallet in the database or to make entry in WalletEntity table.
+	 * Output: save the entries in walletEntity object.
+	 */
 	private void createWallet(WalletEntity walletEntity, WalletTransaction wallet) {
 		Date currentDate = new Date();
 		walletEntity.setLenderId(wallet.getLenderId());
@@ -53,6 +63,11 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletEntity.setUpdatedDate(currentDate);
 	}
 
+	/*
+	 * Input: updateWallet([walletEntity], [walletTransaction]) method is used to
+	 * update the wallet in the database by using specific walletId.
+	 * Output: save the entries in walletEntity object.
+	 */
 	private void updateWallet(WalletEntity walletEntity, WalletTransaction wallet) {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(wallet.getWalletId());
 		Date currentDate = new Date();
@@ -82,6 +97,11 @@ public class WalletDAOImpl implements IWalletDAO {
 		transactionEntity.setDate(currentDate);
 	}
 
+	/*
+	 * Input: getAWallet([walletId]) method is used to retrieve the walletData from
+	 * the walletEntity table using specific walletID. 
+	 * Output: return walletData object.
+	 */
 	@Override
 	public WalletData getAWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
