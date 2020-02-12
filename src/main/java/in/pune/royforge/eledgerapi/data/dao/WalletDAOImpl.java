@@ -6,10 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
+
+import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
 import in.pune.royforge.eledgerapi.data.model.TransactionType;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
+
 import in.pune.royforge.eledgerapi.data.repo.WalletEntityRepository;
 
 @Repository
@@ -17,8 +21,11 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	@Autowired
 	WalletEntityRepository walletEntityRepository;
+	@Autowired
+	ITransactionLogRepository transactionLogRepository;
 
 	@Override
+
 	public void save(WalletTransaction wallet) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
@@ -29,8 +36,12 @@ public class WalletDAOImpl implements IWalletDAO {
 		} else {
 			updateWallet(walletEntity, wallet);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
-			walletEntityobj.getBalance();
 		}
+
+		TransactionEntity transactionEntity = new TransactionEntity();
+		transactionLogCreate(transactionEntity, wallet, walletEntityobj.getWalletId());
+		transactionLogRepository.save(transactionEntity);
+
 	}
 
 	private void createWallet(WalletEntity walletEntity, WalletTransaction wallet) {
@@ -46,7 +57,7 @@ public class WalletDAOImpl implements IWalletDAO {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(wallet.getWalletId());
 		Date currentDate = new Date();
 		Double newBalance = 0d;
-		
+
 		if (wallet.getTxnType() == TransactionType.CREDIT)
 			newBalance = existedWallet.get().getBalance() - wallet.getAmount();
 		else if (wallet.getTxnType() == TransactionType.DEBIT)
@@ -58,6 +69,17 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletEntity.setUpdatedDate(currentDate);
 		walletEntity.setBorrowId(wallet.getBorrowId());
 		walletEntity.setLenderId(wallet.getLenderId());
+	}
+
+	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
+		Date currentDate = new Date();
+		transactionEntity.setWalletId(walletId);
+		transactionEntity.setlenderId(wallet.getLenderId());
+		transactionEntity.setBorrowerId(wallet.getBorrowId());
+		transactionEntity.setComment(wallet.getComment());
+		transactionEntity.setAmount(wallet.getAmount());
+		transactionEntity.setTxnType(wallet.getTxnType().name());
+		transactionEntity.setDate(currentDate);
 	}
 
 	@Override
