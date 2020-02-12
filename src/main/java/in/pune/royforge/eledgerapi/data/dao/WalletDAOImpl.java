@@ -26,7 +26,6 @@ public class WalletDAOImpl implements IWalletDAO {
 	ITransactionLogRepository transactionLogRepository;
 
 	@Override
-
 	public void save(WalletTransaction wallet) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
@@ -86,7 +85,6 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	}
 
-	@Override
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = new WalletData();
@@ -96,7 +94,6 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setBalance(walletEntity.get().getBalance());
 		walletData.setCreatedDate(walletEntity.get().getCreatedDate());
 		walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
-
 		return walletData;
 	}
 }
