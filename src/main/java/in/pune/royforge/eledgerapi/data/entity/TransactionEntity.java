@@ -16,14 +16,14 @@ import in.pune.royforge.eledgerapi.data.model.TransactionType;
 @Entity
 public class TransactionEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long transactionId;
-	
+
 	@Column
 	private long walletId;
-	
+
 	@Column
 	private String lenderId;
 
@@ -32,14 +32,14 @@ public class TransactionEntity implements Serializable {
 
 	@Column
 	private String comment;
-	
+
 	@Column
 	private double amount;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column
 	private Date date;
-	
+
 	@Column
 	private String txnType;
 
@@ -107,7 +107,4 @@ public class TransactionEntity implements Serializable {
 		this.txnType = txnType;
 	}
 
-
-	
-	
 }
