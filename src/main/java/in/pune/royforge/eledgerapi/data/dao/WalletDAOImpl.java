@@ -85,6 +85,7 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	}
 
+	@Override
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = new WalletData();
