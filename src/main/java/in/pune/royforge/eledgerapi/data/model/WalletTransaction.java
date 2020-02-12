@@ -73,6 +73,7 @@ public class WalletTransaction {
 	}
 
 	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	public String getComment() {

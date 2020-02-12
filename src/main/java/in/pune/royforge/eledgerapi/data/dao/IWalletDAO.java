@@ -11,5 +11,5 @@ public interface IWalletDAO {
 
 	List<WalletData> getWallets();
 
-	WalletData getAWallet(Long walletId);
+	WalletData getWallet(Long walletId);
 }

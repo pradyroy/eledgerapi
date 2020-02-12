@@ -11,5 +11,5 @@ public interface WalletService {
 
 	List<WalletData> getWallets();
 
-	WalletData getAWallet(Long walletId);
+	WalletData getWallet(Long walletId);
 }

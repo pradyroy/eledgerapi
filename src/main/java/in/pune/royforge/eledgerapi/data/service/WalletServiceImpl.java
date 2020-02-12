@@ -20,8 +20,8 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public WalletData getAWallet(Long walletId) {
-		return walletEntityDAO.getAWallet(walletId);
+	public WalletData getWallet(Long walletId) {
+		return walletEntityDAO.getWallet(walletId);
 	}
 
 	@Override
