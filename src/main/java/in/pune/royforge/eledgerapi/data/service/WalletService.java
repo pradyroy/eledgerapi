@@ -7,5 +7,5 @@ public interface WalletService {
 
 	void save(WalletTransaction wallet);
 
-	WalletData getAWallet(Long walletId);
+	WalletData getWallet(Long walletId);
 }
