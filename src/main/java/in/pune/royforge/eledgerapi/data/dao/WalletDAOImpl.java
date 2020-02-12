@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
+import in.pune.royforge.eledgerapi.data.model.TransactionType;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 import in.pune.royforge.eledgerapi.data.repo.WalletEntityRepository;
@@ -19,11 +20,16 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	@Override
 	public void save(WalletTransaction wallet) {
+		WalletEntity walletEntity = new WalletEntity();
+		WalletEntity walletEntityobj = null;
 
 		if (wallet.getWalletId() == null) {
-			WalletEntity walletEntity = new WalletEntity();
 			createWallet(walletEntity, wallet);
-			WalletEntity walletEntityobj = walletEntityRepository.save(walletEntity);
+			walletEntityobj = walletEntityRepository.save(walletEntity);
+		} else {
+			updateWallet(walletEntity, wallet);
+			walletEntityobj = walletEntityRepository.save(walletEntity);
+			walletEntityobj.getBalance();
 		}
 	}
 
@@ -34,6 +40,24 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletEntity.setBalance(wallet.getAmount());
 		walletEntity.setCreatedDate(currentDate);
 		walletEntity.setUpdatedDate(currentDate);
+	}
+
+	private void updateWallet(WalletEntity walletEntity, WalletTransaction wallet) {
+		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(wallet.getWalletId());
+		Date currentDate = new Date();
+		Double newBalance = 0d;
+		
+		if (wallet.getTxnType() == TransactionType.CREDIT)
+			newBalance = existedWallet.get().getBalance() - wallet.getAmount();
+		else if (wallet.getTxnType() == TransactionType.DEBIT)
+			newBalance = existedWallet.get().getBalance() + wallet.getAmount();
+
+		walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
+		walletEntity.setWalletId(existedWallet.get().getWalletId());
+		walletEntity.setBalance(newBalance);
+		walletEntity.setUpdatedDate(currentDate);
+		walletEntity.setBorrowId(wallet.getBorrowId());
+		walletEntity.setLenderId(wallet.getLenderId());
 	}
 
 	@Override
