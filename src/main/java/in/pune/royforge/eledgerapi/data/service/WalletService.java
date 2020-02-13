@@ -7,9 +7,11 @@ import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
 public interface WalletService {
 
-	void save(WalletTransaction wallet);
+	void save(WalletTransaction walletTransaction);
 
-	WalletData getAWallet(Long walletId);
-	
+	List<WalletData> getWallets();
+
 	List<WalletData> getListOfWalletById(String lenderId, String borrowId);
+
+	WalletData getWallet(Long walletId);
 }

@@ -15,13 +15,18 @@ public class WalletServiceImpl implements WalletService {
 	private IWalletDAO walletEntityDAO;
 
 	@Override
-	public void save(WalletTransaction wallet) {
-		walletEntityDAO.save(wallet);
+	public void save(WalletTransaction walletTransaction) {
+		walletEntityDAO.save(walletTransaction);
 	}
 
 	@Override
-	public WalletData getAWallet(Long walletId) {
-		return walletEntityDAO.getAWallet(walletId);
+	public WalletData getWallet(Long walletId) {
+		return walletEntityDAO.getWallet(walletId);
+	}
+
+	@Override
+	public List<WalletData> getWallets() {
+		return walletEntityDAO.getWallets();
 	}
 
 	@Override

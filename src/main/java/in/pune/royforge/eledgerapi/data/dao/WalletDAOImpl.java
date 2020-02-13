@@ -27,7 +27,6 @@ public class WalletDAOImpl implements IWalletDAO {
 	ITransactionLogRepository transactionLogRepository;
 
 	@Override
-
 	public void save(WalletTransaction wallet) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
@@ -35,6 +34,7 @@ public class WalletDAOImpl implements IWalletDAO {
 		if (wallet.getWalletId() == null) {
 			createWallet(walletEntity, wallet);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
+
 		}
 
 		TransactionEntity transactionEntity = new TransactionEntity();
@@ -43,13 +43,26 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	}
 
-	private void createWallet(WalletEntity walletEntity, WalletTransaction wallet) {
+	private void createWallet(WalletEntity walletEntity, WalletTransaction walletTransaction) {
+
 		Date currentDate = new Date();
-		walletEntity.setLenderId(wallet.getLenderId());
-		walletEntity.setBorrowId(wallet.getBorrowId());
-		walletEntity.setBalance(wallet.getAmount());
+		walletEntity.setLenderId(walletTransaction.getLenderId());
+		walletEntity.setBorrowId(walletTransaction.getBorrowId());
+		walletEntity.setBalance(walletTransaction.getAmount());
 		walletEntity.setCreatedDate(currentDate);
 		walletEntity.setUpdatedDate(currentDate);
+	}
+
+	@Override
+	public List<WalletData> getWallets() {
+		List<WalletData> wallets = new ArrayList<>();
+		Iterable<WalletEntity> walletsList = walletEntityRepository.findAll();
+		for (WalletEntity walletEntity : walletsList) {
+			WalletData walletData = new WalletData();
+			setWalletData(walletEntity, walletData);
+			wallets.add(walletData);
+		}
+		return wallets;
 	}
 
 	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
@@ -65,32 +78,27 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	@Override
-	public WalletData getAWallet(Long walletId) {
+	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
-
 		WalletData walletData = new WalletData();
-
 		walletData.setWalletId(walletEntity.get().getWalletId());
 		walletData.setLenderId(walletEntity.get().getLenderId());
 		walletData.setBorrowId(walletEntity.get().getBorrowId());
 		walletData.setBalance(walletEntity.get().getBalance());
 		walletData.setCreatedDate(walletEntity.get().getCreatedDate());
 		walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
-
 		return walletData;
 	}
 
 	/*
-	 * Input: String [lenderId], String [borrowId]. 
-	 * Output: return list of type WalletData. 
-	 * Operation: This method is used to get the list of wallet with the
-	 *            help of lenderId and borrowId.
+	 * Input: String [lenderId], String [borrowId]. Output: return list of type
+	 * WalletData. Operation: This method is used to get the list of wallet with the
+	 * help of lenderId and borrowId.
 	 */
 	@Override
 	public List<WalletData> getListOfWalletById(String lenderId, String borrowId) {
 		List<WalletData> wallets = new ArrayList<>();
-		Iterable<WalletEntity> walletsList = walletEntityRepository.getListOfWalletById(lenderId,
-				borrowId);
+		Iterable<WalletEntity> walletsList = walletEntityRepository.getListOfWalletById(lenderId, borrowId);
 		for (WalletEntity walletEntity : walletsList) {
 			WalletData walletData = new WalletData();
 			setWalletData(walletEntity, walletData);
@@ -100,9 +108,9 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	/*
-	 * Input: (WalletEntity walletEntity, WalletData walletData) 
-	 * Output: This method is used to set the data from one object[WalletEntity] to another
-	 *         object[WalletData].
+	 * Input: (WalletEntity walletEntity, WalletData walletData) Output: This method
+	 * is used to set the data from one object[WalletEntity] to another
+	 * object[WalletData].
 	 */
 	private void setWalletData(WalletEntity walletEntity, WalletData walletData) {
 		walletData.setBalance(walletEntity.getBalance());
