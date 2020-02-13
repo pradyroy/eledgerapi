@@ -32,20 +32,20 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * Input: save(WalletTransaction wallet) method is used to create or update the
 	 * wallet in the database. Output: save the walletEntity in the repository.
 	 */
-	public void save(WalletTransaction wallet) {
+	public void save(WalletTransaction walletTransaction) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
 
-		if (wallet.getWalletId() == null) {
-			createWallet(walletEntity, wallet);
+		if (walletTransaction.getWalletId() == null) {
+			createWallet(walletEntity, walletTransaction);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
 		} else {
-			updateWallet(walletEntity, wallet);
+			updateWallet(walletEntity, walletTransaction);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
 		}
 
 		TransactionEntity transactionEntity = new TransactionEntity();
-		transactionLogCreate(transactionEntity, wallet, walletEntityobj.getWalletId());
+		transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
 		transactionLogRepository.save(transactionEntity);
 
 	}
