@@ -8,5 +8,5 @@ import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
 public interface WalletEntityRepository extends PagingAndSortingRepository<WalletEntity, Long> {
 
 	@Query("FROM WalletEntity  WHERE lenderId= ?1 AND borrowId= ?2")
-	Iterable<WalletEntity> getListOfWalletByLenderIdAndBorrowId(String lenderId, String borrowId);
+	Iterable<WalletEntity> getListOfWalletById(String lenderId, String borrowId);
 }

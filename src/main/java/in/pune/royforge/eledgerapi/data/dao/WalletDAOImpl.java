@@ -87,9 +87,9 @@ public class WalletDAOImpl implements IWalletDAO {
 	 *            help of lenderId and borrowId.
 	 */
 	@Override
-	public List<WalletData> getListOfWalletByLenderIdAndBorrowId(String lenderId, String borrowId) {
+	public List<WalletData> getListOfWalletById(String lenderId, String borrowId) {
 		List<WalletData> wallets = new ArrayList<>();
-		Iterable<WalletEntity> walletsList = walletEntityRepository.getListOfWalletByLenderIdAndBorrowId(lenderId,
+		Iterable<WalletEntity> walletsList = walletEntityRepository.getListOfWalletById(lenderId,
 				borrowId);
 		for (WalletEntity walletEntity : walletsList) {
 			WalletData walletData = new WalletData();

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.pune.royforge.eledgerapi.data.model.WalletData;
@@ -31,8 +32,9 @@ public class WalletController {
 	}
 
 	@RequestMapping(value = "/{lenderId}/{borrowId}", method = RequestMethod.GET)
-	public List<WalletData> getListOfWalletByLenderIdAndBorrowId(@PathVariable(value = "lenderId") String lenderId,
+	@ResponseBody
+	public List<WalletData> getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "borrowId") String borrowId) {
-		return walletEntityService.getListOfWalletByLenderIdAndBorrowId(lenderId, borrowId);
+		return walletEntityService.getListOfWalletById(lenderId, borrowId);
 	}
 }
