@@ -1,13 +1,20 @@
 package in.pune.royforge.eledgerapi.data.service;
 
+import java.util.List;
+
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
 public interface WalletService {
 
-	void save(WalletTransaction wallet);
+	void save(WalletTransaction walletTransaction);
 
-	WalletData getAWallet(Long walletId);
+	List<WalletData> getWallets();
+
+
 	
 	void delete(Long walletId);
+
+	WalletData getWallet(Long walletId);
+
 }
