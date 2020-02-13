@@ -1,6 +1,8 @@
 package in.pune.royforge.eledgerapi.data.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
 
 import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
-import in.pune.royforge.eledgerapi.data.model.TransactionType;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
@@ -21,6 +22,7 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	@Autowired
 	WalletEntityRepository walletEntityRepository;
+
 	@Autowired
 	ITransactionLogRepository transactionLogRepository;
 
@@ -78,4 +80,36 @@ public class WalletDAOImpl implements IWalletDAO {
 		return walletData;
 	}
 
+	/*
+	 * Input: String [lenderId], String [borrowId]. 
+	 * Output: return list of type WalletData. 
+	 * Operation: This method is used to get the list of wallet with the
+	 *            help of lenderId and borrowId.
+	 */
+	@Override
+	public List<WalletData> getListOfWalletByLenderIdAndBorrowId(String lenderId, String borrowId) {
+		List<WalletData> wallets = new ArrayList<>();
+		Iterable<WalletEntity> walletsList = walletEntityRepository.getListOfWalletByLenderIdAndBorrowId(lenderId,
+				borrowId);
+		for (WalletEntity walletEntity : walletsList) {
+			WalletData walletData = new WalletData();
+			setWalletData(walletEntity, walletData);
+			wallets.add(walletData);
+		}
+		return wallets;
+	}
+
+	/*
+	 * Input: (WalletEntity walletEntity, WalletData walletData) 
+	 * Output: This method is used to set the data from one object[WalletEntity] to another
+	 *         object[WalletData].
+	 */
+	private void setWalletData(WalletEntity walletEntity, WalletData walletData) {
+		walletData.setBalance(walletEntity.getBalance());
+		walletData.setBorrowId(walletEntity.getBorrowId());
+		walletData.setCreatedDate(walletEntity.getCreatedDate());
+		walletData.setLenderId(walletEntity.getLenderId());
+		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
+		walletData.setWalletId(walletEntity.getWalletId());
+	}
 }

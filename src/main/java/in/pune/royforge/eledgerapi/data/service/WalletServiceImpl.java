@@ -1,11 +1,12 @@
 package in.pune.royforge.eledgerapi.data.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import in.pune.royforge.eledgerapi.data.dao.IWalletDAO;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
-
 
 @Service
 public class WalletServiceImpl implements WalletService {
@@ -21,5 +22,10 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public WalletData getAWallet(Long walletId) {
 		return walletEntityDAO.getAWallet(walletId);
+	}
+
+	@Override
+	public List<WalletData> getListOfWalletByLenderIdAndBorrowId(String lenderId, String borrowId) {
+		return walletEntityDAO.getListOfWalletByLenderIdAndBorrowId(lenderId, borrowId);
 	}
 }
