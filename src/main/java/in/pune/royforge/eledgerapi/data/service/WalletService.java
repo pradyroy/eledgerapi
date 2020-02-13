@@ -8,4 +8,6 @@ public interface WalletService {
 	void save(WalletTransaction wallet);
 
 	WalletData getAWallet(Long walletId);
+	
+	void delete(Long walletId);
 }

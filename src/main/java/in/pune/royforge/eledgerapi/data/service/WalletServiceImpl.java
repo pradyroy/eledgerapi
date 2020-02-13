@@ -22,4 +22,10 @@ public class WalletServiceImpl implements WalletService {
 	public WalletData getAWallet(Long walletId) {
 		return walletEntityDAO.getAWallet(walletId);
 	}
+	
+	@Override
+	public void delete(Long walletId) {
+		walletEntityDAO.delete(walletId);
+	}
+	
 }
