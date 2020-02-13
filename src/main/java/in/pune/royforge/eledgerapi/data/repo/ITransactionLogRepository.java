@@ -10,6 +10,6 @@ import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 public interface ITransactionLogRepository extends PagingAndSortingRepository<TransactionEntity, Long> {
 
 	@Query("FROM TransactionEntity WHERE lenderId = ?1 AND borrowerId = ?2")
-	Iterable<TransactionEntity> transactionsList(String lenderId, String borrowerId);		
+	Iterable<TransactionEntity> transactionsList(String lenderId, String borrowerId);
 
 }

@@ -17,7 +17,7 @@ public class Transaction {
 	private double amount;
 
 	private Date date;
-	
+
 	private String type;
 
 	public long getTransactionId() {
@@ -83,10 +83,5 @@ public class Transaction {
 	public void setType(String string) {
 		this.type = string;
 	}
-
-
-
-	
-	
 
 }
