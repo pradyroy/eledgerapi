@@ -10,7 +10,6 @@ import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
 
 import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
-import in.pune.royforge.eledgerapi.data.model.TransactionType;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
@@ -25,7 +24,6 @@ public class WalletDAOImpl implements IWalletDAO {
 	ITransactionLogRepository transactionLogRepository;
 
 	@Override
-
 	public void save(WalletTransaction wallet) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
@@ -63,7 +61,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	@Override
-	public WalletData getAWallet(Long walletId) {
+	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 
 		WalletData walletData = new WalletData();
