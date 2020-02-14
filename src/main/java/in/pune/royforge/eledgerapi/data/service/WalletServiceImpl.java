@@ -28,4 +28,9 @@ public class WalletServiceImpl implements WalletService {
 	public List<WalletData> getWallets() {
 		return walletEntityDAO.getWallets();
 	}
+
+	@Override
+	public List<WalletData> findByLenderId(String lenderId) {
+		return walletEntityDAO.findByLenderId(lenderId);
+	}
 }

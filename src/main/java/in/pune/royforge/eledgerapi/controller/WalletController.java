@@ -34,4 +34,10 @@ public class WalletController {
 	public WalletData getWallet(@PathVariable(value = "walletId") Long walletId) {
 		return walletEntityService.getWallet(walletId);
 	}
+
+	@RequestMapping(value = "/lender-{lenderid}", method = RequestMethod.GET)
+	public List<WalletData> findByLenderId(@PathVariable(value = "lenderid") String lenderId) {
+		return walletEntityService.findByLenderId(lenderId);
+	}
+
 }
