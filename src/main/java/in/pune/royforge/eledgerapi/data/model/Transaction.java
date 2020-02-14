@@ -17,8 +17,8 @@ public class Transaction {
 	private double amount;
 
 	private Date date;
-	
-	private TransactionType type;
+
+	private String type;
 
 	public long getTransactionId() {
 		return transactionId;
@@ -76,14 +76,12 @@ public class Transaction {
 		this.date = date;
 	}
 
-	public TransactionType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(TransactionType type) {
-		this.type = type;
+	public void setType(String string) {
+		this.type = string;
 	}
-	
-	
 
 }
