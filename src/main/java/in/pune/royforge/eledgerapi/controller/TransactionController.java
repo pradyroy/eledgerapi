@@ -1,25 +1,30 @@
 package in.pune.royforge.eledgerapi.controller;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
-import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
-import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
-import in.pune.royforge.eledgerapi.data.service.WalletService;
+import in.pune.royforge.eledgerapi.data.model.Transaction;
+import in.pune.royforge.eledgerapi.data.service.TransactionService;
 
 @RestController
-@RequestMapping("/tansactionlog")
+@RequestMapping("/tansaction")
 
 public class TransactionController {
-		
+
 	@Autowired
-	WalletService walletEntityService;
-	
+	TransactionService transactionService;
+
+	@RequestMapping(value = "/{lenderId}/{startDate}", method = RequestMethod.GET)
+	public List<Transaction> lenderTransactionsLog(@PathVariable(value = "lenderId") String lenderId,
+			@PathVariable(value = "startDate") Date startDate) {
+		return transactionService.transactionListByLenderIdAndStratDate(lenderId, startDate);
+
+	}
 
 }
