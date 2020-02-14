@@ -21,7 +21,7 @@ public class TransactionController {
 	TransactionService transactionService;
 
 	@RequestMapping(value = "/{lenderId}/{startDate}/{endDate}", method = RequestMethod.GET)
-	public List<Transaction> walletTransactionsLog(@PathVariable(value = "lenderId") String lenderId,
+	public List<Transaction> transactionLogsBetweenTwoDates(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "startDate") Date startDate, @PathVariable(value = "endDate") Date endDate) {
 		return transactionService.transactionListBetweenTwoDates(lenderId, startDate, endDate);
 		
