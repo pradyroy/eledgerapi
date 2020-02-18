@@ -12,16 +12,15 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 import in.pune.royforge.eledgerapi.data.service.TransactionService;
 
 @RestController
-@RequestMapping("/tansaction")
+@RequestMapping("/transaction")
 public class TransactionController {
 
 	@Autowired
 	TransactionService transactionService;
 
-	@RequestMapping(value = "/{lenderId}/{borrowerId}", method = RequestMethod.GET)
-	public List<Transaction> walletTransactionsLog(@PathVariable(value = "lenderId") String lenderId,
-			@PathVariable(value = "borrowerId") String borrowerId) {
-		return transactionService.walletTransactionLog(lenderId, borrowerId);
+	@RequestMapping(value = "/lender/{lenderId}/borrower/{borrowerId}", method = RequestMethod.GET)
+	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(
+			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowerId") String borrowerId) {
+		return transactionService.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 	}
-
 }

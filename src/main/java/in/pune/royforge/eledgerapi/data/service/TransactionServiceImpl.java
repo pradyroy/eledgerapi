@@ -21,9 +21,9 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public List<Transaction> walletTransactionLog(String lenderId, String borrowerId) {
+	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		// TODO Auto-generated method stub
-		return transactionEntityDAO.walletTransactionLog(lenderId, borrowerId);
+		return transactionEntityDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 	}
 
 }

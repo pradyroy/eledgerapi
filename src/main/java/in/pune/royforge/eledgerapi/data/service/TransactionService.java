@@ -8,6 +8,6 @@ public interface TransactionService {
 
 	void save(Transaction transaction);
 
-	List<Transaction> walletTransactionLog(String lenderId, String borrowerId);
+	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
 
 }

@@ -6,6 +6,6 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 
 public interface ITransactionDAO {
 
-	List<Transaction> walletTransactionLog(String lenderId, String borrowerId);
+	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
 
 }

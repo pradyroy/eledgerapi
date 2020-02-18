@@ -24,7 +24,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	 * 
 	 */
 	@Override
-	public List<Transaction> walletTransactionLog(String lenderId, String borrowerId) {
+	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		List<Transaction> transactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionsList(lenderId, borrowerId);
 		for (TransactionEntity transaction1 : transactionsList) {
