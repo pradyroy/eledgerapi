@@ -107,12 +107,10 @@ public class WalletDAOImpl implements IWalletDAO {
 	public List<WalletData> findWalletsListByLenderId(String lenderId) {
 		List<WalletData> walletsOfLender = new ArrayList<>();
 		Iterable<WalletEntity> walletsList = walletEntityRepository.findByLenderId(lenderId);
-		if (walletsList != null) {
-			for (WalletEntity walletEntity : walletsList) {
-				WalletData walletData = new WalletData();
-				setWalletData(walletEntity, walletData);
-				walletsOfLender.add(walletData);
-			}
+		for (WalletEntity walletEntity : walletsList) {
+			WalletData walletData = new WalletData();
+			setWalletData(walletEntity, walletData);
+			walletsOfLender.add(walletData);
 		}
 		return walletsOfLender;
 	}
