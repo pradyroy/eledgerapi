@@ -17,7 +17,7 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
-	@RequestMapping(value = "/transactionlog", method = RequestMethod.GET)
+	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
 	public List<Transaction> getTransactions() {
 		return transactionService.getTransactions();
 	}
