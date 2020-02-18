@@ -7,15 +7,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
-
 import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
 import in.pune.royforge.eledgerapi.data.model.TransactionType;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
-
 import in.pune.royforge.eledgerapi.data.repo.WalletEntityRepository;
 
 @Repository
@@ -26,16 +23,14 @@ public class WalletDAOImpl implements IWalletDAO {
 	@Autowired
 	ITransactionLogRepository transactionLogRepository;
 
-	@Override
-
 	/*
 	 * Input: save(WalletTransaction wallet) method is used to create or update the
 	 * wallet in the database. Output: save the walletEntity in the repository.
 	 */
+	@Override
 	public void save(WalletTransaction walletTransaction) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
-
 		if (walletTransaction.getWalletId() == null) {
 			createWallet(walletEntity, walletTransaction);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
@@ -43,11 +38,9 @@ public class WalletDAOImpl implements IWalletDAO {
 			updateWallet(walletEntity, walletTransaction);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
 		}
-
 		TransactionEntity transactionEntity = new TransactionEntity();
 		transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
 		transactionLogRepository.save(transactionEntity);
-
 	}
 
 	/*
@@ -66,21 +59,19 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	/*
 	 * Input: updateWallet([walletEntity], [walletTransaction]) method is used to
-	 * update the wallet in the database by using specific walletId. 
-	 * Output: save the entries in walletEntity object.
+	 * update the wallet in the database by using specific walletId. Output: save
+	 * the entries in walletEntity object.
 	 */
 	private void updateWallet(WalletEntity walletEntity, WalletTransaction wallet) {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(wallet.getWalletId());
-
 		if (!existedWallet.isEmpty()) {
 			Date currentDate = new Date();
 			Double newBalance = 0d;
-
-			if (wallet.getTxnType() == TransactionType.CREDIT)
+			if (wallet.getTxnType() == TransactionType.CREDIT) {
 				newBalance = existedWallet.get().getBalance() - wallet.getAmount();
-			else if (wallet.getTxnType() == TransactionType.DEBIT)
+			} else if (wallet.getTxnType() == TransactionType.DEBIT) {
 				newBalance = existedWallet.get().getBalance() + wallet.getAmount();
-
+			}
 			walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
 			walletEntity.setWalletId(existedWallet.get().getWalletId());
 			walletEntity.setBalance(newBalance);
@@ -124,8 +115,8 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	/*
 	 * Input: getAWallet([walletId]) method is used to retrieve the walletData from
-	 * the walletEntity table using specific walletID. 
-	 * Output: return walletData object.
+	 * the walletEntity table using specific walletID. Output: return walletData
+	 * object.
 	 */
 	@Override
 	public WalletData getWallet(Long walletId) {
