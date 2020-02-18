@@ -20,10 +20,10 @@ public class TransactionDAOImpl implements ITransactionDAO{
 	ITransactionLogRepository transactionLogRepository;
 	
 	@Override
-	public List<Transaction> transactionListByLenderIdAndStratDate(String lenderId, Date startDate) {
+	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
 		List<Transaction> transactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionListByLenderIdAndStratDate(lenderId,
-				startDate);
+				date);
 		for (TransactionEntity transactionEntity : transactionsList) {
 			Transaction transaction = new Transaction();
 			setTransactionData(transactionEntity, transaction);

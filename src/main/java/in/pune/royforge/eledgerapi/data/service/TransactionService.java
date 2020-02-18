@@ -8,7 +8,7 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 
 public interface TransactionService {
 
-	List<Transaction> transactionListByLenderIdAndStratDate(String lenderId, Date startDate);
+	List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date);
 
 	List<Transaction> getTransactions();
 

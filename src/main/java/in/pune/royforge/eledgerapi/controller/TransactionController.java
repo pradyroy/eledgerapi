@@ -13,17 +13,17 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 import in.pune.royforge.eledgerapi.data.service.TransactionService;
 
 @RestController
-@RequestMapping("/tansaction")
+@RequestMapping("/transaction")
 
 public class TransactionController {
 
 	@Autowired
 	TransactionService transactionService;
 
-	@RequestMapping(value = "/{lenderId}/{startDate}", method = RequestMethod.GET)
+	@RequestMapping(value = "/lenderId/{lenderId}/date/{date}", method = RequestMethod.GET)
 	public List<Transaction> lenderTransactionsLog(@PathVariable(value = "lenderId") String lenderId,
-			@PathVariable(value = "startDate") Date startDate) {
-		return transactionService.transactionListByLenderIdAndStratDate(lenderId, startDate);
+			@PathVariable(value = "date") Date date) {
+		return transactionService.transactionListByLenderIdAndDate(lenderId, date);
 	}
 
 	@RequestMapping(value = "/transactions", method = RequestMethod.GET)

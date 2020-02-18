@@ -10,6 +10,6 @@ import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 public interface ITransactionLogRepository extends PagingAndSortingRepository<TransactionEntity, String> {
 
 	@Query("FROM TransactionEntity WHERE lenderId = ?1  AND DATE(date) =?2 ")
-	Iterable<TransactionEntity> transactionListByLenderIdAndStratDate(String lenderId, Date startDate);
+	Iterable<TransactionEntity> transactionListByLenderIdAndStratDate(String lenderId, Date date);
 	
 }

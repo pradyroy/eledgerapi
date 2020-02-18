@@ -16,8 +16,8 @@ public class TransactionServiceImpl implements TransactionService {
 	private ITransactionDAO transactionEntityDAO;
 
 	@Override
-	public List<Transaction> transactionListByLenderIdAndStratDate(String lenderId, Date startDate) {
-		return transactionEntityDAO.transactionListByLenderIdAndStratDate(lenderId, startDate);
+	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
+		return transactionEntityDAO.transactionListByLenderIdAndDate(lenderId, date);
 	}
 
 	@Override
