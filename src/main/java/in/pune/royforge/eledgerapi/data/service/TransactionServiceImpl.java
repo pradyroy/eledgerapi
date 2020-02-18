@@ -11,13 +11,19 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
-	
+
 	@Autowired
 	private ITransactionDAO transactionEntityDAO;
-	
+
 	@Override
 	public List<Transaction> transactionListByLenderIdAndStratDate(String lenderId, Date startDate) {
 		return transactionEntityDAO.transactionListByLenderIdAndStratDate(lenderId, startDate);
+	}
+
+	@Override
+	public List<Transaction> getTransactions() {
+		return transactionEntityDAO.getTransactions();
+
 	}
 
 }

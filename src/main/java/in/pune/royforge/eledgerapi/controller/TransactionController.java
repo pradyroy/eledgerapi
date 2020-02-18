@@ -24,6 +24,11 @@ public class TransactionController {
 	public List<Transaction> lenderTransactionsLog(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "startDate") Date startDate) {
 		return transactionService.transactionListByLenderIdAndStratDate(lenderId, startDate);
+	}
+
+	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
+	public List<Transaction> getTransactions() {
+		return transactionService.getTransactions();
 
 	}
 

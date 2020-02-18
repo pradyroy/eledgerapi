@@ -7,6 +7,8 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 
 public interface ITransactionDAO {
 
-	
 	List<Transaction> transactionListByLenderIdAndStratDate(String lenderId, Date startDate);
+
+	List<Transaction> getTransactions();
+
 }
