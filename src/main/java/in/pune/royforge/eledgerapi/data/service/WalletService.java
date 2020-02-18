@@ -11,7 +11,7 @@ public interface WalletService {
 
 	List<WalletData> getWallets();
 
-	List<WalletData> getListOfWalletById(String lenderId, String borrowId);
+	WalletData getWalletDataByIds(String lenderId, String borrowId);
 
 	WalletData getWallet(Long walletId);
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.pune.royforge.eledgerapi.data.model.WalletData;
@@ -31,15 +30,14 @@ public class WalletController {
 		return walletEntityService.getWallets();
 	}
 
-	@RequestMapping(value = "/{walletId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/walletID/{walletId}", method = RequestMethod.GET)
 	public WalletData getWallet(@PathVariable(value = "walletId") Long walletId) {
 		return walletEntityService.getWallet(walletId);
 	}
 
-	@RequestMapping(value = "/{lenderId}/{borrowId}", method = RequestMethod.GET)
-	@ResponseBody
-	public List<WalletData> getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
+	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
+	public WalletData getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "borrowId") String borrowId) {
-		return walletEntityService.getListOfWalletById(lenderId, borrowId);
+		return walletEntityService.getWalletDataByIds(lenderId, borrowId);
 	}
 }

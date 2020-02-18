@@ -91,25 +91,24 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	/*
-	 * Input: String [lenderId], String [borrowId]. Output: return list of type
-	 * WalletData. Operation: This method is used to get the list of wallet with the
-	 * help of lenderId and borrowId.
+	 * Input: String [lenderId], String [borrowId]. Output: return WalletData
+	 * object. Operation: This method is used to get the walletData object contain all
+	 * information with the help of lenderId and borrowId.
 	 */
 	@Override
-	public List<WalletData> getListOfWalletById(String lenderId, String borrowId) {
-		List<WalletData> wallets = new ArrayList<>();
-		Iterable<WalletEntity> walletsList = walletEntityRepository.getListOfWalletById(lenderId, borrowId);
-		for (WalletEntity walletEntity : walletsList) {
-			WalletData walletData = new WalletData();
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+		WalletEntity walletEntity = walletEntityRepository.getWalletDataByIds(lenderId, borrowId);
+		WalletData walletData = null;
+		if (walletEntity != null) {
+			walletData = new WalletData();
 			setWalletData(walletEntity, walletData);
-			wallets.add(walletData);
 		}
-		return wallets;
+		return walletData;
 	}
 
 	/*
-	 * Input: (WalletEntity walletEntity, WalletData walletData) Output: This method
-	 * is used to set the data from one object[WalletEntity] to another
+	 * Input: (WalletEntity walletEntity, WalletData walletData), Output: This
+	 * method is used to set the data from one object[WalletEntity] to another
 	 * object[WalletData].
 	 */
 	private void setWalletData(WalletEntity walletEntity, WalletData walletData) {

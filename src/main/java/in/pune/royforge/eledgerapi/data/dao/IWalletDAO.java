@@ -9,7 +9,7 @@ public interface IWalletDAO {
 
 	void save(WalletTransaction wallet);
 
-	List<WalletData> getListOfWalletById(String lenderId, String borrowId);
+	WalletData getWalletDataByIds(String lenderId, String borrowId);
 
 	List<WalletData> getWallets();
 

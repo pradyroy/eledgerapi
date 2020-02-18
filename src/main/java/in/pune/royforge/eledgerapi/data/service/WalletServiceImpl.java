@@ -30,7 +30,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public List<WalletData> getListOfWalletById(String lenderId, String borrowId) {
-		return walletEntityDAO.getListOfWalletById(lenderId, borrowId);
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+		return walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
 	}
 }
