@@ -104,13 +104,15 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * Method is used to fetch the wallets list by taking lender id;
 	 */
 	@Override
-	public List<WalletData> findByLenderId(String lenderId) {
+	public List<WalletData> findWalletsListByLenderId(String lenderId) {
 		List<WalletData> walletsOfLender = new ArrayList<>();
 		Iterable<WalletEntity> walletsList = walletEntityRepository.findByLenderId(lenderId);
-		for (WalletEntity walletEntity : walletsList) {
-			WalletData walletData = new WalletData();
-			setWalletData(walletEntity, walletData);
-			walletsOfLender.add(walletData);
+		if (walletsList != null) {
+			for (WalletEntity walletEntity : walletsList) {
+				WalletData walletData = new WalletData();
+				setWalletData(walletEntity, walletData);
+				walletsOfLender.add(walletData);
+			}
 		}
 		return walletsOfLender;
 	}

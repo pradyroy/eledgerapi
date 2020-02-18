@@ -12,7 +12,7 @@ public interface WalletService {
 	List<WalletData> getWallets();
 
 	WalletData getWallet(Long walletId);
-	
-	List<WalletData> findByLenderId(String lenderId);
+
+	List<WalletData> findWalletsListByLenderId(String lenderId);
 
 }

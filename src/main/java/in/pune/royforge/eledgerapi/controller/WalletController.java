@@ -3,6 +3,7 @@ package in.pune.royforge.eledgerapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +36,9 @@ public class WalletController {
 		return walletEntityService.getWallet(walletId);
 	}
 
-	@RequestMapping(value = "/lender-{lenderid}", method = RequestMethod.GET)
-	public List<WalletData> findByLenderId(@PathVariable(value = "lenderid") String lenderId) {
-		return walletEntityService.findByLenderId(lenderId);
+	@RequestMapping(value = "/lender/{lenderid}", method = RequestMethod.GET)
+	public List<WalletData> findWalletsListByLenderId(@PathVariable(value = "lenderid") String lenderId) {
+		return walletEntityService.findWalletsListByLenderId(lenderId);
 	}
 
 }
