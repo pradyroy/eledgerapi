@@ -34,9 +34,9 @@ public class WalletController {
 		return walletEntityService.getWallet(walletId);
 	}
 	
-	@RequestMapping(value = "/delete/{walletId}", method = RequestMethod.GET)
-	public void delete(@PathVariable(value = "walletId")Long walletId) {
-		walletEntityService.delete(walletId);
-		 
+	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.DELETE)
+	public boolean delete(@PathVariable(value = "walletId")Long walletId) {
+		return walletEntityService.delete(walletId);
+		
 	}
 }

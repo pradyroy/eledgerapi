@@ -13,7 +13,7 @@ public interface WalletService {
 
 
 	
-	void delete(Long walletId);
+	boolean delete(Long walletId);
 
 	WalletData getWallet(Long walletId);
 

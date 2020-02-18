@@ -96,9 +96,16 @@ public class WalletDAOImpl implements IWalletDAO {
 		return walletData;
 	}
 
-	public void delete(Long walletId) {
-		walletEntityRepository.deleteById(walletId);
-
+	public boolean delete(Long walletId) {
+		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
+		if (!walletEntity.isEmpty()) {
+			
+			walletEntityRepository.deleteById(walletId);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }
