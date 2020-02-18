@@ -66,25 +66,28 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	/*
 	 * Input: updateWallet([walletEntity], [walletTransaction]) method is used to
-	 * update the wallet in the database by using specific walletId. Output: save
-	 * the entries in walletEntity object.
+	 * update the wallet in the database by using specific walletId. 
+	 * Output: save the entries in walletEntity object.
 	 */
 	private void updateWallet(WalletEntity walletEntity, WalletTransaction wallet) {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(wallet.getWalletId());
-		Date currentDate = new Date();
-		Double newBalance = 0d;
 
-		if (wallet.getTxnType() == TransactionType.CREDIT)
-			newBalance = existedWallet.get().getBalance() - wallet.getAmount();
-		else if (wallet.getTxnType() == TransactionType.DEBIT)
-			newBalance = existedWallet.get().getBalance() + wallet.getAmount();
+		if (!existedWallet.isEmpty()) {
+			Date currentDate = new Date();
+			Double newBalance = 0d;
 
-		walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
-		walletEntity.setWalletId(existedWallet.get().getWalletId());
-		walletEntity.setBalance(newBalance);
-		walletEntity.setUpdatedDate(currentDate);
-		walletEntity.setBorrowId(wallet.getBorrowId());
-		walletEntity.setLenderId(wallet.getLenderId());
+			if (wallet.getTxnType() == TransactionType.CREDIT)
+				newBalance = existedWallet.get().getBalance() - wallet.getAmount();
+			else if (wallet.getTxnType() == TransactionType.DEBIT)
+				newBalance = existedWallet.get().getBalance() + wallet.getAmount();
+
+			walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
+			walletEntity.setWalletId(existedWallet.get().getWalletId());
+			walletEntity.setBalance(newBalance);
+			walletEntity.setUpdatedDate(currentDate);
+			walletEntity.setBorrowId(wallet.getBorrowId());
+			walletEntity.setLenderId(wallet.getLenderId());
+		}
 	}
 
 	@Override
@@ -121,8 +124,8 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	/*
 	 * Input: getAWallet([walletId]) method is used to retrieve the walletData from
-	 * the walletEntity table using specific walletID. Output: return walletData
-	 * object.
+	 * the walletEntity table using specific walletID. 
+	 * Output: return walletData object.
 	 */
 	@Override
 	public WalletData getWallet(Long walletId) {
