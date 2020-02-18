@@ -10,4 +10,6 @@ public interface TransactionService {
 
 	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
 
+	List<Transaction> getTransactions();
+
 }

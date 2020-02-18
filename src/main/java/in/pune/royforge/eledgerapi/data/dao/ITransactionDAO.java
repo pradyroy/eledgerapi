@@ -8,4 +8,6 @@ public interface ITransactionDAO {
 
 	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
 
+	List<Transaction> getTransactions();
+
 }

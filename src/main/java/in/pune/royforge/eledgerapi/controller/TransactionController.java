@@ -18,6 +18,11 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
+	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
+	public List<Transaction> getTransactions() {
+		return transactionService.getTransactions();
+	}
+
 	@RequestMapping(value = "/lender/{lenderId}/borrower/{borrowerId}", method = RequestMethod.GET)
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(
 			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowerId") String borrowerId) {

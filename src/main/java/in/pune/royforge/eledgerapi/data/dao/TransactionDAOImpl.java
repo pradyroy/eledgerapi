@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.model.Transaction;
-
 import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
 
 @Repository
@@ -30,24 +29,38 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		for (TransactionEntity transaction1 : transactionsList) {
 			Transaction transactionInfo = new Transaction();
 
-			transaction(transaction1, transactionInfo);
+			setTransactionData(transaction1, transactionInfo);
 			transactions.add(transactionInfo);
 		}
 		return transactions;
 	}
 
-	/*
-	 * Method to get the details of a transaction
-	 */
-	private void transaction(TransactionEntity transaction1, Transaction transactionInfo) {
-		transactionInfo.setTransactionId(transaction1.getTransactionId());
-		transactionInfo.setWalletId(transaction1.getWalletId());
-		transactionInfo.setBorrowerId(transaction1.getBorrowerId());
-		transactionInfo.setlenderId(transaction1.getlenderId());
-		transactionInfo.setAmount(transaction1.getAmount());
-		transactionInfo.setDate(transaction1.getDate());
-		transactionInfo.setComment(transaction1.getComment());
-		transactionInfo.setType(transaction1.getTxnType());
+	// Method is used to display the list of transaction logs
+	@Override
+	public List<Transaction> getTransactions() {
+		List<Transaction> transactions = new ArrayList<>();
+		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findAll();
+		for (TransactionEntity transactionEntity : transactionlogs) {
+			Transaction transactionData = new Transaction();
+			setTransactionData(transactionEntity, transactionData);
+			transactions.add(transactionData);
+		}
+		return transactions;
+
+	}
+
+	// Method is used to fetch the data from the transaction table in the object
+	// transaction();
+	public void setTransactionData(TransactionEntity transactionEntity, Transaction transactionData) {
+
+		transactionData.setTransactionId(transactionEntity.getTransactionId());
+		transactionData.setWalletId(transactionEntity.getWalletId());
+		transactionData.setlenderId(transactionEntity.getlenderId());
+		transactionData.setBorrowerId(transactionEntity.getBorrowerId());
+		transactionData.setTxnType(transactionEntity.getTxnType());
+		transactionData.setAmount(transactionEntity.getAmount());
+		transactionData.setComment(transactionEntity.getComment());
+		transactionData.setDate(transactionEntity.getDate());
 	}
 
 }

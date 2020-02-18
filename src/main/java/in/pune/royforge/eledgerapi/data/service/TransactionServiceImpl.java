@@ -26,4 +26,10 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionEntityDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 	}
 
+	@Override
+	public List<Transaction> getTransactions() {
+		return transactionEntityDAO.getTransactions();
+
+	}
+
 }
