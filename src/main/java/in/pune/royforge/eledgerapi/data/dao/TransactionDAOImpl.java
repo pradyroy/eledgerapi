@@ -61,13 +61,11 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		List<Transaction> transactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionListBetweenTwoDates(lenderId,
 				startDate, endDate);
-		if (transactionsList != null) {
 			for (TransactionEntity transactionEntity : transactionsList) {
 				Transaction transaction = new Transaction();
 				setTransaction(transactionEntity, transaction);
 				transactions.add(transaction);
 			}
-		}
 		return transactions;
 	}
 }
