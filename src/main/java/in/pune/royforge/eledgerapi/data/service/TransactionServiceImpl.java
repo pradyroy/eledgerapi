@@ -20,8 +20,8 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 	
 	@Override
-	public List<Transaction> findByLenderId(String lenderId){
-		return transactionDAO.findByLenderId(lenderId);
+	public List<Transaction> transactionsByLenderId(String lenderId){
+		return transactionDAO.transactionsByLenderId(lenderId);
 	}
 	
 }

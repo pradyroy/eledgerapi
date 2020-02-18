@@ -46,7 +46,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	
 	//Method is used to fetch the transaction by taking lender id;
 	@Override
-	public List<Transaction> findByLenderId(String lenderId){
+	public List<Transaction> transactionsByLenderId(String lenderId){
 		List<Transaction> lenderTransactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findByLenderId(lenderId);
 		for (TransactionEntity transactionEntity : transactionlogs) {

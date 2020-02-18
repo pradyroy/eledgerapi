@@ -25,7 +25,7 @@ public class TransactionController {
 	
 	@RequestMapping(value = "/lenderid/{lenderid}", method = RequestMethod.GET)
 	public List<Transaction> findByLenderId(@PathVariable(value = "lenderid")String lenderId) {
-		return transactionService.findByLenderId(lenderId);
+		return transactionService.transactionsByLenderId(lenderId);
 		 
 	}
 	
