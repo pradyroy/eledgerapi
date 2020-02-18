@@ -26,22 +26,10 @@ public class TransactionDAOImpl implements ITransactionDAO{
 				startDate);
 		for (TransactionEntity transactionEntity : transactionsList) {
 			Transaction transaction = new Transaction();
-			setTransaction(transactionEntity, transaction);
+			setTransactionData(transactionEntity, transaction);
 			transactions.add(transaction);
 		}
 		return transactions;
-	}
-
-	//Method is used to fetch the data from the transaction table in the object transaction();
-	private void setTransaction(TransactionEntity transaction1, Transaction transactionInfo) {
-		transactionInfo.setTransactionId(transaction1.getTransactionId());
-		transactionInfo.setWalletId(transaction1.getWalletId());
-		transactionInfo.setBorrowerId(transaction1.getBorrowerId());
-		transactionInfo.setlenderId(transaction1.getlenderId());
-		transactionInfo.setAmount(transaction1.getAmount());
-		transactionInfo.setDate(transaction1.getDate());
-		transactionInfo.setComment(transaction1.getComment());
-		transactionInfo.setTxnType(transaction1.getTxnType());
 	}
 
 	//Method is used to display the list of transaction logs
@@ -51,12 +39,25 @@ public class TransactionDAOImpl implements ITransactionDAO{
 		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findAll();
 		for (TransactionEntity transactionEntity : transactionlogs) {
 			Transaction transactionData = new Transaction();
-			setTransaction(transactionEntity, transactionData);
+			setTransactionData(transactionEntity, transactionData);
 			transactions.add(transactionData);
 		}
 		return transactions;
 
 	}
 
+	//Method is used to fetch the data from the transaction table in the object transaction();
+	public void setTransactionData(TransactionEntity transactionEntity, Transaction transactionData) {
+
+		transactionData.setTransactionId(transactionEntity.getTransactionId());
+		transactionData.setWalletId(transactionEntity.getWalletId());
+		transactionData.setlenderId(transactionEntity.getlenderId());
+		transactionData.setBorrowerId(transactionEntity.getBorrowerId());
+		transactionData.setTxnType(transactionEntity.getTxnType());
+		transactionData.setAmount(transactionEntity.getAmount());
+		transactionData.setComment(transactionEntity.getComment());
+		transactionData.setDate(transactionEntity.getDate());
+
+	}
 
 }
