@@ -20,6 +20,8 @@ public class Transaction {
 
 	private String type;
 
+	private String txnType;
+
 	public long getTransactionId() {
 		return transactionId;
 	}
@@ -84,4 +86,11 @@ public class Transaction {
 		this.type = string;
 	}
 
+	public String getTxnType() {
+		return txnType;
+	}
+
+	public void setTxnType(String txnType) {
+		this.txnType = txnType;
+	}
 }
