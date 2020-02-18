@@ -22,7 +22,7 @@ public class WalletController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public void createWallet(@RequestBody WalletTransaction walletTransaction) {
-		walletEntityService.save(walletTransaction);
+			walletEntityService.save(walletTransaction);
 	}
 
 	@RequestMapping(value = "/wallets", method = RequestMethod.GET)
@@ -32,6 +32,7 @@ public class WalletController {
 
 	@RequestMapping(value = "/{walletId}", method = RequestMethod.GET)
 	public WalletData getWallet(@PathVariable(value = "walletId") Long walletId) {
-		return walletEntityService.getWallet(walletId);
+		WalletData walletData = walletEntityService.getWallet(walletId);
+		return walletData;
 	}
 }

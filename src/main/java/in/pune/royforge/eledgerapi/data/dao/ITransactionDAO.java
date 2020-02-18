@@ -9,5 +9,5 @@ public interface ITransactionDAO {
 
 	List<Transaction> walletTransactionLog(String lenderId, String borrowerId);
 
-	List<Transaction> transactionListBetweenTwoDates(String lenderId, Date startDate, Date endDate);
+	List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate);
 }

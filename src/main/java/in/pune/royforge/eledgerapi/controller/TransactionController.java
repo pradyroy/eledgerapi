@@ -14,17 +14,16 @@ import in.pune.royforge.eledgerapi.data.service.TransactionService;
 
 @RestController
 @RequestMapping("/transactionlog")
-
 public class TransactionController {
 
 	@Autowired
 	TransactionService transactionService;
 
-	@RequestMapping(value = "/{lenderId}/{startDate}/{endDate}", method = RequestMethod.GET)
+	@RequestMapping(value = "/lenderId/{lenderId}/startDate/{startDate}/endDate/{endDate}", method = RequestMethod.GET)
 	public List<Transaction> transactionLogsBetweenTwoDates(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "startDate") Date startDate, @PathVariable(value = "endDate") Date endDate) {
-		return transactionService.transactionListBetweenTwoDates(lenderId, startDate, endDate);
-		
+		List<Transaction> transactions = transactionService.getListOfTransactionBetweenTwoDates(lenderId, startDate,
+				endDate);
+		return transactions;
 	}
-
 }

@@ -33,7 +33,6 @@ public class WalletDAOImpl implements IWalletDAO {
 		if (wallet.getWalletId() == null) {
 			createWallet(walletEntity, wallet);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
-
 		}
 
 		TransactionEntity transactionEntity = new TransactionEntity();
@@ -43,7 +42,6 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	private void createWallet(WalletEntity walletEntity, WalletTransaction walletTransaction) {
-
 		Date currentDate = new Date();
 		walletEntity.setLenderId(walletTransaction.getLenderId());
 		walletEntity.setBorrowId(walletTransaction.getBorrowId());
@@ -88,13 +86,16 @@ public class WalletDAOImpl implements IWalletDAO {
 	@Override
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
-		WalletData walletData = new WalletData();
-		walletData.setWalletId(walletEntity.get().getWalletId());
-		walletData.setLenderId(walletEntity.get().getLenderId());
-		walletData.setBorrowId(walletEntity.get().getBorrowId());
-		walletData.setBalance(walletEntity.get().getBalance());
-		walletData.setCreatedDate(walletEntity.get().getCreatedDate());
-		walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+		WalletData walletData = null;
+		if(!walletEntity.isEmpty()) {
+			walletData = new WalletData();
+			walletData.setWalletId(walletEntity.get().getWalletId());
+			walletData.setLenderId(walletEntity.get().getLenderId());
+			walletData.setBorrowId(walletEntity.get().getBorrowId());
+			walletData.setBalance(walletEntity.get().getBalance());
+			walletData.setCreatedDate(walletEntity.get().getCreatedDate());
+			walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+		}
 		return walletData;
 	}
 }

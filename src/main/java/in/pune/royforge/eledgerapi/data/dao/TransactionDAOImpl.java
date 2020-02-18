@@ -52,19 +52,21 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	}
 
 	/*
-	 * Method to return a list of transactions for a specific lender between startDate and endDate.
-	 * Input: lenderId, startDate, endDate.
-	 * Output: list of transaction between two dates.
+	 * Method to return a list of transactions for a specific lender between
+	 * startDate and endDate. Input: lenderId, startDate, endDate. Output: list of
+	 * transaction between two dates.
 	 */
 	@Override
-	public List<Transaction> transactionListBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
+	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
 		List<Transaction> transactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionListBetweenTwoDates(lenderId,
 				startDate, endDate);
-		for (TransactionEntity transactionEntity : transactionsList) {
-			Transaction transaction = new Transaction();
-			setTransaction(transactionEntity, transaction);
-			transactions.add(transaction);
+		if (transactionsList != null) {
+			for (TransactionEntity transactionEntity : transactionsList) {
+				Transaction transaction = new Transaction();
+				setTransaction(transactionEntity, transaction);
+				transactions.add(transaction);
+			}
 		}
 		return transactions;
 	}

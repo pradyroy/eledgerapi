@@ -28,8 +28,8 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public List<Transaction> transactionListBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
-		return transactionEntityDAO.transactionListBetweenTwoDates(lenderId, startDate, endDate);
+	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
+		return transactionEntityDAO.getListOfTransactionBetweenTwoDates(lenderId, startDate, endDate);
 	}
 
 }
