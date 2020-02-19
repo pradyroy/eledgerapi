@@ -28,4 +28,9 @@ public class WalletServiceImpl implements WalletService {
 	public List<WalletData> getWallets() {
 		return walletEntityDAO.getWallets();
 	}
+
+	@Override
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+		return walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
+	}
 }
