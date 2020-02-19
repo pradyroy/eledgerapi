@@ -15,4 +15,7 @@ public interface TransactionService {
 	List<Transaction> getTransactions();
 
 	List<Transaction> transactionsByLenderId(String lenderId);
+
+	List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date);
+
 }

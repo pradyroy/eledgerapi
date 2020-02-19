@@ -12,10 +12,31 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
 
 @Repository
+
 public class TransactionDAOImpl implements ITransactionDAO {
 
 	@Autowired
 	ITransactionLogRepository transactionLogRepository;
+
+	/*
+	 * Method to get the details of a transaction by lenderId and Date
+	 */
+
+	@Override
+	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
+		List<Transaction> transactions = new ArrayList<>();
+		List<TransactionEntity> transactionsList = transactionLogRepository
+				.transactionListByLenderIdAndStratDate(lenderId, date);
+		if (!transactionsList.isEmpty()) {
+			for (TransactionEntity transactionEntity : transactionsList) {
+				Transaction transaction = new Transaction();
+				setTransactionData(transactionEntity, transaction);
+				transactions.add(transaction);
+			}
+		}
+		return transactions;
+
+	}
 
 	/*
 	 * Method to return a list List contains the details of transaction done between
