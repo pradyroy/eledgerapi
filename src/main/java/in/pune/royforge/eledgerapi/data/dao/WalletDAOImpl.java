@@ -65,7 +65,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	 */
 	private void updateWallet(WalletEntity walletEntity, WalletTransaction wallet) {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(wallet.getWalletId());
-		if (!existedWallet.isEmpty()) {
+		if (existedWallet.isPresent()) {
 			Date currentDate = new Date();
 			Double newBalance = 0d;
 			if (wallet.getTxnType() == TransactionType.CREDIT) {
@@ -118,7 +118,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = null;
-		if(!walletEntity.isEmpty()) {
+		if(walletEntity.isPresent()) {
 			walletData = new WalletData();
 			walletData.setWalletId(walletEntity.get().getWalletId());
 			walletData.setLenderId(walletEntity.get().getLenderId());
@@ -134,7 +134,7 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	public boolean delete(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
-		if (!walletEntity.isEmpty()) {
+		if (walletEntity.isPresent()) {
 			walletEntityRepository.deleteById(walletId);
 			return true;
 		} else {

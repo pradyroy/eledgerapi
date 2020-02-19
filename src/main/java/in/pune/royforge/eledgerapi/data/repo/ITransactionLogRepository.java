@@ -15,4 +15,6 @@ public interface ITransactionLogRepository extends PagingAndSortingRepository<Tr
 
 	@Query("FROM TransactionEntity WHERE lenderId = ?1  AND ( DATE(date) BETWEEN ?2 AND ?3 )")
 	List<TransactionEntity> transactionListBetweenTwoDates(String lenderId, Date startDate, Date endDate);
+
+	List<TransactionEntity> findByLenderId(String lenderId);
 }

@@ -1,3 +1,4 @@
+
 package in.pune.royforge.eledgerapi.data.service;
 
 
@@ -16,9 +17,18 @@ public class TransactionServiceImpl implements TransactionService {
 	private ITransactionDAO transactionDAO;
 
 	@Override
+	public List<Transaction> getTransactions() {
+		return transactionDAO.getTransactions();
+	}
+
+	@Override
+	public List<Transaction> transactionsByLenderId(String lenderId) {
+		return transactionDAO.transactionsByLenderId(lenderId);
+	}
+
+
 	public void save(Transaction transaction) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -32,8 +42,6 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionDAO.getListOfTransactionBetweenTwoDates(lenderId, startDate, endDate);
 	}
 
-	@Override
-	public List<Transaction> getTransactions() {
-		return transactionDAO.getTransactions();
-	}
+	
 }
+
