@@ -32,6 +32,12 @@ public class TransactionController {
 
 	}
 
+	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
+	public List<Transaction> transactionsByLenderId(@PathVariable(value = "lenderId") String lenderId) {
+		return transactionService.transactionsByLenderId(lenderId);
+
+	}
+
 	@RequestMapping(value = "/lenderId/{lenderId}/startDate/{startDate}/endDate/{endDate}", method = RequestMethod.GET)
 	public List<Transaction> transactionLogsBetweenTwoDates(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "startDate") Date startDate, @PathVariable(value = "endDate") Date endDate) {
