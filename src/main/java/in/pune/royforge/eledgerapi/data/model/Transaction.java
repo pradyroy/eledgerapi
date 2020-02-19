@@ -83,5 +83,4 @@ public class Transaction {
 	public void setTxnType(String txnType) {
 		this.txnType = txnType;
 	}
-
 }

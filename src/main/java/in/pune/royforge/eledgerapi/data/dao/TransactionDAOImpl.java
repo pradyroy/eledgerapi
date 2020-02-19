@@ -25,9 +25,8 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		List<Transaction> transactions = new ArrayList<>();
-		List<TransactionEntity> transactionsList = (List<TransactionEntity>) transactionLogRepository
-				.transactionsList(lenderId, borrowerId);
-
+		List<TransactionEntity> transactionsList = transactionLogRepository.transactionsList(lenderId, borrowerId);
+		
 		if (!transactionsList.isEmpty()) {
 			for (TransactionEntity transaction : transactionsList) {
 				Transaction transactionInfo = new Transaction();

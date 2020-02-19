@@ -1,5 +1,7 @@
 package in.pune.royforge.eledgerapi.data.repo;
 
+
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +14,6 @@ public interface ITransactionLogRepository extends PagingAndSortingRepository<Tr
 	@Query("FROM TransactionEntity WHERE lenderId = ?1 AND borrowerId = ?2")
 	List<TransactionEntity> transactionsList(String lenderId, String borrowerId);
 
+	@Query("FROM TransactionEntity WHERE lenderId = ?1  AND ( DATE(date) BETWEEN ?2 AND ?3 )")
+	List<TransactionEntity> transactionListBetweenTwoDates(String lenderId, Date startDate, Date endDate);
 }
