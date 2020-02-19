@@ -29,24 +29,10 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		for (TransactionEntity transaction1 : transactionsList) {
 			Transaction transactionInfo = new Transaction();
 
-			setTransaction(transaction1, transactionInfo);
+			setTransactionData(transaction1, transactionInfo);
 			transactions.add(transactionInfo);
 		}
 		return transactions;
-	}
-
-	/*
-	 * Method to get the details of a transaction
-	 */
-	private void setTransaction(TransactionEntity transaction1, Transaction transactionInfo) {
-		transactionInfo.setTransactionId(transaction1.getTransactionId());
-		transactionInfo.setWalletId(transaction1.getWalletId());
-		transactionInfo.setBorrowerId(transaction1.getBorrowerId());
-		transactionInfo.setlenderId(transaction1.getlenderId());
-		transactionInfo.setAmount(transaction1.getAmount());
-		transactionInfo.setDate(transaction1.getDate());
-		transactionInfo.setComment(transaction1.getComment());
-		transactionInfo.setType(transaction1.getTxnType());
 	}
 
 	/*
@@ -61,7 +47,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 				startDate, endDate);
 		for (TransactionEntity transactionEntity : transactionsList) {
 			Transaction transaction = new Transaction();
-			setTransaction(transactionEntity, transaction);
+			setTransactionData(transactionEntity, transaction);
 			transactions.add(transaction);
 		}
 		return transactions;

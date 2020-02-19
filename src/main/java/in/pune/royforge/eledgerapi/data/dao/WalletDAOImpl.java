@@ -94,6 +94,10 @@ public class WalletDAOImpl implements IWalletDAO {
 		return wallets;
 	}
 
+	/*
+	 * Method to get Transaction details
+	 * To get data from TransactionEntity into Transaction
+	 */
 	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
 		Date currentDate = new Date();
 		transactionEntity.setWalletId(walletId);
@@ -106,7 +110,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	/*
-	 * Input: getAWallet([walletId]) method is used to retrieve the walletData from
+	 * Input: getWallet([walletId]) method is used to retrieve the walletData from
 	 * the walletEntity table using specific walletID. Output: return walletData
 	 * object.
 	 */
@@ -136,6 +140,21 @@ public class WalletDAOImpl implements IWalletDAO {
 		} else {
 			return false;
 		}
+	}
+
+	/*
+	 * Method is used to fetch the wallets list by taking lender id;
+	 */
+	@Override
+	public List<WalletData> findWalletsListByLenderId(String lenderId) {
+		List<WalletData> walletsOfLender = new ArrayList<>();
+		List<WalletEntity> walletsList = walletEntityRepository.findByLenderId(lenderId);
+		for (WalletEntity walletEntity : walletsList) {
+			WalletData walletData = new WalletData();
+			setWalletData(walletEntity, walletData);
+			walletsOfLender.add(walletData);
+		}
+		return walletsOfLender;
 	}
 
 	/*

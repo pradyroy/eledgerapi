@@ -29,6 +29,7 @@ public class WalletController {
 		return walletEntityService.getWallets();
 	}
 
+
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.GET)
 	public WalletData getWallet(@PathVariable(value = "walletId") Long walletId) {
 		return walletEntityService.getWallet(walletId);
@@ -37,6 +38,11 @@ public class WalletController {
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.DELETE)
 	public boolean delete(@PathVariable(value = "walletId") Long walletId) {
 		return walletEntityService.delete(walletId);
+	}
+
+	@RequestMapping(value = "/lender/{lenderid}", method = RequestMethod.GET)
+	public List<WalletData> findWalletsListByLenderId(@PathVariable(value = "lenderid") String lenderId) {
+		return walletEntityService.findWalletsListByLenderId(lenderId);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
