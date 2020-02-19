@@ -1,5 +1,6 @@
 package in.pune.royforge.eledgerapi.data.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		List<Transaction> transactions = new ArrayList<>();
 		List<TransactionEntity> transactionsList = transactionLogRepository.transactionsList(lenderId, borrowerId);
-		
+
 		if (!transactionsList.isEmpty()) {
 			for (TransactionEntity transaction : transactionsList) {
 				Transaction transactionInfo = new Transaction();
@@ -63,6 +64,24 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		transactionData.setAmount(transactionEntity.getAmount());
 		transactionData.setComment(transactionEntity.getComment());
 		transactionData.setDate(transactionEntity.getDate());
+	}
+
+	/*
+	 * Method to return a list of transactions for a specific lender between
+	 * startDate and endDate. Input: lenderId, startDate, endDate. Output: list of
+	 * transaction between two dates.
+	 */
+	@Override
+	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
+		List<Transaction> transactions = new ArrayList<>();
+		List<TransactionEntity> transactionsList = transactionLogRepository.transactionListBetweenTwoDates(lenderId,
+				startDate, endDate);
+		for (TransactionEntity transactionEntity : transactionsList) {
+			Transaction transaction = new Transaction();
+			setTransactionData(transactionEntity, transaction);
+			transactions.add(transaction);
+		}
+		return transactions;
 	}
 
 }

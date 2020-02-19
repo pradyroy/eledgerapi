@@ -10,8 +10,6 @@ public interface TransactionService {
 
 	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
 
-	List<Transaction> walletTransactionLog(String lenderId, String borrowerId);
-
 	List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate);
 
 	List<Transaction> getTransactions();

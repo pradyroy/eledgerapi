@@ -38,4 +38,5 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<Transaction> getTransactions() {
 		return transactionDAO.getTransactions();
 	}
+
 }
