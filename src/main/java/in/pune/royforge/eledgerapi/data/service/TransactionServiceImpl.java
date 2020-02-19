@@ -1,4 +1,4 @@
-  
+
 package in.pune.royforge.eledgerapi.data.service;
 
 import java.util.List;
@@ -18,7 +18,6 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public List<Transaction> getTransactions() {
 		return transactionDAO.getTransactions();
-
 	}
 
 	@Override

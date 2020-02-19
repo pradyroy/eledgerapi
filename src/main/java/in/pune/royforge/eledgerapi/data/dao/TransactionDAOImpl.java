@@ -49,7 +49,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> transactionsByLenderId(String lenderId){
 		List<Transaction> lenderTransactions = new ArrayList<>();
-		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findByLenderId(lenderId);
+		List<TransactionEntity> transactionlogs = (List<TransactionEntity>) transactionLogRepository.findByLenderId(lenderId);
 		for (TransactionEntity transactionEntity : transactionlogs) {
 			Transaction transactionData = new Transaction();
 			setTransactionData(transactionEntity, transactionData);
