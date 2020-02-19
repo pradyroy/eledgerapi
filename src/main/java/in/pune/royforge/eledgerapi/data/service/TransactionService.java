@@ -13,4 +13,6 @@ public interface TransactionService {
 	List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate);
 
 	List<Transaction> getTransactions();
+
+	List<Transaction> transactionsByLenderId(String lenderId);
 }

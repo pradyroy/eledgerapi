@@ -1,5 +1,5 @@
-package in.pune.royforge.eledgerapi.data.service;
 
+package in.pune.royforge.eledgerapi.data.service;
 
 import java.sql.Date;
 import java.util.List;
@@ -16,9 +16,17 @@ public class TransactionServiceImpl implements TransactionService {
 	private ITransactionDAO transactionDAO;
 
 	@Override
+	public List<Transaction> getTransactions() {
+		return transactionDAO.getTransactions();
+	}
+
+	@Override
+	public List<Transaction> transactionsByLenderId(String lenderId) {
+		return transactionDAO.transactionsByLenderId(lenderId);
+	}
+
 	public void save(Transaction transaction) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -27,16 +35,9 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 	}
 
-
-
 	@Override
 	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
 		return transactionDAO.getListOfTransactionBetweenTwoDates(lenderId, startDate, endDate);
-	}
-
-	@Override
-	public List<Transaction> getTransactions() {
-		return transactionDAO.getTransactions();
 	}
 
 }

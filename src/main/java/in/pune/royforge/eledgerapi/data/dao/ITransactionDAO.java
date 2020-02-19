@@ -11,6 +11,7 @@ public interface ITransactionDAO {
 
 	List<Transaction> getTransactions();
 
-	List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate);
+	List<Transaction> transactionsByLenderId(String lenderId);
 
+	List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate);
 }
