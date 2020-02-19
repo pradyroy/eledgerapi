@@ -25,10 +25,11 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		List<Transaction> transactions = new ArrayList<>();
-		List<TransactionEntity> transactionEntities = transactionLogRepository.transactionsList(lenderId, borrowerId);
+		List<TransactionEntity> transactionsList = (List<TransactionEntity>) transactionLogRepository
+				.transactionsList(lenderId, borrowerId);
 
-		if (transactionEntities.isEmpty()) {
-			for (TransactionEntity transaction : transactionEntities) {
+		if (!transactionsList.isEmpty()) {
+			for (TransactionEntity transaction : transactionsList) {
 				Transaction transactionInfo = new Transaction();
 				setTransactionData(transaction, transactionInfo);
 				transactions.add(transactionInfo);
