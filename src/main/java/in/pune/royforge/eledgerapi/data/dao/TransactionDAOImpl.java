@@ -22,7 +22,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
 		List<Transaction> transactions = new ArrayList<>();
-		Iterable<TransactionEntity> transactionsList = transactionLogRepository
+		List<TransactionEntity> transactionsList = transactionLogRepository
 				.transactionListByLenderIdAndStratDate(lenderId, date);
 		for (TransactionEntity transactionEntity : transactionsList) {
 			Transaction transaction = new Transaction();
@@ -36,7 +36,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> getTransactions() {
 		List<Transaction> transactions = new ArrayList<>();
-		List<TransactionEntity> transactionlogs = (List<TransactionEntity>) transactionLogRepository.findAll();
+		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findAll();
 		for (TransactionEntity transactionEntity : transactionlogs) {
 			Transaction transactionData = new Transaction();
 			setTransactionData(transactionEntity, transactionData);
