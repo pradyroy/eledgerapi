@@ -9,7 +9,12 @@ public interface IWalletDAO {
 
 	void save(WalletTransaction wallet);
 
+	boolean delete(Long walletId);
+
+	WalletData getWalletDataByIds(String lenderId, String borrowId);
+
 	List<WalletData> getWallets();
 
 	WalletData getWallet(Long walletId);
+
 }

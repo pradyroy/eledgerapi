@@ -28,4 +28,15 @@ public class WalletServiceImpl implements WalletService {
 	public List<WalletData> getWallets() {
 		return walletEntityDAO.getWallets();
 	}
+
+	@Override
+	public boolean delete(Long walletId) {
+		return walletEntityDAO.delete(walletId);
+
+	}
+
+	@Override
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+		return walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
+	}
 }
