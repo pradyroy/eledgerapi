@@ -14,16 +14,16 @@ import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
 
 @Repository
 
-public class TransactionDAOImpl implements ITransactionDAO{
-	
+public class TransactionDAOImpl implements ITransactionDAO {
+
 	@Autowired
 	ITransactionLogRepository transactionLogRepository;
-	
+
 	@Override
 	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
 		List<Transaction> transactions = new ArrayList<>();
-		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionListByLenderIdAndStratDate(lenderId,
-				date);
+		Iterable<TransactionEntity> transactionsList = transactionLogRepository
+				.transactionListByLenderIdAndStratDate(lenderId, date);
 		for (TransactionEntity transactionEntity : transactionsList) {
 			Transaction transaction = new Transaction();
 			setTransactionData(transactionEntity, transaction);
@@ -32,11 +32,11 @@ public class TransactionDAOImpl implements ITransactionDAO{
 		return transactions;
 	}
 
-	//Method is used to display the list of transaction logs
+	// Method is used to display the list of transaction logs
 	@Override
 	public List<Transaction> getTransactions() {
 		List<Transaction> transactions = new ArrayList<>();
-		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findAll();
+		List<TransactionEntity> transactionlogs = (List<TransactionEntity>) transactionLogRepository.findAll();
 		for (TransactionEntity transactionEntity : transactionlogs) {
 			Transaction transactionData = new Transaction();
 			setTransactionData(transactionEntity, transactionData);
@@ -46,7 +46,8 @@ public class TransactionDAOImpl implements ITransactionDAO{
 
 	}
 
-	//Method is used to fetch the data from the transaction table in the object transaction();
+	// Method is used to fetch the data from the transaction table in the object
+	// transaction();
 	public void setTransactionData(TransactionEntity transactionEntity, Transaction transactionData) {
 
 		transactionData.setTransactionId(transactionEntity.getTransactionId());
