@@ -127,13 +127,25 @@ public class WalletDAOImpl implements IWalletDAO {
 		return walletData;
 	}
 
+	// By taking input {lenderId} to delete the wallet.
+
+	public boolean delete(Long walletId) {
+		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
+		if (!walletEntity.isEmpty()) {
+			walletEntityRepository.deleteById(walletId);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/*
 	 * Method is used to fetch the wallets list by taking lender id;
 	 */
 	@Override
 	public List<WalletData> findWalletsListByLenderId(String lenderId) {
 		List<WalletData> walletsOfLender = new ArrayList<>();
-		Iterable<WalletEntity> walletsList = walletEntityRepository.findByLenderId(lenderId);
+		List<WalletEntity> walletsList = walletEntityRepository.findByLenderId(lenderId);
 		for (WalletEntity walletEntity : walletsList) {
 			WalletData walletData = new WalletData();
 			setWalletData(walletEntity, walletData);
@@ -171,4 +183,5 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
 		walletData.setWalletId(walletEntity.getWalletId());
 	}
+
 }
