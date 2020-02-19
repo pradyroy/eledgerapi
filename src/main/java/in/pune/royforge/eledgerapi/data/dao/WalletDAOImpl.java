@@ -113,13 +113,16 @@ public class WalletDAOImpl implements IWalletDAO {
 	@Override
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
-		WalletData walletData = new WalletData();
-		walletData.setWalletId(walletEntity.get().getWalletId());
-		walletData.setLenderId(walletEntity.get().getLenderId());
-		walletData.setBorrowId(walletEntity.get().getBorrowId());
-		walletData.setBalance(walletEntity.get().getBalance());
-		walletData.setCreatedDate(walletEntity.get().getCreatedDate());
-		walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+		WalletData walletData = null;
+		if(!walletEntity.isEmpty()) {
+			walletData = new WalletData();
+			walletData.setWalletId(walletEntity.get().getWalletId());
+			walletData.setLenderId(walletEntity.get().getLenderId());
+			walletData.setBorrowId(walletEntity.get().getBorrowId());
+			walletData.setBalance(walletEntity.get().getBalance());
+			walletData.setCreatedDate(walletEntity.get().getCreatedDate());
+			walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+		}
 		return walletData;
 	}
 
