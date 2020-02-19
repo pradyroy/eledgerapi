@@ -102,8 +102,8 @@ public class TransactionEntity implements Serializable {
 		return txnType;
 	}
 
-	public void setTxnType(String txnType) {
-		this.txnType = txnType;
+	public void setTxnType(String string) {
+		this.txnType = string;
 	}
 
 }

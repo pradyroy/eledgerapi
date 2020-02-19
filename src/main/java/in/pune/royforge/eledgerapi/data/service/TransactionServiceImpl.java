@@ -32,15 +32,14 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionDAO.transactionsByLenderId(lenderId);
 	}
 
-
 	public void save(Transaction transaction) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public List<Transaction> walletTransactionLog(String lenderId, String borrowerId) {
+	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		// TODO Auto-generated method stub
-		return transactionDAO.walletTransactionLog(lenderId, borrowerId);
+		return transactionDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 	}
 
 
@@ -49,6 +48,4 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionDAO.getListOfTransactionBetweenTwoDates(lenderId, startDate, endDate);
 	}
 
-	
 }
-
