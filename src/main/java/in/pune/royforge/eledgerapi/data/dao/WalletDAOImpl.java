@@ -122,13 +122,12 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
 		return walletData;
 	}
-	
-	//By taking input {lenderId} to delete the wallet. 
+
+	// By taking input {lenderId} to delete the wallet.
 
 	public boolean delete(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		if (!walletEntity.isEmpty()) {
-
 			walletEntityRepository.deleteById(walletId);
 			return true;
 		} else {
