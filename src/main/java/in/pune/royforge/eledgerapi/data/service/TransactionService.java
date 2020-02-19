@@ -7,5 +7,6 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 public interface TransactionService {
 
 	List<Transaction> getTransactions();
+	List<Transaction> transactionsByLenderId(String lenderId);
 
 }

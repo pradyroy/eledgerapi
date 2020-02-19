@@ -1,3 +1,4 @@
+  
 package in.pune.royforge.eledgerapi.data.service;
 
 import java.util.List;
@@ -18,6 +19,11 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<Transaction> getTransactions() {
 		return transactionDAO.getTransactions();
 
+	}
+
+	@Override
+	public List<Transaction> transactionsByLenderId(String lenderId) {
+		return transactionDAO.transactionsByLenderId(lenderId);
 	}
 
 }
