@@ -13,8 +13,14 @@ public interface ITransactionLogRepository extends PagingAndSortingRepository<Tr
 	@Query("FROM TransactionEntity WHERE lenderId = ?1 AND borrowerId = ?2")
 	Iterable<TransactionEntity> transactionsList(String lenderId, String borrowerId);
 
+
+	@Query("FROM TransactionEntity WHERE lenderId = ?1  AND DATE(date) =?2 ")
+	List<TransactionEntity> transactionListByLenderIdAndStratDate(String lenderId, Date date);
+
+
 	@Query("FROM TransactionEntity WHERE lenderId = ?1  AND ( DATE(date) BETWEEN ?2 AND ?3 )")
 	List<TransactionEntity> transactionListBetweenTwoDates(String lenderId, Date startDate, Date endDate);
 
 	List<TransactionEntity> findByLenderId(String lenderId);
+
 }

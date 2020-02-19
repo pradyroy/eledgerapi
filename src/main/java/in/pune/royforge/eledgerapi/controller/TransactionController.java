@@ -20,9 +20,16 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
+	@RequestMapping(value = "/lenderId/{lenderId}/date/{date}", method = RequestMethod.GET)
+	public List<Transaction> getTransactionListByLenderIdAndDate(@PathVariable(value = "lenderId") String lenderId,
+			@PathVariable(value = "date") Date date) {
+		return transactionService.transactionListByLenderIdAndDate(lenderId, date);
+	}
+
 	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
 	public List<Transaction> getTransactions() {
 		return transactionService.getTransactions();
+
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)

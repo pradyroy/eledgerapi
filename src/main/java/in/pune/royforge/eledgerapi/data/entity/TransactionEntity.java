@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import in.pune.royforge.eledgerapi.data.model.TransactionType;
 
 @Entity
 public class TransactionEntity implements Serializable {
