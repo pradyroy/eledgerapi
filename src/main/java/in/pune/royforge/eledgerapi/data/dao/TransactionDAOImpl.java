@@ -57,7 +57,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
 		List<Transaction> transactions = new ArrayList<>();
-		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionListBetweenTwoDates(lenderId,
+		List<TransactionEntity> transactionsList = transactionLogRepository.transactionListBetweenTwoDates(lenderId,
 				startDate, endDate);
 		for (TransactionEntity transactionEntity : transactionsList) {
 			Transaction transaction = new Transaction();

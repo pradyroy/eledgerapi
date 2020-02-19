@@ -18,16 +18,14 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
-		@RequestMapping(value = "/transactions", method = RequestMethod.GET)
-		public List<Transaction> getTransactions() {
-			return transactionService.getTransactions();
-		}
-
-		@RequestMapping(value = "/lenderId/{lenderId}/startDate/{startDate}/endDate/{endDate}", method = RequestMethod.GET)
-		public List<Transaction> transactionLogsBetweenTwoDates(@PathVariable(value = "lenderId") String lenderId,
-				@PathVariable(value = "startDate") Date startDate, @PathVariable(value = "endDate") Date endDate) {
-			List<Transaction> transactions = transactionService.getListOfTransactionBetweenTwoDates(lenderId, startDate,
-					endDate);
-			return transactions;
-		}
+	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
+	public List<Transaction> getTransactions() {
+		return transactionService.getTransactions();
 	}
+
+	@RequestMapping(value = "/lenderId/{lenderId}/startDate/{startDate}/endDate/{endDate}", method = RequestMethod.GET)
+	public List<Transaction> transactionLogsBetweenTwoDates(@PathVariable(value = "lenderId") String lenderId,
+			@PathVariable(value = "startDate") Date startDate, @PathVariable(value = "endDate") Date endDate) {
+		return transactionService.getListOfTransactionBetweenTwoDates(lenderId, startDate, endDate);
+	}
+}
