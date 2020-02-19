@@ -21,7 +21,7 @@ public class TransactionController {
 	TransactionService transactionService;
 
 	@RequestMapping(value = "/lenderId/{lenderId}/date/{date}", method = RequestMethod.GET)
-	public List<Transaction> lenderTransactionsLog(@PathVariable(value = "lenderId") String lenderId,
+	public List<Transaction> getTransactionListByLenderIdAndDate(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "date") Date date) {
 		return transactionService.transactionListByLenderIdAndDate(lenderId, date);
 	}
