@@ -99,8 +99,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> transactionsByLenderId(String lenderId) {
 		List<Transaction> lenderTransactions = new ArrayList<>();
-		List<TransactionEntity> transactionlogs = (List<TransactionEntity>) transactionLogRepository
-				.findByLenderId(lenderId);
+		List<TransactionEntity> transactionlogs = transactionLogRepository.findByLenderId(lenderId);
 		if (!transactionlogs.isEmpty()) {
 			for (TransactionEntity transactionEntity : transactionlogs) {
 				Transaction transactionData = new Transaction();
