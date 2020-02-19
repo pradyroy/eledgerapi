@@ -25,12 +25,14 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	@Override
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		List<Transaction> transactions = new ArrayList<>();
-		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionsList(lenderId, borrowerId);
-		for (TransactionEntity transaction1 : transactionsList) {
-			Transaction transactionInfo = new Transaction();
+		List<TransactionEntity> transactionEntities = transactionLogRepository.transactionsList(lenderId, borrowerId);
 
-			setTransactionData(transaction1, transactionInfo);
-			transactions.add(transactionInfo);
+		if (transactionEntities.isEmpty()) {
+			for (TransactionEntity transaction : transactionEntities) {
+				Transaction transactionInfo = new Transaction();
+				setTransactionData(transaction, transactionInfo);
+				transactions.add(transactionInfo);
+			}
 		}
 		return transactions;
 	}
