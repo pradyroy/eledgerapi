@@ -113,20 +113,35 @@ public class WalletDAOImpl implements IWalletDAO {
 	@Override
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
-		WalletData walletData = new WalletData();
-		walletData.setWalletId(walletEntity.get().getWalletId());
-		walletData.setLenderId(walletEntity.get().getLenderId());
-		walletData.setBorrowId(walletEntity.get().getBorrowId());
-		walletData.setBalance(walletEntity.get().getBalance());
-		walletData.setCreatedDate(walletEntity.get().getCreatedDate());
-		walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+		WalletData walletData = null;
+		if(!walletEntity.isEmpty()) {
+			walletData = new WalletData();
+			walletData.setWalletId(walletEntity.get().getWalletId());
+			walletData.setLenderId(walletEntity.get().getLenderId());
+			walletData.setBorrowId(walletEntity.get().getBorrowId());
+			walletData.setBalance(walletEntity.get().getBalance());
+			walletData.setCreatedDate(walletEntity.get().getCreatedDate());
+			walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+		}
 		return walletData;
+	}
+
+	// By taking input {lenderId} to delete the wallet.
+
+	public boolean delete(Long walletId) {
+		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
+		if (!walletEntity.isEmpty()) {
+			walletEntityRepository.deleteById(walletId);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/*
 	 * Input: String [lenderId], String [borrowId]. Output: return WalletData
-	 * object. Operation: This method is used to get the walletData object contain all
-	 * information with the help of lenderId and borrowId.
+	 * object. Operation: This method is used to get the walletData object contain
+	 * all information with the help of lenderId and borrowId.
 	 */
 	@Override
 	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
@@ -152,4 +167,5 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
 		walletData.setWalletId(walletEntity.getWalletId());
 	}
+
 }
