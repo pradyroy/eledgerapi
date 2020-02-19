@@ -43,6 +43,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		transactionData.setDate(transactionEntity.getDate());
 
 	}
+
 	
 	//Method is used to fetch the transaction by taking lender id;
 	@Override
@@ -60,6 +61,5 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		
 	}
 	
-
 
 }

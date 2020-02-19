@@ -17,11 +17,12 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public List<Transaction> getTransactions() {
 		return transactionDAO.getTransactions();
+
 	}
-	
+
 	@Override
-	public List<Transaction> transactionsByLenderId(String lenderId){
+	public List<Transaction> transactionsByLenderId(String lenderId) {
 		return transactionDAO.transactionsByLenderId(lenderId);
 	}
-	
+
 }

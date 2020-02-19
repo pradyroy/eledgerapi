@@ -10,4 +10,5 @@ public interface ITransactionDAO {
 
 	List<Transaction> transactionsByLenderId(String lenderId);
 
+
 }
