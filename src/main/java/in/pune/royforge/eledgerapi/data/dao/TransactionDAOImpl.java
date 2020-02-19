@@ -1,19 +1,57 @@
 package in.pune.royforge.eledgerapi.data.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.model.Transaction;
 import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
 
 @Repository
 public class TransactionDAOImpl implements ITransactionDAO {
+
 	@Autowired
 	ITransactionLogRepository transactionLogRepository;
+
+	/*
+	 * Method to return a list List contains the details of transaction done between
+	 * a particular lender ID and borrower ID Lender Id and Borrower ID is passed as
+	 * argument to this method
+	 * 
+	 */
+	@Override
+	public List<Transaction> walletTransactionLog(String lenderId, String borrowerId) {
+		List<Transaction> transactions = new ArrayList<>();
+		Iterable<TransactionEntity> transactionsList = transactionLogRepository.transactionsList(lenderId, borrowerId);
+		for (TransactionEntity transaction1 : transactionsList) {
+			Transaction transactionInfo = new Transaction();
+
+			setTransactionData(transaction1, transactionInfo);
+			transactions.add(transactionInfo);
+		}
+		return transactions;
+	}
+
+	/*
+	 * Method to return a list of transactions for a specific lender between
+	 * startDate and endDate. Input: lenderId, startDate, endDate. Output: list of
+	 * transaction between two dates.
+	 */
+	@Override
+	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
+		List<Transaction> transactions = new ArrayList<>();
+		List<TransactionEntity> transactionsList = transactionLogRepository.transactionListBetweenTwoDates(lenderId,
+				startDate, endDate);
+		for (TransactionEntity transactionEntity : transactionsList) {
+			Transaction transaction = new Transaction();
+			setTransactionData(transactionEntity, transaction);
+			transactions.add(transaction);
+		}
+		return transactions;
+	}
 
 	// Method is used to display the list of transaction logs
 	@Override
@@ -26,7 +64,6 @@ public class TransactionDAOImpl implements ITransactionDAO {
 			transactions.add(transactionData);
 		}
 		return transactions;
-
 	}
 
 	// Method is used to fetch the data from the transaction table in the object

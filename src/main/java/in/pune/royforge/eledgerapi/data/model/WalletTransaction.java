@@ -83,5 +83,4 @@ public class WalletTransaction {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
 }

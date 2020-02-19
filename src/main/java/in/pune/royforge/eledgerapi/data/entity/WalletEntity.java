@@ -82,5 +82,4 @@ public class WalletEntity implements Serializable {
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-
 }
