@@ -20,6 +20,7 @@ public class WalletDAOImpl implements IWalletDAO {
 
 	@Autowired
 	WalletEntityRepository walletEntityRepository;
+
 	@Autowired
 	ITransactionLogRepository transactionLogRepository;
 
@@ -93,15 +94,10 @@ public class WalletDAOImpl implements IWalletDAO {
 		return wallets;
 	}
 
-	private void setWalletData(WalletEntity walletEntity, WalletData walletData) {
-		walletData.setBalance(walletEntity.getBalance());
-		walletData.setBorrowId(walletEntity.getBorrowId());
-		walletData.setCreatedDate(walletEntity.getCreatedDate());
-		walletData.setLenderId(walletEntity.getLenderId());
-		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
-		walletData.setWalletId(walletEntity.getWalletId());
-	}
-
+	/*
+	 * Method to get Transaction details
+	 * To get data from TransactionEntity into Transaction
+	 */
 	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
 		Date currentDate = new Date();
 		transactionEntity.setWalletId(walletId);
@@ -144,5 +140,35 @@ public class WalletDAOImpl implements IWalletDAO {
 			walletsOfLender.add(walletData);
 		}
 		return walletsOfLender;
+	}
+
+	/*
+	 * Input: String [lenderId], String [borrowId]. Output: return WalletData
+	 * object. Operation: This method is used to get the walletData object contain
+	 * all information with the help of lenderId and borrowId.
+	 */
+	@Override
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+		WalletEntity walletEntity = walletEntityRepository.getWalletDataByIds(lenderId, borrowId);
+		WalletData walletData = null;
+		if (walletEntity != null) {
+			walletData = new WalletData();
+			setWalletData(walletEntity, walletData);
+		}
+		return walletData;
+	}
+
+	/*
+	 * Input: (WalletEntity walletEntity, WalletData walletData), Output: This
+	 * method is used to set the data from one object[WalletEntity] to another
+	 * object[WalletData].
+	 */
+	private void setWalletData(WalletEntity walletEntity, WalletData walletData) {
+		walletData.setBalance(walletEntity.getBalance());
+		walletData.setBorrowId(walletEntity.getBorrowId());
+		walletData.setCreatedDate(walletEntity.getCreatedDate());
+		walletData.setLenderId(walletEntity.getLenderId());
+		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
+		walletData.setWalletId(walletEntity.getWalletId());
 	}
 }

@@ -33,4 +33,8 @@ public class WalletServiceImpl implements WalletService {
 	public List<WalletData> findWalletsListByLenderId(String lenderId) {
 		return walletEntityDAO.findWalletsListByLenderId(lenderId);
 	}
+
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+		return walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
+	}
 }
