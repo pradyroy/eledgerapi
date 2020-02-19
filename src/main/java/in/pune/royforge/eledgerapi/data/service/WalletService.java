@@ -11,7 +11,10 @@ public interface WalletService {
 
 	List<WalletData> getWallets();
 
+	boolean delete(Long walletId);
+
 	WalletData getWalletDataByIds(String lenderId, String borrowId);
 
 	WalletData getWallet(Long walletId);
+
 }
