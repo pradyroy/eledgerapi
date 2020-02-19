@@ -16,7 +16,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 
 	@Autowired
 	ITransactionLogRepository transactionLogRepository;
-	
+
 	/*
 	 * Method to get the details of a transaction by lenderId and Date
 	 */
@@ -26,12 +26,15 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		List<Transaction> transactions = new ArrayList<>();
 		List<TransactionEntity> transactionsList = transactionLogRepository
 				.transactionListByLenderIdAndStratDate(lenderId, date);
-		for (TransactionEntity transactionEntity : transactionsList) {
-			Transaction transaction = new Transaction();
-			setTransactionData(transactionEntity, transaction);
-			transactions.add(transaction);
+		if (!transactionsList.isEmpty()) {
+			for (TransactionEntity transactionEntity : transactionsList) {
+				Transaction transaction = new Transaction();
+				setTransactionData(transactionEntity, transaction);
+				transactions.add(transaction);
+			}
 		}
 		return transactions;
+
 	}
 
 	/*
