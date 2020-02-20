@@ -27,21 +27,17 @@ public class TransactionController {
 	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
 	public List<Transaction> getTransactions() {
 		return transactionService.getTransactions();
-
 	}
 
-	@RequestMapping(value = "/lender/{lenderId}/borrower/{borrowerId}", method = RequestMethod.GET)
-
+	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowerId}", method = RequestMethod.GET)
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(
 			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowerId") String borrowerId) {
 		return transactionService.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
-
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
 	public List<Transaction> transactionsByLenderId(@PathVariable(value = "lenderId") String lenderId) {
 		return transactionService.transactionsByLenderId(lenderId);
-
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/startDate/{startDate}/endDate/{endDate}", method = RequestMethod.GET)

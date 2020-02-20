@@ -32,7 +32,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public void save(WalletTransaction walletTransaction) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
-		if (walletTransaction.getWalletId() == null) {
+		if (null == walletTransaction.getWalletId()) {
 			createWallet(walletEntity, walletTransaction);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
 		} else {
@@ -82,21 +82,26 @@ public class WalletDAOImpl implements IWalletDAO {
 		}
 	}
 
+	/*
+	 * Get a list of wallets present in the data
+	 */
 	@Override
 	public List<WalletData> getWallets() {
 		List<WalletData> wallets = new ArrayList<>();
 		Iterable<WalletEntity> walletsList = walletEntityRepository.findAll();
-		for (WalletEntity walletEntity : walletsList) {
-			WalletData walletData = new WalletData();
-			setWalletData(walletEntity, walletData);
-			wallets.add(walletData);
+		if (null != walletsList) {
+			for (WalletEntity walletEntity : walletsList) {
+				WalletData walletData = new WalletData();
+				setWalletData(walletEntity, walletData);
+				wallets.add(walletData);
+			}
 		}
 		return wallets;
 	}
 
 	/*
-	 * Method to get Transaction details
-	 * To get data from TransactionEntity into Transaction
+	 * Method to get Transaction details To get data from TransactionEntity into
+	 * Transaction
 	 */
 	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
 		Date currentDate = new Date();
@@ -118,7 +123,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = null;
-		if(walletEntity.isPresent()) {
+		if (walletEntity.isPresent()) {
 			walletData = new WalletData();
 			walletData.setWalletId(walletEntity.get().getWalletId());
 			walletData.setLenderId(walletEntity.get().getLenderId());
@@ -166,7 +171,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
 		WalletEntity walletEntity = walletEntityRepository.getWalletDataByIds(lenderId, borrowId);
 		WalletData walletData = null;
-		if (walletEntity != null) {
+		if (null != walletEntity) {
 			walletData = new WalletData();
 			setWalletData(walletEntity, walletData);
 		}
@@ -186,5 +191,4 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
 		walletData.setWalletId(walletEntity.getWalletId());
 	}
-
 }

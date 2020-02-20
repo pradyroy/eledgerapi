@@ -21,7 +21,6 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	/*
 	 * Method to get the details of a transaction by lenderId and Date
 	 */
-
 	@Override
 	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
 		List<Transaction> transactions = new ArrayList<>();
@@ -35,7 +34,6 @@ public class TransactionDAOImpl implements ITransactionDAO {
 			}
 		}
 		return transactions;
-
 	}
 
 	/*
@@ -48,7 +46,6 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
 		List<Transaction> transactions = new ArrayList<>();
 		List<TransactionEntity> transactionsList = transactionLogRepository.transactionsList(lenderId, borrowerId);
-
 		if (!transactionsList.isEmpty()) {
 			for (TransactionEntity transaction : transactionsList) {
 				Transaction transactionInfo = new Transaction();
@@ -64,19 +61,19 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	public List<Transaction> getTransactions() {
 		List<Transaction> transactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findAll();
-		for (TransactionEntity transactionEntity : transactionlogs) {
-			Transaction transactionData = new Transaction();
-			setTransactionData(transactionEntity, transactionData);
-			transactions.add(transactionData);
+		if (null != transactionlogs) {
+			for (TransactionEntity transactionEntity : transactionlogs) {
+				Transaction transactionData = new Transaction();
+				setTransactionData(transactionEntity, transactionData);
+				transactions.add(transactionData);
+			}
 		}
 		return transactions;
-
 	}
 
 	// Method is used to fetch the data from the transaction table in the object
 	// transaction();
 	public void setTransactionData(TransactionEntity transactionEntity, Transaction transactionData) {
-
 		transactionData.setTransactionId(transactionEntity.getTransactionId());
 		transactionData.setWalletId(transactionEntity.getWalletId());
 		transactionData.setlenderId(transactionEntity.getlenderId());
@@ -117,9 +114,6 @@ public class TransactionDAOImpl implements ITransactionDAO {
 				lenderTransactions.add(transactionData);
 			}
 		}
-
 		return lenderTransactions;
-
 	}
-
 }
