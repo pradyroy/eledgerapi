@@ -86,17 +86,19 @@ public class WalletDAOImpl implements IWalletDAO {
 	public List<WalletData> getWallets() {
 		List<WalletData> wallets = new ArrayList<>();
 		Iterable<WalletEntity> walletsList = walletEntityRepository.findAll();
-		for (WalletEntity walletEntity : walletsList) {
-			WalletData walletData = new WalletData();
-			setWalletData(walletEntity, walletData);
-			wallets.add(walletData);
+		if (walletsList != null) {
+			for (WalletEntity walletEntity : walletsList) {
+				WalletData walletData = new WalletData();
+				setWalletData(walletEntity, walletData);
+				wallets.add(walletData);
+			}
 		}
 		return wallets;
 	}
 
 	/*
-	 * Method to get Transaction details
-	 * To get data from TransactionEntity into Transaction
+	 * Method to get Transaction details To get data from TransactionEntity into
+	 * Transaction
 	 */
 	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
 		Date currentDate = new Date();
@@ -118,7 +120,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public WalletData getWallet(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = null;
-		if(walletEntity.isPresent()) {
+		if (walletEntity.isPresent()) {
 			walletData = new WalletData();
 			walletData.setWalletId(walletEntity.get().getWalletId());
 			walletData.setLenderId(walletEntity.get().getLenderId());
