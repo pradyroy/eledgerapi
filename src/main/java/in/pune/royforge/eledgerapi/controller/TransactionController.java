@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,14 +21,15 @@ public class TransactionController {
 	TransactionService transactionService;
 
 	@RequestMapping(value = "/lenderId/{lenderId}/date/{date}", method = RequestMethod.GET)
-	public List<Transaction> getTransactionListByLenderIdAndDate(@PathVariable(value = "lenderId") String lenderId,
-			@PathVariable(value = "date") Date date) {
-		return transactionService.transactionListByLenderIdAndDate(lenderId, date);
+	public ResponseEntity<List<Transaction>> getTransactionListByLenderIdAndDate(
+			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "date") Date date) {
+		return new ResponseEntity<List<Transaction>>(
+				transactionService.transactionListByLenderIdAndDate(lenderId, date), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
-	public List<Transaction> getTransactions() {
-		return transactionService.getTransactions();
+	public ResponseEntity<List<Transaction>> getTransactions() {
+		return new ResponseEntity<List<Transaction>>(transactionService.getTransactions(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowerId}", method = RequestMethod.GET)
@@ -36,8 +39,9 @@ public class TransactionController {
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
-	public List<Transaction> transactionsByLenderId(@PathVariable(value = "lenderId") String lenderId) {
-		return transactionService.transactionsByLenderId(lenderId);
+	public ResponseEntity<List<Transaction>> transactionsByLenderId(@PathVariable(value = "lenderId") String lenderId) {
+		return new ResponseEntity<List<Transaction>>(transactionService.transactionsByLenderId(lenderId),
+				HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/startDate/{startDate}/endDate/{endDate}", method = RequestMethod.GET)
