@@ -14,13 +14,11 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
 	private ITransactionDAO transactionDAO;
-	
+
 	@Override
 	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
 		return transactionDAO.transactionListByLenderIdAndDate(lenderId, date);
 	}
-
-	
 
 	@Override
 	public List<Transaction> getTransactions() {
@@ -41,7 +39,6 @@ public class TransactionServiceImpl implements TransactionService {
 		// TODO Auto-generated method stub
 		return transactionDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 	}
-
 
 	@Override
 	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
