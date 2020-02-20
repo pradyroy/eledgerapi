@@ -64,10 +64,12 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	public List<Transaction> getTransactions() {
 		List<Transaction> transactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findAll();
-		for (TransactionEntity transactionEntity : transactionlogs) {
-			Transaction transactionData = new Transaction();
-			setTransactionData(transactionEntity, transactionData);
-			transactions.add(transactionData);
+		if (transactionlogs != null) {
+			for (TransactionEntity transactionEntity : transactionlogs) {
+				Transaction transactionData = new Transaction();
+				setTransactionData(transactionEntity, transactionData);
+				transactions.add(transactionData);
+			}
 		}
 		return transactions;
 
