@@ -17,6 +17,14 @@ public class CustomExceptionHandler {
 		return new ResponseEntity<Object>(error, HttpStatus.NOT_FOUND);
 	}
 
+
+	@ExceptionHandler(EmptyListException.class)
+	public final ResponseEntity<Object> handleEmptyListException(EmptyListException ex) {
+		Date currentDate = new Date();
+		ErrorResponse error = new ErrorResponse(currentDate, ex.getMessage(), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Object>(error, HttpStatus.NO_CONTENT);
+	}
+
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllException(Exception ex) {
 		Date currentDate = new Date();

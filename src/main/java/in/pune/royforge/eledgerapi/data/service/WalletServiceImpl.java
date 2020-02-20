@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import in.pune.royforge.eledgerapi.data.dao.IWalletDAO;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
+import in.pune.royforge.eledgerapi.exceptionhandler.EmptyListException;
 import in.pune.royforge.eledgerapi.exceptionhandler.RecordNotFoundException;
 
 @Service
@@ -21,22 +22,30 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public WalletData getWallet(Long walletId) throws RecordNotFoundException{
+	public WalletData getWallet(Long walletId) throws RecordNotFoundException {
 		WalletData walletData = walletEntityDAO.getWallet(walletId);
-		if(walletData == null) {
+		if (walletData == null) {
 			throw new RecordNotFoundException("Record Not Found");
 		}
 		return walletData;
 	}
 
 	@Override
-	public List<WalletData> getWallets() {
-		return walletEntityDAO.getWallets();
+	public List<WalletData> getWallets() throws EmptyListException {
+		List<WalletData> walletData = walletEntityDAO.getWallets();
+		if (walletData == null) {
+			throw new EmptyListException("Empty List!! ,The input does not have details stored...");
+		}
+		return walletData;
 	}
 
 	@Override
-	public List<WalletData> findWalletsListByLenderId(String lenderId) {
-		return walletEntityDAO.findWalletsListByLenderId(lenderId);
+	public List<WalletData> findWalletsListByLenderId(String lenderId) throws RecordNotFoundException {
+		List<WalletData> walletData = walletEntityDAO.findWalletsListByLenderId(lenderId);
+		if (walletData.isEmpty()) {
+			throw new RecordNotFoundException("List of Wallets not found for the given lender-ID");
+		}
+		return walletData;
 	}
 
 	public boolean delete(Long walletId) {
@@ -46,6 +55,10 @@ public class WalletServiceImpl implements WalletService {
 
 	@Override
 	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
-		return walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
+		WalletData walletData = walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
+		if (walletData == null) {
+			throw new RecordNotFoundException("No wallet found between the given lender and borrower");
+		}
+		return walletData;
 	}
 }
