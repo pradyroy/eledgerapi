@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import in.pune.royforge.eledgerapi.data.dao.ITransactionDAO;
 import in.pune.royforge.eledgerapi.data.model.Transaction;
+import in.pune.royforge.eledgerapi.exceptionhandler.RecordNotFoundException;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
+	public void save(Transaction transaction) {
+
+	}
 
 	@Autowired
 	private ITransactionDAO transactionDAO;
-	
+
 	@Override
 	public List<Transaction> transactionListByLenderIdAndDate(String lenderId, Date date) {
 		return transactionDAO.transactionListByLenderIdAndDate(lenderId, date);
@@ -26,20 +30,18 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public List<Transaction> transactionsByLenderId(String lenderId) {
-		return transactionDAO.transactionsByLenderId(lenderId);
-	}
-
-	public void save(Transaction transaction) {
-		// TODO Auto-generated method stub
+	public List<Transaction> transactionsByLenderId(String lenderId) throws RecordNotFoundException {
+		List<Transaction> transactions = transactionDAO.transactionsByLenderId(lenderId);
+		if (transactions.isEmpty()) {
+			throw new RecordNotFoundException("Lender Not Exist");
+		}
+		return transactions;
 	}
 
 	@Override
 	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
-		// TODO Auto-generated method stub
 		return transactionDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 	}
-
 
 	@Override
 	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
