@@ -104,7 +104,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 			setTransactionData(transactionEntity, transaction);
 			transactions.add(transaction);
 		}
-		
+
 		return transactions;
 	}
 
