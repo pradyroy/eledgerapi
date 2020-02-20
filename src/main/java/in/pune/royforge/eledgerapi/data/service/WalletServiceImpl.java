@@ -35,17 +35,20 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public List<WalletData> findWalletsListByLenderId(String lenderId) {
-		return walletEntityDAO.findWalletsListByLenderId(lenderId);
+	public List<WalletData> findWalletsListByLenderId(String lenderId) throws RecordNotFoundException {
+		List<WalletData> walletData = walletEntityDAO.findWalletsListByLenderId(lenderId);
+		if (walletData.isEmpty()) {
+			throw new RecordNotFoundException("List of Wallets not found for the given lender-ID");
+		}
+		return walletData;
 	}
 
 	public boolean delete(Long walletId) {
 		boolean walletDelete = walletEntityDAO.delete(walletId);
-		if (walletDelete == false){
+		if (walletDelete == false) {
 			throw new RecordNotFoundException("Wallet Not Exist");
 		}
 		return walletDelete;
-
 	}
 
 	@Override

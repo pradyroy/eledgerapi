@@ -82,6 +82,9 @@ public class WalletDAOImpl implements IWalletDAO {
 		}
 	}
 
+	/*
+	 * Get a list of wallets present in the data
+	 */
 	@Override
 	public List<WalletData> getWallets() {
 		List<WalletData> wallets = new ArrayList<>();
