@@ -49,7 +49,11 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	public boolean delete(Long walletId) {
-		return walletEntityDAO.delete(walletId);
+		boolean walletDelete = walletEntityDAO.delete(walletId);
+		if (walletDelete == false){
+			throw new RecordNotFoundException("Wallet Not Exist");
+		}
+		return walletDelete;
 
 	}
 
