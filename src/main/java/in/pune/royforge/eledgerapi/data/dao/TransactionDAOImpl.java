@@ -64,7 +64,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	public List<Transaction> getTransactions() {
 		List<Transaction> transactions = new ArrayList<>();
 		Iterable<TransactionEntity> transactionlogs = transactionLogRepository.findAll();
-		if (transactionlogs != null) {
+		if (null != transactionlogs) {
 			for (TransactionEntity transactionEntity : transactionlogs) {
 				Transaction transactionData = new Transaction();
 				setTransactionData(transactionEntity, transactionData);
@@ -104,6 +104,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 			setTransactionData(transactionEntity, transaction);
 			transactions.add(transaction);
 		}
+		
 		return transactions;
 	}
 

@@ -32,7 +32,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public void save(WalletTransaction walletTransaction) {
 		WalletEntity walletEntity = new WalletEntity();
 		WalletEntity walletEntityobj = null;
-		if (walletTransaction.getWalletId() == null) {
+		if (null == walletTransaction.getWalletId()) {
 			createWallet(walletEntity, walletTransaction);
 			walletEntityobj = walletEntityRepository.save(walletEntity);
 		} else {
@@ -89,7 +89,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public List<WalletData> getWallets() {
 		List<WalletData> wallets = new ArrayList<>();
 		Iterable<WalletEntity> walletsList = walletEntityRepository.findAll();
-		if (walletsList != null) {
+		if (null !=walletsList) {
 			for (WalletEntity walletEntity : walletsList) {
 				WalletData walletData = new WalletData();
 				setWalletData(walletEntity, walletData);
@@ -171,7 +171,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
 		WalletEntity walletEntity = walletEntityRepository.getWalletDataByIds(lenderId, borrowId);
 		WalletData walletData = null;
-		if (walletEntity != null) {
+		if (null != walletEntity) {
 			walletData = new WalletData();
 			setWalletData(walletEntity, walletData);
 		}
