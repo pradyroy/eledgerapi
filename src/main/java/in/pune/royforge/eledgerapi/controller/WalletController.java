@@ -46,7 +46,7 @@ public class WalletController {
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
 	public WalletData getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
-			@PathVariable(value = "borrowId") String borrowId) {
+			@PathVariable(value = "borrowId") String borrowId) {	
 		return walletEntityService.getWalletDataByIds(lenderId, borrowId);
 	}
 }

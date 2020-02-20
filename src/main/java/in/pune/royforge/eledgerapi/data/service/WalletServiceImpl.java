@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import in.pune.royforge.eledgerapi.data.dao.IWalletDAO;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
+import in.pune.royforge.eledgerapi.exceptionhandler.RecordNotFoundException;
 
 @Service
 public class WalletServiceImpl implements WalletService {
@@ -20,8 +21,12 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public WalletData getWallet(Long walletId) {
-		return walletEntityDAO.getWallet(walletId);
+	public WalletData getWallet(Long walletId) throws RecordNotFoundException {
+		WalletData walletData = walletEntityDAO.getWallet(walletId);
+		if (null == walletData) {
+			throw new RecordNotFoundException("walletId Not Found in Record");
+		}
+		return walletData;
 	}
 
 	@Override
@@ -30,17 +35,28 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public List<WalletData> findWalletsListByLenderId(String lenderId) {
-		return walletEntityDAO.findWalletsListByLenderId(lenderId);
+	public List<WalletData> findWalletsListByLenderId(String lenderId) throws RecordNotFoundException {
+		List<WalletData> walletData = walletEntityDAO.findWalletsListByLenderId(lenderId);
+		if (walletData.isEmpty()) {
+			throw new RecordNotFoundException("List of Wallets not found for the given lender-ID");
+		}
+		return walletData;
 	}
 
 	public boolean delete(Long walletId) {
-		return walletEntityDAO.delete(walletId);
-
+		boolean walletDelete = walletEntityDAO.delete(walletId);
+		if (false == walletDelete) {
+			throw new RecordNotFoundException("Wallet Not Exist");
+		}
+		return walletDelete;
 	}
 
 	@Override
 	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
-		return walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
+		WalletData walletData = walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
+		if (null == walletData) {
+			throw new RecordNotFoundException("Customer or Merchant or both Not Found");
+		}
+		return walletData;
 	}
 }

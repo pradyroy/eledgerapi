@@ -2,9 +2,8 @@ package in.pune.royforge.eledgerapi.data.model;
 
 import java.util.Date;
 
-
 public class WalletData {
-	
+
 	private Long walletId;
 
 	private String lenderId;
