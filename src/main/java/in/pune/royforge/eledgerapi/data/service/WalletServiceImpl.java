@@ -23,7 +23,7 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public WalletData getWallet(Long walletId) throws RecordNotFoundException {
 		WalletData walletData = walletEntityDAO.getWallet(walletId);
-		if (walletData == null) {
+		if (null == walletData) {
 			throw new RecordNotFoundException("walletId Not Found in Record");
 		}
 		return walletData;
@@ -45,7 +45,7 @@ public class WalletServiceImpl implements WalletService {
 
 	public boolean delete(Long walletId) {
 		boolean walletDelete = walletEntityDAO.delete(walletId);
-		if (walletDelete == false) {
+		if (false == walletDelete) {
 			throw new RecordNotFoundException("Wallet Not Exist");
 		}
 		return walletDelete;
@@ -54,7 +54,7 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
 		WalletData walletData = walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
-		if (walletData == null) {
+		if (null == walletData) {
 			throw new RecordNotFoundException("Customer or Merchant or both Not Found");
 		}
 		return walletData;

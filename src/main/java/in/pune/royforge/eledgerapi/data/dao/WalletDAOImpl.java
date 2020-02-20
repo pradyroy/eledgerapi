@@ -89,7 +89,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	public List<WalletData> getWallets() {
 		List<WalletData> wallets = new ArrayList<>();
 		Iterable<WalletEntity> walletsList = walletEntityRepository.findAll();
-		if (null !=walletsList) {
+		if (null != walletsList) {
 			for (WalletEntity walletEntity : walletsList) {
 				WalletData walletData = new WalletData();
 				setWalletData(walletEntity, walletData);
@@ -191,5 +191,4 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
 		walletData.setWalletId(walletEntity.getWalletId());
 	}
-
 }

@@ -12,9 +12,6 @@ import in.pune.royforge.eledgerapi.exceptionhandler.RecordNotFoundException;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
-	public void save(Transaction transaction) {
-
-	}
 
 	@Autowired
 	private ITransactionDAO transactionDAO;
@@ -52,5 +49,4 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate) {
 		return transactionDAO.getListOfTransactionBetweenTwoDates(lenderId, startDate, endDate);
 	}
-
 }
