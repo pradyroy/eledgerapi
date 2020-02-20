@@ -191,5 +191,4 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
 		walletData.setWalletId(walletEntity.getWalletId());
 	}
-
 }

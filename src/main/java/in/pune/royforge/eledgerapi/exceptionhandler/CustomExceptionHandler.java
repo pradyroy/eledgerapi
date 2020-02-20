@@ -12,15 +12,15 @@ public class CustomExceptionHandler {
 
 	@ExceptionHandler(RecordNotFoundException.class)
 	public final ResponseEntity<Object> handleRecordNotFoundException(RecordNotFoundException ex) {
-		Date currentDate = new Date();
-		ErrorResponse error = new ErrorResponse(currentDate, ex.getMessage(), HttpStatus.NOT_FOUND);
-		return new ResponseEntity<Object>(error, HttpStatus.NOT_FOUND);
+
+		return new ResponseEntity<Object>(new ErrorResponse(new Date(), ex.getMessage(), HttpStatus.NOT_FOUND),
+				HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllException(Exception ex) {
-		Date currentDate = new Date();
-		ErrorResponse error = new ErrorResponse(currentDate, ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		return new ResponseEntity<Object>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<Object>(
+				new ErrorResponse(new Date(), ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR),
+				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
