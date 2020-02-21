@@ -56,9 +56,15 @@ public class WalletDAOImpl implements IWalletDAO {
 	 */
 	private void createWallet(WalletEntity walletEntity, WalletTransaction walletTransaction) {
 		Date currentDate = new Date();
+		double newBalance = 0;
 		walletEntity.setLenderId(walletTransaction.getLenderId());
 		walletEntity.setBorrowId(walletTransaction.getBorrowId());
-		walletEntity.setBalance(walletTransaction.getAmount());
+		if (walletTransaction.getTxnType() == TransactionType.CREDIT) {
+			newBalance -= walletTransaction.getAmount();
+		} else if (walletTransaction.getTxnType() == TransactionType.DEBIT) {
+			newBalance += walletTransaction.getAmount();
+		}
+		walletEntity.setBalance(newBalance);
 		walletEntity.setCreatedDate(currentDate);
 		walletEntity.setUpdatedDate(currentDate);
 	}

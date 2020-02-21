@@ -33,9 +33,9 @@ public class TransactionController {
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowerId}", method = RequestMethod.GET)
-	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(
+	public ResponseEntity<List<Transaction>> getTransactionsUsingLenderIdAndBorrowerId(
 			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowerId") String borrowerId) {
-		return transactionService.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
+		return new ResponseEntity<List<Transaction>>(transactionService.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)

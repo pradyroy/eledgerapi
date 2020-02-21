@@ -28,8 +28,8 @@ public class WalletController {
 	}
 
 	@RequestMapping(value = "/wallets", method = RequestMethod.GET)
-	public List<WalletData> getWallets() {
-		return walletEntityService.getWallets();
+	public ResponseEntity<List<WalletData>> getWallets() {
+		return new ResponseEntity<List<WalletData>>(walletEntityService.getWallets(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.GET)
@@ -43,8 +43,10 @@ public class WalletController {
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderid}", method = RequestMethod.GET)
-	public List<WalletData> findWalletsListByLenderId(@PathVariable(value = "lenderid") String lenderId) {
-		return walletEntityService.findWalletsListByLenderId(lenderId);
+	public ResponseEntity<List<WalletData>> findWalletsListByLenderId(
+			@PathVariable(value = "lenderid") String lenderId) {
+		return new ResponseEntity<List<WalletData>>(walletEntityService.findWalletsListByLenderId(lenderId),
+				HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
