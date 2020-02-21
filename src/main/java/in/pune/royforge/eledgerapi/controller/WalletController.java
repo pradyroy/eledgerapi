@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 import in.pune.royforge.eledgerapi.data.service.WalletService;
@@ -37,8 +38,8 @@ public class WalletController {
 	}
 
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.DELETE)
-	public boolean delete(@PathVariable(value = "walletId") Long walletId) {
-		return walletEntityService.delete(walletId);
+	public ResponseEntity<Boolean> delete(@PathVariable(value = "walletId") Long walletId) {
+		return new ResponseEntity<Boolean>(walletEntityService.delete(walletId), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderid}", method = RequestMethod.GET)

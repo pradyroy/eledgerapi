@@ -9,13 +9,13 @@ public interface IWalletDAO {
 
 	boolean save(WalletTransaction wallet);
 
-	boolean delete(Long walletId);
+	boolean delete(long walletId);
 
 	WalletData getWalletDataByIds(String lenderId, String borrowId);
 
 	List<WalletData> getWallets();
 
-	WalletData getWallet(Long walletId);
+	WalletData getWallet(long walletId);
 
 	List<WalletData> findWalletsListByLenderId(String lenderId);
 
