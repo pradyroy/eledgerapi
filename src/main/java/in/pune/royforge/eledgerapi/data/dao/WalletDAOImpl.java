@@ -146,16 +146,6 @@ public class WalletDAOImpl implements IWalletDAO {
 		return walletData;
 	}
 
-	// By taking input {lenderId} to delete the wallet.
-	public boolean delete(long walletId) {
-		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
-		if (walletEntity.isPresent()) {
-			walletEntityRepository.deleteById(walletId);
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	/*
 	 * Method is used to fetch the wallets list by taking lender id;
@@ -200,5 +190,25 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletData.setLenderId(walletEntity.getLenderId());
 		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
 		walletData.setWalletId(walletEntity.getWalletId());
+	}
+	
+	// By taking input {lenderId} to delete the wallet.
+	@Override
+	public boolean deleteWallet(long walletId) {
+		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
+		if (existedWallet.isPresent()) {
+			WalletEntity walletEntity = new WalletEntity();
+			walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
+			walletEntity.setWalletId(existedWallet.get().getWalletId());
+			walletEntity.setBalance(existedWallet.get().getBalance());
+			walletEntity.setUpdatedDate(existedWallet.get().getUpdatedDate());
+			walletEntity.setBorrowId(existedWallet.get().getBorrowId());
+			walletEntity.setLenderId(existedWallet.get().getLenderId());
+			walletEntity.setDeleted(true);
+			walletEntityRepository.save(walletEntity);
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

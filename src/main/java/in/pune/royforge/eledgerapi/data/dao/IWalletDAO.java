@@ -9,8 +9,6 @@ public interface IWalletDAO {
 
 	boolean save(WalletTransaction wallet);
 
-	boolean delete(long walletId);
-
 	WalletData getWalletDataByIds(String lenderId, String borrowId);
 
 	List<WalletData> getWallets();
@@ -18,5 +16,7 @@ public interface IWalletDAO {
 	WalletData getWallet(long walletId);
 
 	List<WalletData> findWalletsListByLenderId(String lenderId);
+	
+	boolean deleteWallet(long walletId);
 
 }
