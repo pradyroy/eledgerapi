@@ -29,19 +29,24 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * wallet in the database. Output: save the walletEntity in the repository.
 	 */
 	@Override
-	public void save(WalletTransaction walletTransaction) {
-		WalletEntity walletEntity = new WalletEntity();
-		WalletEntity walletEntityobj = null;
-		if (null == walletTransaction.getWalletId()) {
-			createWallet(walletEntity, walletTransaction);
-			walletEntityobj = walletEntityRepository.save(walletEntity);
+	public boolean save(WalletTransaction walletTransaction) {
+		if (null != walletTransaction) {
+			WalletEntity walletEntity = new WalletEntity();
+			WalletEntity walletEntityobj = null;
+			if (null == walletTransaction.getWalletId()) {
+				createWallet(walletEntity, walletTransaction);
+				walletEntityobj = walletEntityRepository.save(walletEntity);
+			} else {
+				updateWallet(walletEntity, walletTransaction);
+				walletEntityobj = walletEntityRepository.save(walletEntity);
+			}
+			TransactionEntity transactionEntity = new TransactionEntity();
+			transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
+			transactionLogRepository.save(transactionEntity);
+			return true;
 		} else {
-			updateWallet(walletEntity, walletTransaction);
-			walletEntityobj = walletEntityRepository.save(walletEntity);
+			return false;
 		}
-		TransactionEntity transactionEntity = new TransactionEntity();
-		transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
-		transactionLogRepository.save(transactionEntity);
 	}
 
 	/*
@@ -51,9 +56,15 @@ public class WalletDAOImpl implements IWalletDAO {
 	 */
 	private void createWallet(WalletEntity walletEntity, WalletTransaction walletTransaction) {
 		Date currentDate = new Date();
+		double newBalance = 0;
 		walletEntity.setLenderId(walletTransaction.getLenderId());
 		walletEntity.setBorrowId(walletTransaction.getBorrowId());
-		walletEntity.setBalance(walletTransaction.getAmount());
+		if (walletTransaction.getTxnType() == TransactionType.CREDIT) {
+			newBalance -= walletTransaction.getAmount();
+		} else if (walletTransaction.getTxnType() == TransactionType.DEBIT) {
+			newBalance += walletTransaction.getAmount();
+		}
+		walletEntity.setBalance(newBalance);
 		walletEntity.setCreatedDate(currentDate);
 		walletEntity.setUpdatedDate(currentDate);
 	}
@@ -67,7 +78,7 @@ public class WalletDAOImpl implements IWalletDAO {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(wallet.getWalletId());
 		if (existedWallet.isPresent()) {
 			Date currentDate = new Date();
-			Double newBalance = 0d;
+			double newBalance = 0d;
 			if (wallet.getTxnType() == TransactionType.CREDIT) {
 				newBalance = existedWallet.get().getBalance() - wallet.getAmount();
 			} else if (wallet.getTxnType() == TransactionType.DEBIT) {
@@ -120,7 +131,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * object.
 	 */
 	@Override
-	public WalletData getWallet(Long walletId) {
+	public WalletData getWallet(long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = null;
 		if (walletEntity.isPresent()) {
@@ -136,8 +147,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	// By taking input {lenderId} to delete the wallet.
-
-	public boolean delete(Long walletId) {
+	public boolean delete(long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		if (walletEntity.isPresent()) {
 			walletEntityRepository.deleteById(walletId);

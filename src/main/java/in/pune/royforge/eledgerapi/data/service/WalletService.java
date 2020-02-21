@@ -7,7 +7,7 @@ import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
 public interface WalletService {
 
-	void save(WalletTransaction walletTransaction);
+	boolean save(WalletTransaction walletTransaction);
 
 	List<WalletData> getWallets();
 

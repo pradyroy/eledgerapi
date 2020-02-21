@@ -7,15 +7,15 @@ import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
 public interface IWalletDAO {
 
-	void save(WalletTransaction wallet);
+	boolean save(WalletTransaction wallet);
 
-	boolean delete(Long walletId);
+	boolean delete(long walletId);
 
 	WalletData getWalletDataByIds(String lenderId, String borrowId);
 
 	List<WalletData> getWallets();
 
-	WalletData getWallet(Long walletId);
+	WalletData getWallet(long walletId);
 
 	List<WalletData> findWalletsListByLenderId(String lenderId);
 

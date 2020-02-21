@@ -73,7 +73,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 
 	// Method is used to fetch the data from the transaction table in the object
 	// transaction();
-	public void setTransactionData(TransactionEntity transactionEntity, Transaction transactionData) {
+	private void setTransactionData(TransactionEntity transactionEntity, Transaction transactionData) {
 		transactionData.setTransactionId(transactionEntity.getTransactionId());
 		transactionData.setWalletId(transactionEntity.getWalletId());
 		transactionData.setlenderId(transactionEntity.getlenderId());
@@ -105,15 +105,15 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	// Method is used to fetch the transaction by taking lender id;
 	@Override
 	public List<Transaction> transactionsByLenderId(String lenderId) {
-		List<Transaction> lenderTransactions = new ArrayList<>();
-		List<TransactionEntity> transactionlogs = transactionLogRepository.findByLenderId(lenderId);
-		if (!transactionlogs.isEmpty()) {
-			for (TransactionEntity transactionEntity : transactionlogs) {
+		List<Transaction> transactionList = new ArrayList<>();
+		List<TransactionEntity> transactionLogs = transactionLogRepository.findByLenderId(lenderId);
+		if (!transactionLogs.isEmpty()) {
+			for (TransactionEntity transactionEntity : transactionLogs) {
 				Transaction transactionData = new Transaction();
 				setTransactionData(transactionEntity, transactionData);
-				lenderTransactions.add(transactionData);
+				transactionList.add(transactionData);
 			}
 		}
-		return lenderTransactions;
+		return transactionList;
 	}
 }
