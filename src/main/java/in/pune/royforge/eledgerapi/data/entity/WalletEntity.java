@@ -35,6 +35,9 @@ public class WalletEntity implements Serializable {
 	@Column
 	private Date updatedDate;
 
+	@Column
+	private boolean isDeleted;
+
 	public Long getWalletId() {
 		return walletId;
 	}
@@ -81,5 +84,13 @@ public class WalletEntity implements Serializable {
 
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }
