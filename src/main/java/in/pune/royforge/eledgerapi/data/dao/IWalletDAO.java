@@ -7,7 +7,7 @@ import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
 public interface IWalletDAO {
 
-	void save(WalletTransaction wallet);
+	boolean save(WalletTransaction wallet);
 
 	boolean delete(Long walletId);
 

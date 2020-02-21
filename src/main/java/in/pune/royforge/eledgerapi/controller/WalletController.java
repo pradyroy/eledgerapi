@@ -3,6 +3,8 @@ package in.pune.royforge.eledgerapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,8 @@ public class WalletController {
 	WalletService walletEntityService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void createWallet(@RequestBody WalletTransaction walletTransaction) {
-		walletEntityService.save(walletTransaction);
+	public ResponseEntity<Boolean> createOrUpdateWallet(@RequestBody WalletTransaction walletTransaction) {
+		return new ResponseEntity<Boolean>(walletEntityService.save(walletTransaction), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/wallets", method = RequestMethod.GET)
@@ -29,10 +31,9 @@ public class WalletController {
 		return walletEntityService.getWallets();
 	}
 
-
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.GET)
-	public WalletData getWallet(@PathVariable(value = "walletId") Long walletId) {
-		return walletEntityService.getWallet(walletId);
+	public ResponseEntity<WalletData> getWallet(@PathVariable(value = "walletId") Long walletId) {
+		return new ResponseEntity<WalletData>(walletEntityService.getWallet(walletId), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.DELETE)
@@ -40,14 +41,15 @@ public class WalletController {
 		return walletEntityService.delete(walletId);
 	}
 
-	@RequestMapping(value = "/lender/{lenderid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/lenderId/{lenderid}", method = RequestMethod.GET)
 	public List<WalletData> findWalletsListByLenderId(@PathVariable(value = "lenderid") String lenderId) {
 		return walletEntityService.findWalletsListByLenderId(lenderId);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
-	public WalletData getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
-			@PathVariable(value = "borrowId") String borrowId) {	
-		return walletEntityService.getWalletDataByIds(lenderId, borrowId);
+	public ResponseEntity<WalletData> getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
+			@PathVariable(value = "borrowId") String borrowId) {
+		return new ResponseEntity<WalletData>(walletEntityService.getWalletDataByIds(lenderId, borrowId),
+				HttpStatus.OK);
 	}
 }

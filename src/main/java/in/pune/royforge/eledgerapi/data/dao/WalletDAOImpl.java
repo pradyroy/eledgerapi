@@ -29,19 +29,24 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * wallet in the database. Output: save the walletEntity in the repository.
 	 */
 	@Override
-	public void save(WalletTransaction walletTransaction) {
-		WalletEntity walletEntity = new WalletEntity();
-		WalletEntity walletEntityobj = null;
-		if (null == walletTransaction.getWalletId()) {
-			createWallet(walletEntity, walletTransaction);
-			walletEntityobj = walletEntityRepository.save(walletEntity);
+	public boolean save(WalletTransaction walletTransaction) {
+		if (null != walletTransaction) {
+			WalletEntity walletEntity = new WalletEntity();
+			WalletEntity walletEntityobj = null;
+			if (null == walletTransaction.getWalletId()) {
+				createWallet(walletEntity, walletTransaction);
+				walletEntityobj = walletEntityRepository.save(walletEntity);
+			} else {
+				updateWallet(walletEntity, walletTransaction);
+				walletEntityobj = walletEntityRepository.save(walletEntity);
+			}
+			TransactionEntity transactionEntity = new TransactionEntity();
+			transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
+			transactionLogRepository.save(transactionEntity);
+			return true;
 		} else {
-			updateWallet(walletEntity, walletTransaction);
-			walletEntityobj = walletEntityRepository.save(walletEntity);
+			return false;
 		}
-		TransactionEntity transactionEntity = new TransactionEntity();
-		transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
-		transactionLogRepository.save(transactionEntity);
 	}
 
 	/*
@@ -136,7 +141,6 @@ public class WalletDAOImpl implements IWalletDAO {
 	}
 
 	// By taking input {lenderId} to delete the wallet.
-
 	public boolean delete(Long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		if (walletEntity.isPresent()) {
