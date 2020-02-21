@@ -65,9 +65,9 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletEntity.setLenderId(walletTransaction.getLenderId());
 		walletEntity.setBorrowId(walletTransaction.getBorrowId());
 		if (walletTransaction.getTxnType() == TransactionType.CREDIT) {
-			newBalance -= walletTransaction.getAmount();
-		} else if (walletTransaction.getTxnType() == TransactionType.DEBIT) {
 			newBalance += walletTransaction.getAmount();
+		} else if (walletTransaction.getTxnType() == TransactionType.DEBIT) {
+			newBalance -= walletTransaction.getAmount();
 		}
 		walletEntity.setBalance(newBalance);
 		walletEntity.setCreatedDate(currentDate);
@@ -86,9 +86,9 @@ public class WalletDAOImpl implements IWalletDAO {
 			Date currentDate = new Date();
 			double newBalance = 0d;
 			if (wallet.getTxnType() == TransactionType.CREDIT) {
-				newBalance = existedWallet.get().getBalance() - wallet.getAmount();
-			} else if (wallet.getTxnType() == TransactionType.DEBIT) {
 				newBalance = existedWallet.get().getBalance() + wallet.getAmount();
+			} else if (wallet.getTxnType() == TransactionType.DEBIT) {
+				newBalance = existedWallet.get().getBalance() - wallet.getAmount();
 			}
 			walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
 			walletEntity.setWalletId(existedWallet.get().getWalletId());
@@ -97,7 +97,6 @@ public class WalletDAOImpl implements IWalletDAO {
 			walletEntity.setBorrowId(wallet.getBorrowId());
 			walletEntity.setLenderId(wallet.getLenderId());
 		}
-
 	}
 
 	/*
