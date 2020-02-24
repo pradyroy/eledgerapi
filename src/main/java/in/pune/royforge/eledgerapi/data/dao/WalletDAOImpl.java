@@ -37,8 +37,13 @@ public class WalletDAOImpl implements IWalletDAO {
 				createWallet(walletEntity, walletTransaction);
 				walletEntityobj = walletEntityRepository.save(walletEntity);
 			} else {
-				updateWallet(walletEntity, walletTransaction);
-				walletEntityobj = walletEntityRepository.save(walletEntity);
+				Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletTransaction.getWalletId());
+				if (!existedWallet.get().isDeleted()) {
+					updateWallet(walletEntity, walletTransaction);
+					walletEntityobj = walletEntityRepository.save(walletEntity);
+				} else {
+					return false;
+				}
 			}
 			TransactionEntity transactionEntity = new TransactionEntity();
 			transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
@@ -60,13 +65,14 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletEntity.setLenderId(walletTransaction.getLenderId());
 		walletEntity.setBorrowId(walletTransaction.getBorrowId());
 		if (walletTransaction.getTxnType() == TransactionType.CREDIT) {
-			newBalance -= walletTransaction.getAmount();
-		} else if (walletTransaction.getTxnType() == TransactionType.DEBIT) {
 			newBalance += walletTransaction.getAmount();
+		} else if (walletTransaction.getTxnType() == TransactionType.DEBIT) {
+			newBalance -= walletTransaction.getAmount();
 		}
 		walletEntity.setBalance(newBalance);
 		walletEntity.setCreatedDate(currentDate);
 		walletEntity.setUpdatedDate(currentDate);
+		walletEntity.setDeleted(false);
 	}
 
 	/*
@@ -80,9 +86,9 @@ public class WalletDAOImpl implements IWalletDAO {
 			Date currentDate = new Date();
 			double newBalance = 0d;
 			if (wallet.getTxnType() == TransactionType.CREDIT) {
-				newBalance = existedWallet.get().getBalance() - wallet.getAmount();
-			} else if (wallet.getTxnType() == TransactionType.DEBIT) {
 				newBalance = existedWallet.get().getBalance() + wallet.getAmount();
+			} else if (wallet.getTxnType() == TransactionType.DEBIT) {
+				newBalance = existedWallet.get().getBalance() - wallet.getAmount();
 			}
 			walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
 			walletEntity.setWalletId(existedWallet.get().getWalletId());
@@ -102,9 +108,11 @@ public class WalletDAOImpl implements IWalletDAO {
 		Iterable<WalletEntity> walletsList = walletEntityRepository.findAll();
 		if (null != walletsList) {
 			for (WalletEntity walletEntity : walletsList) {
-				WalletData walletData = new WalletData();
-				setWalletData(walletEntity, walletData);
-				wallets.add(walletData);
+				if (!walletEntity.isDeleted()) {
+					WalletData walletData = new WalletData();
+					setWalletData(walletEntity, walletData);
+					wallets.add(walletData);
+				}
 			}
 		}
 		return wallets;
@@ -134,14 +142,16 @@ public class WalletDAOImpl implements IWalletDAO {
 	public WalletData getWallet(long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = null;
-		if (walletEntity.isPresent()) {
-			walletData = new WalletData();
-			walletData.setWalletId(walletEntity.get().getWalletId());
-			walletData.setLenderId(walletEntity.get().getLenderId());
-			walletData.setBorrowId(walletEntity.get().getBorrowId());
-			walletData.setBalance(walletEntity.get().getBalance());
-			walletData.setCreatedDate(walletEntity.get().getCreatedDate());
-			walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+		if (!walletEntity.get().isDeleted()) {
+			if (walletEntity.isPresent()) {
+				walletData = new WalletData();
+				walletData.setWalletId(walletEntity.get().getWalletId());
+				walletData.setLenderId(walletEntity.get().getLenderId());
+				walletData.setBorrowId(walletEntity.get().getBorrowId());
+				walletData.setBalance(walletEntity.get().getBalance());
+				walletData.setCreatedDate(walletEntity.get().getCreatedDate());
+				walletData.setUpdatedDate(walletEntity.get().getUpdatedDate());
+			}
 		}
 		return walletData;
 	}
@@ -155,9 +165,11 @@ public class WalletDAOImpl implements IWalletDAO {
 		List<WalletData> walletsOfLender = new ArrayList<>();
 		List<WalletEntity> walletsList = walletEntityRepository.findByLenderId(lenderId);
 		for (WalletEntity walletEntity : walletsList) {
-			WalletData walletData = new WalletData();
-			setWalletData(walletEntity, walletData);
-			walletsOfLender.add(walletData);
+			if (!walletEntity.isDeleted()) {
+				WalletData walletData = new WalletData();
+				setWalletData(walletEntity, walletData);
+				walletsOfLender.add(walletData);
+			}
 		}
 		return walletsOfLender;
 	}
@@ -172,8 +184,10 @@ public class WalletDAOImpl implements IWalletDAO {
 		WalletEntity walletEntity = walletEntityRepository.getWalletDataByIds(lenderId, borrowId);
 		WalletData walletData = null;
 		if (null != walletEntity) {
-			walletData = new WalletData();
-			setWalletData(walletEntity, walletData);
+			if (!walletEntity.isDeleted()) {
+				walletData = new WalletData();
+				setWalletData(walletEntity, walletData);
+			}
 		}
 		return walletData;
 	}
@@ -184,12 +198,14 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * object[WalletData].
 	 */
 	private void setWalletData(WalletEntity walletEntity, WalletData walletData) {
-		walletData.setBalance(walletEntity.getBalance());
-		walletData.setBorrowId(walletEntity.getBorrowId());
-		walletData.setCreatedDate(walletEntity.getCreatedDate());
-		walletData.setLenderId(walletEntity.getLenderId());
-		walletData.setUpdatedDate(walletEntity.getUpdatedDate());
-		walletData.setWalletId(walletEntity.getWalletId());
+		if (!walletEntity.isDeleted()) {
+			walletData.setBalance(walletEntity.getBalance());
+			walletData.setBorrowId(walletEntity.getBorrowId());
+			walletData.setCreatedDate(walletEntity.getCreatedDate());
+			walletData.setLenderId(walletEntity.getLenderId());
+			walletData.setUpdatedDate(walletEntity.getUpdatedDate());
+			walletData.setWalletId(walletEntity.getWalletId());
+		}
 	}
 	
 	// By taking input {lenderId} to delete the wallet.
