@@ -26,7 +26,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 		List<Transaction> transactions = new ArrayList<>();
 		List<TransactionEntity> transactionsList = transactionLogRepository
 				.transactionListByLenderIdAndStratDate(lenderId, date);
-		if (!transactionsList.isEmpty()) {
+			if (!transactionsList.isEmpty()) {
 			for (TransactionEntity transactionEntity : transactionsList) {
 				Transaction transaction = new Transaction();
 				setTransactionData(transactionEntity, transaction);
