@@ -24,35 +24,34 @@ public class WalletController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Boolean> createOrUpdateWallet(@RequestBody WalletTransaction walletTransaction) {
-		return new ResponseEntity<Boolean>(walletEntityService.save(walletTransaction), HttpStatus.OK);
+		return new ResponseEntity<>(walletEntityService.save(walletTransaction), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/wallets", method = RequestMethod.GET)
 	public ResponseEntity<List<WalletData>> getWallets() {
-		return new ResponseEntity<List<WalletData>>(walletEntityService.getWallets(), HttpStatus.OK);
+		return new ResponseEntity<>(walletEntityService.getWallets(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.GET)
 	public ResponseEntity<WalletData> getWallet(@PathVariable(value = "walletId") Long walletId) {
-		return new ResponseEntity<WalletData>(walletEntityService.getWallet(walletId), HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Boolean> delete(@PathVariable(value = "walletId") Long walletId) {
-		return new ResponseEntity<Boolean>(walletEntityService.delete(walletId), HttpStatus.OK);
+		return new ResponseEntity<>(walletEntityService.getWallet(walletId), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderid}", method = RequestMethod.GET)
 	public ResponseEntity<List<WalletData>> findWalletsListByLenderId(
 			@PathVariable(value = "lenderid") String lenderId) {
-		return new ResponseEntity<List<WalletData>>(walletEntityService.findWalletsListByLenderId(lenderId),
-				HttpStatus.OK);
+		return new ResponseEntity<>(walletEntityService.findWalletsListByLenderId(lenderId), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
 	public ResponseEntity<WalletData> getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
 			@PathVariable(value = "borrowId") String borrowId) {
-		return new ResponseEntity<WalletData>(walletEntityService.getWalletDataByIds(lenderId, borrowId),
+		return new ResponseEntity<>(walletEntityService.getWalletDataByIds(lenderId, borrowId),
 				HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Boolean> deleteWallet(@PathVariable(value = "walletId") Long walletId) {
+		return new ResponseEntity<>(walletEntityService.deleteWallet(walletId),HttpStatus.OK);
 	}
 }

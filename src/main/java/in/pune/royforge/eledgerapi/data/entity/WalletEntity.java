@@ -34,7 +34,7 @@ public class WalletEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column
 	private Date updatedDate;
-
+	
 	@Column
 	private boolean isDeleted;
 
