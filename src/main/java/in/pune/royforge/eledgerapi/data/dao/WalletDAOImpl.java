@@ -198,17 +198,23 @@ public class WalletDAOImpl implements IWalletDAO {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
 		if (existedWallet.isPresent()) {
 			WalletEntity walletEntity = new WalletEntity();
-			walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
-			walletEntity.setWalletId(existedWallet.get().getWalletId());
-			walletEntity.setBalance(existedWallet.get().getBalance());
-			walletEntity.setUpdatedDate(existedWallet.get().getUpdatedDate());
-			walletEntity.setBorrowId(existedWallet.get().getBorrowId());
-			walletEntity.setLenderId(existedWallet.get().getLenderId());
+			setWalletEntity(walletEntity,walletId );
 			walletEntity.setDeleted(true);
 			walletEntityRepository.save(walletEntity);
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public void setWalletEntity(WalletEntity walletEntity, long walletId) {
+		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
+		walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
+		walletEntity.setWalletId(existedWallet.get().getWalletId());
+		walletEntity.setBalance(existedWallet.get().getBalance());
+		walletEntity.setUpdatedDate(existedWallet.get().getUpdatedDate());
+		walletEntity.setBorrowId(existedWallet.get().getBorrowId());
+		walletEntity.setLenderId(existedWallet.get().getLenderId());
+		
 	}
 }
