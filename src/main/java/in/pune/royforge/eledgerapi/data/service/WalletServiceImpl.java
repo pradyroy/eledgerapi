@@ -18,12 +18,17 @@ public class WalletServiceImpl implements WalletService {
 
 	@Override
 	public boolean save(WalletTransaction walletTransaction) throws InvalidArgumentException {
+		boolean isSave = false;
 		if (null != walletTransaction.getLenderId() && null != walletTransaction.getBorrowId()
 				&& null != walletTransaction.getAmount() && null != walletTransaction.getTxnType()) {
-			return walletEntityDAO.save(walletTransaction);
+			isSave = walletEntityDAO.save(walletTransaction);
 		} else {
 			throw new InvalidArgumentException("Required Valid Input to Perform Operation");
 		}
+		if (!isSave) {
+			throw new RecordNotFoundException(" Wallet Id Not found");
+		}
+		return isSave;
 	}
 
 	@Override
