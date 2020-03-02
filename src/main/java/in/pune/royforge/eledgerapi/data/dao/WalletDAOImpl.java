@@ -33,23 +33,24 @@ public class WalletDAOImpl implements IWalletDAO {
 	public boolean save(WalletTransaction walletTransaction) {
 		if (null != walletTransaction) {
 			WalletEntity walletEntity = new WalletEntity();
-			WalletEntity walletEntityobj = null;
-			UUID uuidgenerartor = UUID.randomUUID();
+			TransactionEntity transactionEntity = new TransactionEntity();
+			WalletEntity walletEntityObj;
+			UUID uuId = UUID.randomUUID();
 			if (null == walletTransaction.getWalletId()) {
-				walletTransaction.setBorrowId(uuidgenerartor);
+				walletTransaction.setBorrowId(uuId);
 				createWallet(walletEntity, walletTransaction);
-				walletEntityobj = walletEntityRepository.save(walletEntity);
+				transactionEntity.setBorrowerId(uuId);
+				walletEntityObj = walletEntityRepository.save(walletEntity);
 			} else {
 				Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletTransaction.getWalletId());
 				if (!existedWallet.get().isDeleted()) {
 					updateWallet(walletEntity, walletTransaction);
-					walletEntityobj = walletEntityRepository.save(walletEntity);
+					walletEntityObj = walletEntityRepository.save(walletEntity);
 				} else {
 					return false;
 				}
 			}
-			TransactionEntity transactionEntity = new TransactionEntity();
-			transactionLogCreate(transactionEntity, walletTransaction, walletEntityobj.getWalletId());
+			transactionLogCreate(transactionEntity, walletTransaction, walletEntityObj.getWalletId());
 			transactionLogRepository.save(transactionEntity);
 			return true;
 		} else {
@@ -126,15 +127,10 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * Transaction
 	 */
 	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
-		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
 		Date currentDate = new Date();
 		transactionEntity.setWalletId(walletId);
 		transactionEntity.setlenderId(wallet.getLenderId());
-		if (null != existedWallet.get().getWalletId()) {
-			transactionEntity.setBorrowerId(existedWallet.get().getBorrowId());
-		} else {
-			transactionEntity.setBorrowerId(wallet.getBorrowId());
-		}
+		transactionEntity.setBorrowerId(wallet.getBorrowId());
 		transactionEntity.setComment(wallet.getComment());
 		transactionEntity.setAmount(wallet.getAmount());
 		transactionEntity.setTxnType(wallet.getTxnType().name());
@@ -150,8 +146,8 @@ public class WalletDAOImpl implements IWalletDAO {
 	public WalletData getWallet(long walletId) {
 		Optional<WalletEntity> walletEntity = walletEntityRepository.findById(walletId);
 		WalletData walletData = null;
-		if (!walletEntity.get().isDeleted()) {
-			if (walletEntity.isPresent()) {
+		if (walletEntity.isPresent()) {
+			if (!walletEntity.get().isDeleted()) {
 				walletData = new WalletData();
 				walletData.setWalletId(walletEntity.get().getWalletId());
 				walletData.setLenderId(walletEntity.get().getLenderId());
@@ -221,7 +217,7 @@ public class WalletDAOImpl implements IWalletDAO {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
 		if (existedWallet.isPresent()) {
 			WalletEntity walletEntity = new WalletEntity();
-			setWalletEntity(walletEntity, walletId);
+			setWalletEntity(walletEntity, existedWallet);
 			walletEntity.setDeleted(true);
 			walletEntityRepository.save(walletEntity);
 			return true;
@@ -230,8 +226,7 @@ public class WalletDAOImpl implements IWalletDAO {
 		}
 	}
 
-	public void setWalletEntity(WalletEntity walletEntity, long walletId) {
-		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
+	private void setWalletEntity(WalletEntity walletEntity, Optional<WalletEntity> existedWallet) {
 		walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
 		walletEntity.setWalletId(existedWallet.get().getWalletId());
 		walletEntity.setBalance(existedWallet.get().getBalance());
