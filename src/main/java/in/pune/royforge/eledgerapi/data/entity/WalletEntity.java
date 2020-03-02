@@ -2,6 +2,7 @@ package in.pune.royforge.eledgerapi.data.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.TemporalType;
 @Entity
 public class WalletEntity implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long walletId;
@@ -22,7 +25,7 @@ public class WalletEntity implements Serializable {
 	private String lenderId;
 
 	@Column
-	private String borrowId;
+	private UUID borrowId;
 
 	@Column
 	private Double balance;
@@ -34,7 +37,7 @@ public class WalletEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column
 	private Date updatedDate;
-	
+
 	@Column
 	private boolean isDeleted;
 
@@ -54,11 +57,11 @@ public class WalletEntity implements Serializable {
 		this.lenderId = lenderId;
 	}
 
-	public String getBorrowId() {
+	public UUID getBorrowId() {
 		return borrowId;
 	}
 
-	public void setBorrowId(String borrowId) {
+	public void setBorrowId(UUID borrowId) {
 		this.borrowId = borrowId;
 	}
 

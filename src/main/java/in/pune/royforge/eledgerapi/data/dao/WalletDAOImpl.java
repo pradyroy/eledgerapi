@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,9 @@ public class WalletDAOImpl implements IWalletDAO {
 		if (null != walletTransaction) {
 			WalletEntity walletEntity = new WalletEntity();
 			WalletEntity walletEntityobj = null;
+			UUID uuidgenerartor = UUID.randomUUID();
 			if (null == walletTransaction.getWalletId()) {
+				walletTransaction.setBorrowId(uuidgenerartor);
 				createWallet(walletEntity, walletTransaction);
 				walletEntityobj = walletEntityRepository.save(walletEntity);
 			} else {
@@ -94,7 +97,7 @@ public class WalletDAOImpl implements IWalletDAO {
 			walletEntity.setWalletId(existedWallet.get().getWalletId());
 			walletEntity.setBalance(newBalance);
 			walletEntity.setUpdatedDate(currentDate);
-			walletEntity.setBorrowId(wallet.getBorrowId());
+			walletEntity.setBorrowId(existedWallet.get().getBorrowId());
 			walletEntity.setLenderId(wallet.getLenderId());
 		}
 	}
@@ -123,10 +126,15 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * Transaction
 	 */
 	private void transactionLogCreate(TransactionEntity transactionEntity, WalletTransaction wallet, long walletId) {
+		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
 		Date currentDate = new Date();
 		transactionEntity.setWalletId(walletId);
 		transactionEntity.setlenderId(wallet.getLenderId());
-		transactionEntity.setBorrowerId(wallet.getBorrowId());
+		if (null != existedWallet.get().getWalletId()) {
+			transactionEntity.setBorrowerId(existedWallet.get().getBorrowId());
+		} else {
+			transactionEntity.setBorrowerId(wallet.getBorrowId());
+		}
 		transactionEntity.setComment(wallet.getComment());
 		transactionEntity.setAmount(wallet.getAmount());
 		transactionEntity.setTxnType(wallet.getTxnType().name());
@@ -155,7 +163,6 @@ public class WalletDAOImpl implements IWalletDAO {
 		}
 		return walletData;
 	}
-
 
 	/*
 	 * Method is used to fetch the wallets list by taking lender id;
@@ -207,14 +214,14 @@ public class WalletDAOImpl implements IWalletDAO {
 			walletData.setWalletId(walletEntity.getWalletId());
 		}
 	}
-	
+
 	// By taking input {lenderId} to delete the wallet.
 	@Override
 	public boolean deleteWallet(long walletId) {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
 		if (existedWallet.isPresent()) {
 			WalletEntity walletEntity = new WalletEntity();
-			setWalletEntity(walletEntity,walletId );
+			setWalletEntity(walletEntity, walletId);
 			walletEntity.setDeleted(true);
 			walletEntityRepository.save(walletEntity);
 			return true;
@@ -222,7 +229,7 @@ public class WalletDAOImpl implements IWalletDAO {
 			return false;
 		}
 	}
-	
+
 	public void setWalletEntity(WalletEntity walletEntity, long walletId) {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
 		walletEntity.setCreatedDate(existedWallet.get().getCreatedDate());
@@ -231,6 +238,5 @@ public class WalletDAOImpl implements IWalletDAO {
 		walletEntity.setUpdatedDate(existedWallet.get().getUpdatedDate());
 		walletEntity.setBorrowId(existedWallet.get().getBorrowId());
 		walletEntity.setLenderId(existedWallet.get().getLenderId());
-		
 	}
 }

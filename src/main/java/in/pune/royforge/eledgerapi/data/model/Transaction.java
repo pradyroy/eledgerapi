@@ -1,6 +1,7 @@
 package in.pune.royforge.eledgerapi.data.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Transaction {
 
@@ -10,7 +11,7 @@ public class Transaction {
 
 	private String lenderId;
 
-	private String borrowerId;
+	private UUID borrowerId;
 
 	private String comment;
 
@@ -44,11 +45,11 @@ public class Transaction {
 		this.lenderId = lenderId;
 	}
 
-	public String getBorrowerId() {
+	public UUID getBorrowerId() {
 		return borrowerId;
 	}
 
-	public void setBorrowerId(String borrowerId) {
+	public void setBorrowerId(UUID borrowerId) {
 		this.borrowerId = borrowerId;
 	}
 
