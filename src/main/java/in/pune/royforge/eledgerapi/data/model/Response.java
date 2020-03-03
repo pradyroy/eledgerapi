@@ -1,22 +1,32 @@
-package in.pune.royforge.eledgerapi.exceptionhandler;
+package in.pune.royforge.eledgerapi.data.model;
 
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
 
-public class ErrorResponse {
+public class Response {
 
 	private Date date;
+	
+	private Object data;
 
 	private String message;
 
-	private HttpStatus errorCode;
+	private HttpStatus responseCode;
 
-	public ErrorResponse(Date date, String message, HttpStatus errorCode) {
+	public Response(Date date, String message, HttpStatus errorCode) {
 		super();
 		this.date = date;
 		this.message = message;
-		this.errorCode = errorCode;
+		this.responseCode = errorCode;
+	}
+	
+	public Response(Date date, String message, HttpStatus errorCode, Object data) {
+		super();
+		this.date = date;
+		this.message = message;
+		this.responseCode = errorCode;
+		this.data = data;
 	}
 
 	public Date getDate() {
@@ -35,11 +45,20 @@ public class ErrorResponse {
 		this.message = message;
 	}
 
-	public HttpStatus getErrorCode() {
-		return errorCode;
+	public HttpStatus getResponseCode() {
+		return responseCode;
 	}
 
-	public void setErrorCode(HttpStatus errorCode) {
-		this.errorCode = errorCode;
+	public void setResponseCode(HttpStatus responseCode) {
+		this.responseCode = responseCode;
 	}
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
+	}
+
 }

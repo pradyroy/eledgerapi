@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import in.pune.royforge.eledgerapi.data.model.Response;
+
 @ControllerAdvice
 public class CustomExceptionHandler {
 
@@ -16,7 +18,7 @@ public class CustomExceptionHandler {
 	 */
 	@ExceptionHandler(RecordNotFoundException.class)
 	public final ResponseEntity<Object> handleRecordNotFoundException(RecordNotFoundException ex) {
-		return new ResponseEntity<Object>(new ErrorResponse(new Date(), ex.getMessage(), HttpStatus.NOT_FOUND),
+		return new ResponseEntity<Object>(new Response(new Date(), ex.getMessage(), HttpStatus.NOT_FOUND),
 				HttpStatus.NOT_FOUND);
 	}
 
@@ -26,7 +28,7 @@ public class CustomExceptionHandler {
 	 */
 	@ExceptionHandler(InvalidArgumentException.class)
 	public final ResponseEntity<Object> handleInvalidArgumentException(InvalidArgumentException ex) {
-		return new ResponseEntity<Object>(new ErrorResponse(new Date(), ex.getMessage(), HttpStatus.NOT_ACCEPTABLE),
+		return new ResponseEntity<Object>(new Response(new Date(), ex.getMessage(), HttpStatus.NOT_ACCEPTABLE),
 				HttpStatus.NOT_ACCEPTABLE);
 	}
 
@@ -37,7 +39,7 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllException(Exception ex) {
 		return new ResponseEntity<Object>(
-				new ErrorResponse(new Date(), ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR),
+				new Response(new Date(), ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

@@ -2,14 +2,23 @@ package in.pune.royforge.eledgerapi.controller;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Date;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import in.pune.royforge.eledgerapi.data.model.Response;
+import in.pune.royforge.eledgerapi.data.model.WalletData;
+import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
+import in.pune.royforge.eledgerapi.data.service.WalletService;
+
 import in.pune.royforge.eledgerapi.data.model.Transaction;
 import in.pune.royforge.eledgerapi.data.service.TransactionService;
 
@@ -39,8 +48,8 @@ public class TransactionController {
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
-	public ResponseEntity<List<Transaction>> transactionsByLenderId(@PathVariable(value = "lenderId") String lenderId) {
-		return new ResponseEntity<List<Transaction>>(transactionService.transactionsByLenderId(lenderId),
+	public ResponseEntity<Response> transactionsByLenderId(@PathVariable(value = "lenderId") String lenderId) {
+		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.OK, transactionService.transactionsByLenderId(lenderId)),
 				HttpStatus.OK);
 	}
 
