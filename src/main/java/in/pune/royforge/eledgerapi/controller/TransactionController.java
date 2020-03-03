@@ -32,32 +32,33 @@ public class TransactionController {
 	@RequestMapping(value = "/lenderId/{lenderId}/date/{date}", method = RequestMethod.GET)
 	public ResponseEntity<List<Transaction>> getTransactionListByLenderIdAndDate(
 			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "date") Date date) {
-		return new ResponseEntity<List<Transaction>>(
-				transactionService.transactionListByLenderIdAndDate(lenderId, date), HttpStatus.OK);
+		return new ResponseEntity<>(transactionService.transactionListByLenderIdAndDate(lenderId, date), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
 	public ResponseEntity<List<Transaction>> getTransactions() {
-		return new ResponseEntity<List<Transaction>>(transactionService.getTransactions(), HttpStatus.OK);
+		return new ResponseEntity<>(transactionService.getTransactions(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowerId}", method = RequestMethod.GET)
 	public ResponseEntity<List<Transaction>> getTransactionsUsingLenderIdAndBorrowerId(
 			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowerId") String borrowerId) {
-		return new ResponseEntity<List<Transaction>>(transactionService.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId), HttpStatus.OK);
+		return new ResponseEntity<>(transactionService.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId),
+				HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
 	public ResponseEntity<Response> transactionsByLenderId(@PathVariable(value = "lenderId") String lenderId) {
 		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.OK, transactionService.transactionsByLenderId(lenderId)),
 				HttpStatus.OK);
+
 	}
 
 	@RequestMapping(value = "/lenderId/{lenderId}/startDate/{startDate}/endDate/{endDate}", method = RequestMethod.GET)
 	public ResponseEntity<List<Transaction>> transactionLogsBetweenTwoDates(
 			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "startDate") Date startDate,
 			@PathVariable(value = "endDate") Date endDate) {
-		return new ResponseEntity<List<Transaction>>(
+		return new ResponseEntity<>(
 				transactionService.getListOfTransactionBetweenTwoDates(lenderId, startDate, endDate), HttpStatus.OK);
 	}
 }

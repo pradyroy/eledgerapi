@@ -18,8 +18,8 @@ public class WalletServiceImpl implements WalletService {
 
 	@Override
 	public boolean save(WalletTransaction walletTransaction) throws InvalidArgumentException {
-		if (null != walletTransaction.getLenderId() && null != walletTransaction.getBorrowId()
-				&& null != walletTransaction.getAmount() && null != walletTransaction.getTxnType()) {
+		if (null != walletTransaction.getLenderId() && null != walletTransaction.getAmount()
+				&& null != walletTransaction.getTxnType()) {
 			return walletEntityDAO.save(walletTransaction);
 		} else {
 			throw new InvalidArgumentException("Required Valid Input to Perform Operation");
@@ -49,20 +49,22 @@ public class WalletServiceImpl implements WalletService {
 		return walletData;
 	}
 
-	public boolean delete(Long walletId) throws RecordNotFoundException{
-		boolean walletDelete = walletEntityDAO.delete(walletId);
-		if (!walletDelete) {
-			throw new RecordNotFoundException("Wallet Not Exist");
-		}
-		return walletDelete;
-	}
-
 	@Override
-	public WalletData getWalletDataByIds(String lenderId, String borrowId) throws RecordNotFoundException{
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) throws RecordNotFoundException {
 		WalletData walletData = walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
 		if (null == walletData) {
 			throw new RecordNotFoundException("Customer or Merchant or both Not Found");
 		}
 		return walletData;
+	}
+
+	@Override
+	public boolean deleteWallet(long walletId) {
+		boolean deleteWallet = walletEntityDAO.deleteWallet(walletId);
+		if (!deleteWallet) {
+			throw new RecordNotFoundException("Wallet Not Found");
+		}
+		return deleteWallet;
+
 	}
 }
