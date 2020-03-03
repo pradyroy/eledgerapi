@@ -2,12 +2,13 @@ package in.pune.royforge.eledgerapi.data.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 import in.pune.royforge.eledgerapi.data.model.Transaction;
 
 public interface ITransactionDAO {
 
-	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
+	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, UUID borrowerId);
 
 	List<Transaction> getTransactions();
 

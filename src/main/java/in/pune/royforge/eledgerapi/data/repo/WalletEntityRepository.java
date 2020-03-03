@@ -1,6 +1,7 @@
 package in.pune.royforge.eledgerapi.data.repo;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -12,5 +13,5 @@ public interface WalletEntityRepository extends PagingAndSortingRepository<Walle
 	List<WalletEntity> findByLenderId(String lenderId);
 
 	@Query("FROM WalletEntity  WHERE lenderId= ?1 AND borrowId= ?2")
-	WalletEntity getWalletDataByIds(String lenderId, String borrowId);
+	WalletEntity getWalletDataByIds(String lenderId, UUID borrowId);
 }

@@ -3,6 +3,7 @@ package in.pune.royforge.eledgerapi.data.service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId)
+	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, UUID borrowerId)
 			throws RecordNotFoundException {
 		List<Transaction> transaction = transactionDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 		if (transaction.isEmpty()) {

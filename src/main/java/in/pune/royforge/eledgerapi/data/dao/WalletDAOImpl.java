@@ -183,7 +183,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * all information with the help of lenderId and borrowId.
 	 */
 	@Override
-	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+	public WalletData getWalletDataByIds(String lenderId, UUID borrowId) {
 		WalletEntity walletEntity = walletEntityRepository.getWalletDataByIds(lenderId, borrowId);
 		WalletData walletData = null;
 		if (null != walletEntity) {

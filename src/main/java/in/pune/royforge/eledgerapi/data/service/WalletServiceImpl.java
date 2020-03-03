@@ -1,6 +1,7 @@
 package in.pune.royforge.eledgerapi.data.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public WalletData getWalletDataByIds(String lenderId, String borrowId) throws RecordNotFoundException {
+	public WalletData getWalletDataByIds(String lenderId, UUID borrowId) throws RecordNotFoundException {
 		WalletData walletData = walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
 		if (null == walletData) {
 			throw new RecordNotFoundException("Customer or Merchant or both Not Found");

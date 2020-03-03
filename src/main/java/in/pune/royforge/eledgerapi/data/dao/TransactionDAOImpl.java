@@ -3,6 +3,7 @@ package in.pune.royforge.eledgerapi.data.dao;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,7 +44,7 @@ public class TransactionDAOImpl implements ITransactionDAO {
 	 * 
 	 */
 	@Override
-	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId) {
+	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, UUID borrowerId) {
 		List<Transaction> transactions = new ArrayList<>();
 		List<TransactionEntity> transactionsList = transactionLogRepository.transactionsList(lenderId, borrowerId);
 		if (!transactionsList.isEmpty()) {
