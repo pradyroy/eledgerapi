@@ -51,7 +51,7 @@ public class WalletController {
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
 	public ResponseEntity<Response> getListOfWalletById(@PathVariable(value = "lenderId") String lenderId,
-			@PathVariable(value = "borrowId") UUID borrowId) {
+			@PathVariable(value = "borrowId") String borrowId) {
 		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.OK, walletEntityService.getWalletDataByIds(lenderId, borrowId)),
 				HttpStatus.OK);
 	}

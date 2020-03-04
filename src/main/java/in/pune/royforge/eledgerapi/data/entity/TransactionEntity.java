@@ -27,7 +27,7 @@ public class TransactionEntity implements Serializable {
 	private String lenderId;
 
 	@Column
-	private UUID borrowerId;
+	private String borrowerId;
 
 	@Column
 	private String comment;
@@ -66,11 +66,11 @@ public class TransactionEntity implements Serializable {
 		this.lenderId = lenderId;
 	}
 
-	public UUID getBorrowerId() {
+	public String getBorrowerId() {
 		return borrowerId;
 	}
 
-	public void setBorrowerId(UUID borrowerId) {
+	public void setBorrowerId(String borrowerId) {
 		this.borrowerId = borrowerId;
 	}
 

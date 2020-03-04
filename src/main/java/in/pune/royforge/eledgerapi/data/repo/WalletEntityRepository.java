@@ -13,5 +13,5 @@ public interface WalletEntityRepository extends PagingAndSortingRepository<Walle
 	List<WalletEntity> findByLenderId(String lenderId);
 
 	@Query("FROM WalletEntity  WHERE lenderId= ?1 AND borrowId= ?2")
-	WalletEntity getWalletDataByIds(String lenderId, UUID borrowId);
+	WalletEntity getWalletDataByIds(String lenderId, String borrowId);
 }

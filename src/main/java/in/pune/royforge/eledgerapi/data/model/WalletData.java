@@ -9,7 +9,7 @@ public class WalletData {
 
 	private String lenderId;
 
-	private UUID borrowId;
+	private String borrowId;
 
 	private Double balance;
 
@@ -33,11 +33,13 @@ public class WalletData {
 		this.lenderId = lenderId;
 	}
 
-	public UUID getBorrowId() {
+
+
+	public String getBorrowId() {
 		return borrowId;
 	}
 
-	public void setBorrowId(UUID borrowId) {
+	public void setBorrowId(String borrowId) {
 		this.borrowId = borrowId;
 	}
 

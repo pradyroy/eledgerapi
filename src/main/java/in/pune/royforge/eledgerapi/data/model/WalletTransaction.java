@@ -9,7 +9,7 @@ public class WalletTransaction {
 
 	private String lenderId;
 
-	private UUID borrowId;
+	private String borrowId;
 
 	private Double amount;
 
@@ -37,11 +37,12 @@ public class WalletTransaction {
 		this.lenderId = lenderId;
 	}
 
-	public UUID getBorrowId() {
+
+	public String getBorrowId() {
 		return borrowId;
 	}
 
-	public void setBorrowId(UUID borrowId) {
+	public void setBorrowId(String borrowId) {
 		this.borrowId = borrowId;
 	}
 

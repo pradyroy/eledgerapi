@@ -25,7 +25,15 @@ public class WalletEntity implements Serializable {
 	private String lenderId;
 
 	@Column
-	private UUID borrowId;
+	private String borrowId;
+
+	public String getBorrowId() {
+		return borrowId;
+	}
+
+	public void setBorrowId(String borrowId) {
+		this.borrowId = borrowId;
+	}
 
 	@Column
 	private Double balance;
@@ -57,13 +65,6 @@ public class WalletEntity implements Serializable {
 		this.lenderId = lenderId;
 	}
 
-	public UUID getBorrowId() {
-		return borrowId;
-	}
-
-	public void setBorrowId(UUID borrowId) {
-		this.borrowId = borrowId;
-	}
 
 	public Double getBalance() {
 		return balance;

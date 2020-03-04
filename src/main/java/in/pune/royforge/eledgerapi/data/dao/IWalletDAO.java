@@ -10,7 +10,7 @@ public interface IWalletDAO {
 
 	boolean save(WalletTransaction wallet);
 
-	WalletData getWalletDataByIds(String lenderId, UUID borrowId);
+	WalletData getWalletDataByIds(String lenderId, String borrowId);
 
 	List<WalletData> getWallets();
 

@@ -51,7 +51,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public WalletData getWalletDataByIds(String lenderId, UUID borrowId) throws RecordNotFoundException {
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) throws RecordNotFoundException {
 		WalletData walletData = walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
 		if (null == walletData) {
 			throw new RecordNotFoundException("Customer or Merchant or both Not Found");
