@@ -1,7 +1,6 @@
 package in.pune.royforge.eledgerapi.data.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class Transaction {
 

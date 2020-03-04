@@ -1,7 +1,6 @@
 package in.pune.royforge.eledgerapi.data.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;

@@ -1,8 +1,6 @@
 package in.pune.royforge.eledgerapi.controller;
 
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.pune.royforge.eledgerapi.data.model.Response;
-import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 import in.pune.royforge.eledgerapi.data.service.WalletService;
 
