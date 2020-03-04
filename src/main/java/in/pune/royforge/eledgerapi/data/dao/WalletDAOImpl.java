@@ -37,9 +37,9 @@ public class WalletDAOImpl implements IWalletDAO {
 			WalletEntity walletEntityObj;
 			UUID uuId = UUID.randomUUID();
 			if (null == walletTransaction.getWalletId()) {
-				walletTransaction.setBorrowId(uuId);
+				walletTransaction.setBorrowId(uuId.toString());
 				createWallet(walletEntity, walletTransaction);
-				transactionEntity.setBorrowerId(uuId);
+				transactionEntity.setBorrowerId(uuId.toString());
 				walletEntityObj = walletEntityRepository.save(walletEntity);
 			} else {
 				Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletTransaction.getWalletId());

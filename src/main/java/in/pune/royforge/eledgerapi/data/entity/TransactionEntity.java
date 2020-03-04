@@ -2,7 +2,6 @@ package in.pune.royforge.eledgerapi.data.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +26,7 @@ public class TransactionEntity implements Serializable {
 	private String lenderId;
 
 	@Column
-	private UUID borrowerId;
+	private String borrowerId;
 
 	@Column
 	private String comment;
@@ -66,11 +65,11 @@ public class TransactionEntity implements Serializable {
 		this.lenderId = lenderId;
 	}
 
-	public UUID getBorrowerId() {
+	public String getBorrowerId() {
 		return borrowerId;
 	}
 
-	public void setBorrowerId(UUID borrowerId) {
+	public void setBorrowerId(String borrowerId) {
 		this.borrowerId = borrowerId;
 	}
 
