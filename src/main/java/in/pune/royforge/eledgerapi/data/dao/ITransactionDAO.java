@@ -8,7 +8,7 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 
 public interface ITransactionDAO {
 
-	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, UUID borrowerId);
+	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
 
 	List<Transaction> getTransactions();
 

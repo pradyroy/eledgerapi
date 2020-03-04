@@ -8,7 +8,7 @@ import in.pune.royforge.eledgerapi.data.model.Transaction;
 
 public interface TransactionService {
 
-	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, UUID borrowerId);
+	List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId);
 
 	List<Transaction> getListOfTransactionBetweenTwoDates(String lenderId, Date startDate, Date endDate);
 

@@ -12,7 +12,7 @@ import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 public interface ITransactionLogRepository extends PagingAndSortingRepository<TransactionEntity, Long> {
 
 	@Query("FROM TransactionEntity WHERE lenderId = ?1 AND borrowerId = ?2")
-	List<TransactionEntity> transactionsList(String lenderId, UUID borrowerId);
+	List<TransactionEntity> transactionsList(String lenderId, String borrowerId);
 
 	@Query("FROM TransactionEntity WHERE lenderId = ?1  AND DATE(date) =?2 ")
 	List<TransactionEntity> transactionListByLenderIdAndStratDate(String lenderId, Date date);

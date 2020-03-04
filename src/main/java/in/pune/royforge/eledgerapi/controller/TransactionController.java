@@ -39,7 +39,7 @@ public class TransactionController {
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowerId}", method = RequestMethod.GET)
 	public ResponseEntity<Response> getTransactionsUsingLenderIdAndBorrowerId(
-			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowerId") UUID borrowerId) {
+			@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowerId") String borrowerId) {
 		return new ResponseEntity<>(
 				new Response(new Date(), "success", HttpStatus.OK,
 						transactionService.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId)),

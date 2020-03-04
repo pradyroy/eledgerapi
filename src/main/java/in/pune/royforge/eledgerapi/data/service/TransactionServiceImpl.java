@@ -37,7 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, UUID borrowerId)
+	public List<Transaction> getTransactionsUsingLenderIdAndBorrowerId(String lenderId, String borrowerId)
 			throws RecordNotFoundException {
 		List<Transaction> transaction = transactionDAO.getTransactionsUsingLenderIdAndBorrowerId(lenderId, borrowerId);
 		if (transaction.isEmpty()) {
