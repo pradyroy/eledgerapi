@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import in.pune.royforge.eledgerapi.data.dao.IWalletDAO;
+import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 import in.pune.royforge.eledgerapi.exceptionhandler.InvalidArgumentException;
@@ -18,7 +19,7 @@ public class WalletServiceImpl implements WalletService {
 	private IWalletDAO walletEntityDAO;
 
 	@Override
-	public boolean save(WalletTransaction walletTransaction) throws InvalidArgumentException {
+	public WalletEntity save(WalletTransaction walletTransaction) throws InvalidArgumentException {
 		if (null != walletTransaction.getLenderId() && null != walletTransaction.getAmount()
 				&& null != walletTransaction.getTxnType()) {
 			return walletEntityDAO.save(walletTransaction);

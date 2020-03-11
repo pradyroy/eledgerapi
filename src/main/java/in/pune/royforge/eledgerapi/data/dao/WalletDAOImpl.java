@@ -30,7 +30,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	 * wallet in the database. Output: save the walletEntity in the repository.
 	 */
 	@Override
-	public boolean save(WalletTransaction walletTransaction) {
+	public WalletEntity save(WalletTransaction walletTransaction) {
 		if (null != walletTransaction) {
 			WalletEntity walletEntity = new WalletEntity();
 			TransactionEntity transactionEntity = new TransactionEntity();
@@ -47,14 +47,14 @@ public class WalletDAOImpl implements IWalletDAO {
 					updateWallet(walletEntity, walletTransaction);
 					walletEntityObj = walletEntityRepository.save(walletEntity);
 				} else {
-					return false;
+					return null;
 				}
 			}
 			transactionLogCreate(transactionEntity, walletTransaction, walletEntityObj.getWalletId());
 			transactionLogRepository.save(transactionEntity);
-			return true;
+			return walletEntityObj;
 		} else {
-			return false;
+			return new WalletEntity();
 		}
 	}
 
