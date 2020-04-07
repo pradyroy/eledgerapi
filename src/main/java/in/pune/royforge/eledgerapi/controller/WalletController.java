@@ -26,7 +26,7 @@ public class WalletController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Response> createOrUpdateWallet(@RequestBody WalletTransaction walletTransaction) {
-		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.OK, walletEntityService.save(walletTransaction)), HttpStatus.OK);
+		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.CREATED , walletEntityService.save(walletTransaction)), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/wallets", method = RequestMethod.GET)
