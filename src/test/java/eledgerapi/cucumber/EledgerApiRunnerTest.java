@@ -6,5 +6,5 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(features = "src/test/resources/feature")
-public class EledgerRunnerTest {
+public class EledgerApiRunnerTest {
 }

@@ -12,19 +12,13 @@ import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
 
 import java.util.Date;
 
-public class EledgerImpl {
+public class WalletImpl {
 	Response response;
 
 	@Step
-	public void provideUrl() {
+	public void postRequest() {
 		RestAssured.baseURI = "http://localhost:8080/wallet";
-		response = postCreateStudent("m11", "6565-6565", 300d);
-	}
-
-	@Step
-	public void transactionGetUrl(String lenderId, String date) {
-		SerenityRest.rest().given().with().pathParam("lenderId", lenderId).with().pathParam("date", date).when()
-				.get("http://localhost:8080/transaction/lenderId/{lenderId}/date/{date}").then().statusCode(200);
+		response = postCreateStudent("m12", 500d);
 	}
 
 	@Step
@@ -37,7 +31,7 @@ public class EledgerImpl {
 		Assert.assertEquals(response.then().statusCode(201), statusCode);
 	}
 
-	public Response postCreateStudent(String lenderId, String borrowId, Double balance) {
+	public Response postCreateStudent(String lenderId, Double balance) {
 		Date currentDate = new Date();
 		WalletTransaction wallet = new WalletTransaction();
 		wallet.setLenderId(lenderId);
