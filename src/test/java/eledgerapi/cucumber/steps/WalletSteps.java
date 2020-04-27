@@ -14,12 +14,12 @@ public class WalletSteps {
 //Wallet POST API to create new wallet
 	@Given("^I want to hit wallet POST api$")
 	public void i_want_to_hit_wallet_post_api() {
-		walletApi.getRequest();
+		walletApi.getListOfWallets();
 	}
 
-	@When("^I provide the walletTransaction object$")
+	@When("I provide the walletTransaction object")
 	public void iProvideTheWalletTransactionObject() {
-		walletApi.postRequest();
+		walletApi.postWalletRequest();
 	}
 
 	@Then("Response code should return {int} status code")
@@ -36,7 +36,7 @@ public class WalletSteps {
 
 	@When("I provide the lenderId {string}")
 	public void iProvideTheLenderId(String string) {
-		walletApi.walletGetByLenderId(string);
+		walletApi.getByLenderId(string);
 	}
 
 	@Then("Response should return {int} status code")
@@ -52,7 +52,7 @@ public class WalletSteps {
 
 	@When("I provide value of lenderId {string}")
 	public void iProvideValueOfLenderId(String string) {
-		walletApi.walletGetByLenderIdThatNotExist(string);
+		walletApi.getByLenderIdThatNotExist(string);
 	}
 
 	@Then("Api should return {int} status code")
@@ -67,11 +67,71 @@ public class WalletSteps {
 
 	@When("I provide value of lenderId {string} and borrowId {string}")
 	public void iProvideValueOfLenderIdAndBorrowId(String string1, String string2) {
-		walletApi.walletGetByLenderIdAndBorrowId(string1, string2);
+		walletApi.getByLenderIdAndBorrowId(string1, string2);
 	}
 
 	@Then("Api should contain balance {int}")
 	public void api_should_contain_balance(int int1) {
 
+	}
+
+//Wallet GET API using walletId
+	@Given("^I want to call wallet GET API with walletId$")
+	public void i_want_to_call_wallet_get_api_with_walletId() {
+
+	}
+
+	@When("I provide the walletId {string}")
+	public void iProvideTheWalletId(String string) {
+		walletApi.getByWalletId(string);
+	}
+
+	@Then("Response should match lenderId {string}")
+	public void responseShouldMatchLenderId(String string) {
+	}
+
+//Delete Wallet using walletId
+	@Given("^I want to hit wallet DELETE API$")
+	public void i_want_to_hit_wallet_delete_api() {
+
+	}
+
+	@When("I provide the walletId {string} for DELETE API")
+	public void iProvideTheWalletIdForDeleteApi(String string) {
+		walletApi.deleteByWalletId(string);
+	}
+
+	@Then("Response should return data {string}")
+	public void responseShouldReturnData(String string) {
+	}
+
+//Wallet GET API after deleting the wallet
+	@Given("^I want to hit wallet GET API after delete api$")
+	public void iWantToHitWalletGetApiAfterDeleteApi() {
+
+	}
+
+	@When("I provide the deleted walletId {string}")
+	public void iProvideTheDeletedWalletId(String string) {
+		walletApi.getByWalletIdThatNotExist(string);
+	}
+
+	@Then("Response should match status code {string}")
+	public void responseShouldMatchStatusCode(String string) {
+	}
+
+//Wallet GET API to get list of wallets
+	@Given("^I want to hit wallet list GET API$")
+	public void iWantToHitWalletListGetApi() {
+
+	}
+
+	@When("I provide url for list {string}")
+	public void iProvideUrlForList(String string) {
+		walletApi.getListOfWallets();
+	}
+
+	@Then("Status code should be {int}")
+	public void statusCodeShouldBe(int int1) {
 	}
 }

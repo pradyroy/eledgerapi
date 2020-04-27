@@ -1,43 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="903cc36c-0724-4310-83ce-e849619e56c6" name="Default Changelist" comment="" />
+    <list default="true" id="903cc36c-0724-4310-83ce-e849619e56c6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.factorypath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/test/features/GetPost.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/eledger/testbase/TestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/eledger/testbase/TestBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/serenity/TransactionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/serenity/TransactionImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/serenity/WalletImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/serenity/WalletImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/steps/TransactionSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/steps/TransactionSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/steps/WalletSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/eledgerapi/cucumber/steps/WalletSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/feature/transaction/transaction_get.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/feature/transaction/transaction_get.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/feature/wallet/wallet_get.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/feature/wallet/wallet_get.feature" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aqPgHN3l5qR9mVL8iM2dIyHlXe" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -50,24 +83,50 @@
       <option name="presentableId" value="Default" />
       <updated>1587460263572</updated>
       <workItem from="1587460286044" duration="1408000" />
+      <workItem from="1587725686195" duration="1525000" />
+      <workItem from="1587742083847" duration="415000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="4" width="816" height="724" key="#Intentions" timestamp="1587461048000">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="4" width="816" height="724" key="#Intentions/0.0.1366.728@0.0.1366.728" timestamp="1587461048000" />
+    <state x="208" y="31" key="#Project_Structure" timestamp="1587725758081">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="208" y="31" key="#Project_Structure/0.0.1440.900@0.0.1440.900" timestamp="1587725758081" />
+    <state x="208" y="31" key="SettingsEditor" timestamp="1587725915656">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="208" y="31" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1587725915656" />
     <state x="391" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1587460302906">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="391" y="192" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587460302906" />
-    <state x="390" y="0" width="586" height="728" key="find.popup" timestamp="1587461092465">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="411" y="0" width="618" height="900" key="find.popup" timestamp="1587725942307">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="390" y="0" width="586" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1587461092465" />
+    <state x="411" y="0" width="618" height="900" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1587725942307" />
+    <state x="477" y="378" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1587742322493">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="477" y="378" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/0.0.1440.900@0.0.1440.900" timestamp="1587742322493" />
   </component>
 </project>
