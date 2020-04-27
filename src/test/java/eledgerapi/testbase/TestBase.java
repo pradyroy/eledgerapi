@@ -1,4 +1,4 @@
-package eledger.testbase;
+package eledgerapi.testbase;
 
 import org.junit.BeforeClass;
 

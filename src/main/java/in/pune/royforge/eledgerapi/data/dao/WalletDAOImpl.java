@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
-import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
+import in.pune.royforge.eledgerapi.data.repo.TransactionLogRepository;
 import in.pune.royforge.eledgerapi.data.model.TransactionType;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
@@ -23,7 +23,7 @@ public class WalletDAOImpl implements IWalletDAO {
 	WalletEntityRepository walletEntityRepository;
 
 	@Autowired
-	ITransactionLogRepository transactionLogRepository;
+	TransactionLogRepository transactionLogRepository;
 
 	/*
 	 * Input: save(WalletTransaction wallet) method is used to create or update the
