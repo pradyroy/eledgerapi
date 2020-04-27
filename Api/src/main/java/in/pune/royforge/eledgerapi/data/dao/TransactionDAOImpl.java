@@ -9,14 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 import in.pune.royforge.eledgerapi.data.model.Transaction;
-import in.pune.royforge.eledgerapi.data.repo.ITransactionLogRepository;
+import in.pune.royforge.eledgerapi.data.repo.TransactionLogRepository;
 
 @Repository
-
 public class TransactionDAOImpl implements ITransactionDAO {
 
-	@Autowired
-	ITransactionLogRepository transactionLogRepository;
+	@Autowired(required = true)
+	TransactionLogRepository transactionLogRepository;
 
 	/*
 	 * Method to get the details of a transaction by lenderId and Date
