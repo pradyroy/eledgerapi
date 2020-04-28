@@ -223,7 +223,7 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>bddTest</module>
 		<module>Api</module>
+		<module>bddTest</module>
 	</modules>
 </project>
