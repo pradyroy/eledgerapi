@@ -31,7 +31,6 @@ public class WalletSteps {
 // Wallet GET API using lenderId
 	@Given("^I want to hit wallet GET API$")
 	public void i_want_to_hit_wallet_get_api() {
-
 	}
 
 	@When("I provide the lenderId {string}")
@@ -47,7 +46,6 @@ public class WalletSteps {
 //Wallet GET API using lenderId that not exist
 	@Given("^I want to call wallet GET API with lenderId$")
 	public void i_want_to_call_wallet_get_api_with_lenderId() {
-
 	}
 
 	@When("I provide value of lenderId {string}")
@@ -62,7 +60,6 @@ public class WalletSteps {
 //Wallet GET API using lenderId and borrowId
 	@Given("^I want to call wallet GET API with lenderId and borrowId$")
 	public void i_want_to_call_wallet_get_api_with_lenderId_and_borrowId() {
-
 	}
 
 	@When("I provide value of lenderId {string} and borrowId {string}")
@@ -78,7 +75,6 @@ public class WalletSteps {
 //Wallet GET API using walletId
 	@Given("^I want to call wallet GET API with walletId$")
 	public void i_want_to_call_wallet_get_api_with_walletId() {
-
 	}
 
 	@When("I provide the walletId {string}")
@@ -93,7 +89,6 @@ public class WalletSteps {
 //Delete Wallet using walletId
 	@Given("^I want to hit wallet DELETE API$")
 	public void i_want_to_hit_wallet_delete_api() {
-
 	}
 
 	@When("I provide the walletId {string} for DELETE API")
@@ -120,10 +115,23 @@ public class WalletSteps {
 	public void responseShouldMatchStatusCode(String string) {
 	}
 
+// Delete Wallet using walletId that not exist
+	@Given("^I want to hit wallet DELETE API with walletId not existed in database$")
+	public void i_want_to_hit_wallet_delete_api_with_not_existed_walletId() {
+	}
+
+	@When("I provide the not existed walletId {string} for DELETE API")
+	public void iProvideTheNotExistedWalletIdForDeleteApi(String string) {
+		walletApi.deleteByWalletIdThatNotExist(string);
+	}
+
+	@Then("Response should return responseCode {string}")
+	public void responseShouldReturnResponseCode(String string) {
+	}
+
 //Wallet GET API to get list of wallets
 	@Given("^I want to hit wallet list GET API$")
 	public void iWantToHitWalletListGetApi() {
-
 	}
 
 	@When("I provide url for list {string}")

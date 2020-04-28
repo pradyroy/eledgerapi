@@ -67,6 +67,13 @@ public class WalletImpl {
 	}
 
 	@Step
+	public void deleteByWalletIdThatNotExist(String walletId) {
+		SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
+				.delete("http://localhost:8080/wallet/walletId/{walletId}").then().statusCode(404)
+				.body("responseCode", equalTo("NOT_FOUND"));
+	}
+
+	@Step
 	public void getByWalletIdThatNotExist(String walletId) {
 		SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
 				.get("http://localhost:8080/wallet/walletId/{walletId}").then().statusCode(404);

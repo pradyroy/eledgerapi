@@ -67,6 +67,5 @@ public class WalletServiceImpl implements WalletService {
 			throw new RecordNotFoundException("Wallet Not Found");
 		}
 		return deleteWallet;
-
 	}
 }

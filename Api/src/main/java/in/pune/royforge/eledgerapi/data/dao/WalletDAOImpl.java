@@ -216,11 +216,14 @@ public class WalletDAOImpl implements IWalletDAO {
 	public boolean deleteWallet(long walletId) {
 		Optional<WalletEntity> existedWallet = walletEntityRepository.findById(walletId);
 		if (existedWallet.isPresent()) {
-			WalletEntity walletEntity = new WalletEntity();
-			setWalletEntity(walletEntity, existedWallet);
-			walletEntity.setDeleted(true);
-			walletEntityRepository.save(walletEntity);
-			return true;
+			if (existedWallet.get().isDeleted() == false) {
+				WalletEntity walletEntity = new WalletEntity();
+				setWalletEntity(walletEntity, existedWallet);
+				walletEntity.setDeleted(true);
+				walletEntityRepository.save(walletEntity);
+				return true;
+			}
+			return false;
 		} else {
 			return false;
 		}
