@@ -25,12 +25,12 @@ public class WalletImpl {
 
 	@Step
 	public void getListOfWallets() {
-		SerenityRest.rest().given().when().get("http://localhost:8080/wallet/wallets").then().statusCode(200);
+		SerenityRest.rest().given().when().request().get("http://localhost:8080/wallet/wallets").then().statusCode(200);
 	}
 
 	@Step
 	public void statusCodeCheck(int statusCode) {
-		Assert.assertEquals(response.getStatusCode(), 201);
+		Assert.assertEquals(response.getStatusCode(), statusCode);
 	}
 
 	@Step
