@@ -27,6 +27,21 @@ public class WalletSteps {
 		walletApi.statusCodeCheck(int1);
 	}
 
+// Wallet GET API to get list of wallets
+	@Given("^User wants to get list of wallets$")
+	public void iWantToHitWalletListGetApi() {
+	}
+
+	@When("User provide url for list {string}")
+	public void iProvideUrlForList(String string) {
+		walletApi.getListOfWallets();
+	}
+
+	@Then("Status code should be {int}")
+	public void statusCodeShouldBe(int int1) {
+		walletApi.statusCodeCheck(int1);
+	}
+
 // Wallet GET API using lenderId
 	@Given("^User wants to get wallet by using lenderId$")
 	public void i_want_to_hit_wallet_get_api() {
@@ -38,8 +53,8 @@ public class WalletSteps {
 	}
 
 	@Then("Response should return {int} status code")
-	public void response_should_return_status_code(int int1) {
-		// Write code here that turns the phrase above into concrete actions
+	public void response_should_return_status_code(int code) {
+		walletApi.statusCodeCheck(code);
 	}
 
 //Wallet GET API using lenderId that not exist
@@ -53,7 +68,8 @@ public class WalletSteps {
 	}
 
 	@Then("Api should return {int} status code")
-	public void api_should_return_status_code(int int1) {
+	public void api_should_return_status_code(int code) {
+		walletApi.statusCodeCheck(code);
 	}
 
 //Wallet GET API using lenderId and borrowId
@@ -68,6 +84,7 @@ public class WalletSteps {
 
 	@Then("Api should contain balance {int}")
 	public void api_should_contain_balance(int int1) {
+		walletApi.contentCheck("data.balance", (float) int1);
 
 	}
 
@@ -83,6 +100,7 @@ public class WalletSteps {
 
 	@Then("Response should match lenderId {string}")
 	public void responseShouldMatchLenderId(String string) {
+		walletApi.contentCheck("data.lenderId", string);
 	}
 
 //Delete Wallet using walletId
@@ -97,6 +115,7 @@ public class WalletSteps {
 
 	@Then("Response should return data {string}")
 	public void responseShouldReturnData(String string) {
+		walletApi.contentCheck("responseCode", string);
 	}
 
 //Wallet GET API after deleting the wallet
@@ -110,8 +129,8 @@ public class WalletSteps {
 		walletApi.getByWalletIdThatNotExist(string);
 	}
 
-	@Then("Response should match status code {string}")
-	public void responseShouldMatchStatusCode(String string) {
+	@Then("Response should match status code {int}")
+	public void responseShouldMatchStatusCode(int code) {
 	}
 
 // Delete Wallet using walletId that not exist
@@ -126,19 +145,6 @@ public class WalletSteps {
 
 	@Then("Response should return responseCode {string}")
 	public void responseShouldReturnResponseCode(String string) {
-	}
-
-//Wallet GET API to get list of wallets
-	@Given("^User wants to get list of wallets$")
-	public void iWantToHitWalletListGetApi() {
-	}
-
-	@When("User provide url for list {string}")
-	public void iProvideUrlForList(String string) {
-		walletApi.getListOfWallets();
-	}
-
-	@Then("Status code should be {int}")
-	public void statusCodeShouldBe(int int1) {
+		walletApi.contentCheck("responseCode", string);
 	}
 }

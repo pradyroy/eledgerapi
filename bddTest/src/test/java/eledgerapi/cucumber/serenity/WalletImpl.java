@@ -25,7 +25,7 @@ public class WalletImpl {
 
 	@Step
 	public void getListOfWallets() {
-		SerenityRest.rest().given().when().request().get("http://localhost:8080/wallet/wallets").then().statusCode(200);
+		response = SerenityRest.rest().given().when().request().get("http://localhost:8080/wallet/wallets");
 	}
 
 	@Step
@@ -33,50 +33,55 @@ public class WalletImpl {
 		Assert.assertEquals(response.getStatusCode(), statusCode);
 	}
 
+	public void contentCheck(String contentKey, String contentValue) {
+		response.then().assertThat().body(contentKey, equalTo(contentValue));
+	}
+
+	public void contentCheck(String contentKey, float contentValue) {
+		response.then().assertThat().body(contentKey, equalTo(contentValue));
+	}
+
 	@Step
 	public void getByLenderId(String lenderId) {
-		SerenityRest.rest().given().with().pathParam("lenderId", lenderId).when()
-				.get("http://localhost:8080/wallet/lenderId/{lenderId}").then().statusCode(200);
+		response = SerenityRest.rest().given().with().pathParam("lenderId", lenderId).when()
+				.get("http://localhost:8080/wallet/lenderId/{lenderId}");
 	}
 
 	@Step
 	public void getByLenderIdThatNotExist(String lenderId) {
-		SerenityRest.rest().given().with().pathParam("lenderId", lenderId).when()
-				.get("http://localhost:8080/wallet/lenderId/{lenderId}").then().statusCode(404);
+		response = SerenityRest.rest().given().with().pathParam("lenderId", lenderId).when()
+				.get("http://localhost:8080/wallet/lenderId/{lenderId}");
 	}
 
 	@Step
 	public void getByLenderIdAndBorrowId(String lenderId, String borrowId) {
-		SerenityRest.rest().given().with().pathParam("lenderId", lenderId).with().pathParam("borrowId", borrowId).when()
-				.get("http://localhost:8080/wallet/lenderId/{lenderId}/borrowId/{borrowId}").then().assertThat()
-				.statusCode(200).body("data.balance", equalTo(500.0f));
+		response = SerenityRest.rest().given().with().pathParam("lenderId", lenderId).with()
+				.pathParam("borrowId", borrowId).when()
+				.get("http://localhost:8080/wallet/lenderId/{lenderId}/borrowId/{borrowId}");
 	}
 
 	@Step
 	public void getByWalletId(String walletId) {
-		SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
-				.get("http://localhost:8080/wallet/walletId/{walletId}").then().statusCode(200)
-				.body("data.lenderId", equalTo("m12"));
+		response = SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
+				.get("http://localhost:8080/wallet/walletId/{walletId}");
 	}
 
 	@Step
 	public void deleteByWalletId(String walletId) {
-		SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
-				.delete("http://localhost:8080/wallet/walletId/{walletId}").then().statusCode(200)
-				.body("data", equalTo(true));
-	}
-
-	@Step
-	public void deleteByWalletIdThatNotExist(String walletId) {
-		SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
-				.delete("http://localhost:8080/wallet/walletId/{walletId}").then().statusCode(404)
-				.body("responseCode", equalTo("NOT_FOUND"));
+		response = SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
+				.delete("http://localhost:8080/wallet/walletId/{walletId}");
 	}
 
 	@Step
 	public void getByWalletIdThatNotExist(String walletId) {
-		SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
-				.get("http://localhost:8080/wallet/walletId/{walletId}").then().statusCode(404);
+		response = SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
+				.get("http://localhost:8080/wallet/walletId/{walletId}");
+	}
+
+	@Step
+	public void deleteByWalletIdThatNotExist(String walletId) {
+		response = SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
+				.delete("http://localhost:8080/wallet/walletId/{walletId}");
 	}
 
 	public Response postWallet(String lenderId, Double balance) {
