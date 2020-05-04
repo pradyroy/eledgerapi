@@ -46,7 +46,6 @@ public class WalletImpl {
 	public void getByLenderId(String lenderId) {
 		response = SerenityRest.rest().given().with().pathParam("lenderId", lenderId).when()
 				.get("http://localhost:8080/wallet/lenderId/{lenderId}");
-
 	}
 
 	@Step

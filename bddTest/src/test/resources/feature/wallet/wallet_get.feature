@@ -43,10 +43,10 @@ Feature: Test All Wallet Apis
     When User provide the walletId for DELETE API
     Then Response should return data 'OK'
 
-  @wallet_get_walletId_after_delete_wallet
-  Scenario: Wallet GET API after deleting the wallet
-    Given User wants to get wallet by using walletId after deleting that wallet
-    When User provide the deleted walletId '367'
+  @wallet_get_walletId_not_existed
+  Scenario: Wallet GET API using walletId that not exist
+    Given User wants to get wallet by using walletId that not exist
+    When User provide the not existed walletId '367'
     Then Response should match status code 404
 
   @wallet_delete_walletId_not_exist

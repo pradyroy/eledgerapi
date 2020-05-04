@@ -106,12 +106,10 @@ public class WalletSteps {
 	@Given("User performs a POST Operations")
 	public void user_performs_a_POST_Operations() {
 		walletApi.postWalletRequest();
-
 	}
 
 	@Given("User wants to delete created wallet by using walletId")
 	public void user_wants_to_delete_created_wallet_by_using_walletId() {
-
 	}
 
 	@When("User provide the walletId for DELETE API")
@@ -124,13 +122,12 @@ public class WalletSteps {
 		walletApi.contentCheck("responseCode", string);
 	}
 
-//Wallet GET API after deleting the wallet
-	@Given("^User wants to get wallet by using walletId after deleting that wallet$")
+//Wallet GET API using walletId that not exist
+	@Given("^User wants to get wallet by using walletId that not exist$")
 	public void iWantToHitWalletGetApiAfterDeleteApi() {
-
 	}
 
-	@When("User provide the deleted walletId {string}")
+	@When("User provide the not existed walletId {string}")
 	public void iProvideTheDeletedWalletId(String string) {
 		walletApi.getByWalletIdThatNotExist(string);
 	}
