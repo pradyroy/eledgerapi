@@ -13,4 +13,5 @@ public interface WalletEntityRepository extends PagingAndSortingRepository<Walle
 
 	@Query("FROM WalletEntity  WHERE lenderId= ?1 AND borrowId= ?2")
 	WalletEntity getWalletDataByIds(String lenderId, String borrowId);
+
 }

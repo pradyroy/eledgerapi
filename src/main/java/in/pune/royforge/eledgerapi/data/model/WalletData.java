@@ -32,8 +32,6 @@ public class WalletData {
 		this.lenderId = lenderId;
 	}
 
-
-
 	public String getBorrowId() {
 		return borrowId;
 	}

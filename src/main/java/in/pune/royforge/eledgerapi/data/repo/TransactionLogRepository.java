@@ -8,7 +8,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import in.pune.royforge.eledgerapi.data.entity.TransactionEntity;
 
-public interface ITransactionLogRepository extends PagingAndSortingRepository<TransactionEntity, Long> {
+public interface TransactionLogRepository extends PagingAndSortingRepository<TransactionEntity, Long> {
+
+	List<TransactionEntity> findByLenderId(String lenderId);
 
 	@Query("FROM TransactionEntity WHERE lenderId = ?1 AND borrowerId = ?2")
 	List<TransactionEntity> transactionsList(String lenderId, String borrowerId);
@@ -18,7 +20,4 @@ public interface ITransactionLogRepository extends PagingAndSortingRepository<Tr
 
 	@Query("FROM TransactionEntity WHERE lenderId = ?1  AND ( DATE(date) BETWEEN ?2 AND ?3 )")
 	List<TransactionEntity> transactionListBetweenTwoDates(String lenderId, Date startDate, Date endDate);
-
-	List<TransactionEntity> findByLenderId(String lenderId);
-
 }
