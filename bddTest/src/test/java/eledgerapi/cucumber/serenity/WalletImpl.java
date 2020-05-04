@@ -16,11 +16,12 @@ import java.util.Date;
 
 public class WalletImpl {
 	Response response;
+	int walletId;
 
 	@Step
 	public void postWalletRequest() {
 		RestAssured.baseURI = "http://localhost:8080/wallet";
-		response = postWallet("m13", 600d);
+		response = postWallet("TestId1", 600d);
 	}
 
 	@Step
@@ -45,6 +46,7 @@ public class WalletImpl {
 	public void getByLenderId(String lenderId) {
 		response = SerenityRest.rest().given().with().pathParam("lenderId", lenderId).when()
 				.get("http://localhost:8080/wallet/lenderId/{lenderId}");
+
 	}
 
 	@Step
@@ -67,9 +69,9 @@ public class WalletImpl {
 	}
 
 	@Step
-	public void deleteByWalletId(String walletId) {
-		response = SerenityRest.rest().given().with().pathParam("walletId", walletId).when()
-				.delete("http://localhost:8080/wallet/walletId/{walletId}");
+	public void deleteByWalletId() {
+		walletId = response.then().extract().path("data.walletId");
+		response = SerenityRest.rest().given().when().delete("http://localhost:8080/wallet/walletId/" + walletId);
 	}
 
 	@Step

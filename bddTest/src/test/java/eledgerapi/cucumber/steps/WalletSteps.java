@@ -14,7 +14,6 @@ public class WalletSteps {
 //Wallet POST API to create new wallet
 	@Given("^User wants to create a wallet$")
 	public void i_want_to_hit_wallet_post_api() {
-		walletApi.getListOfWallets();
 	}
 
 	@When("User provide the walletTransaction object")
@@ -104,13 +103,20 @@ public class WalletSteps {
 	}
 
 //Delete Wallet using walletId
-	@Given("^User wants to delete wallet by using walletId$")
-	public void i_want_to_hit_wallet_delete_api() {
+	@Given("User performs a POST Operations")
+	public void user_performs_a_POST_Operations() {
+		walletApi.postWalletRequest();
+
 	}
 
-	@When("User provide the walletId {string} for DELETE API")
-	public void iProvideTheWalletIdForDeleteApi(String string) {
-		walletApi.deleteByWalletId(string);
+	@Given("User wants to delete created wallet by using walletId")
+	public void user_wants_to_delete_created_wallet_by_using_walletId() {
+
+	}
+
+	@When("User provide the walletId for DELETE API")
+	public void user_provide_the_walletId_for_DELETE_API() {
+		walletApi.deleteByWalletId();
 	}
 
 	@Then("Response should return data {string}")
@@ -131,6 +137,7 @@ public class WalletSteps {
 
 	@Then("Response should match status code {int}")
 	public void responseShouldMatchStatusCode(int code) {
+		walletApi.statusCodeCheck(code);
 	}
 
 // Delete Wallet using walletId that not exist

@@ -38,8 +38,9 @@ Feature: Test All Wallet Apis
 
   @wallet_delete_walletId
   Scenario: Delete Wallet using walletId
-    Given User wants to delete wallet by using walletId
-    When User provide the walletId '367' for DELETE API
+    Given User performs a POST Operations
+    And User wants to delete created wallet by using walletId
+    When User provide the walletId for DELETE API
     Then Response should return data 'OK'
 
   @wallet_get_walletId_after_delete_wallet
