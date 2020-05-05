@@ -12,6 +12,7 @@
 	<groupId>in.pune.royforge</groupId>
 	<artifactId>eledgerapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>eledgerapi</name>
 	<description>eLedger API for Small Enterprises</description>
 
@@ -221,4 +222,8 @@
 			</plugin>
 		</plugins>
 	</build>
+	<modules>
+		<module>Api</module>
+		<module>bddTest</module>
+	</modules>
 </project>
