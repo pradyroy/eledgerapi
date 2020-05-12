@@ -225,5 +225,6 @@
 	<modules>
 		<module>Api</module>
 		<module>bddTest</module>
+		<module>ConnectionService</module>
 	</modules>
 </project>
