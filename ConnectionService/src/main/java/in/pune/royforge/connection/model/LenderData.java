@@ -1,4 +1,4 @@
-package in.pune.royforge.eledgerapi.data.model;
+package in.pune.royforge.connection.model;
 
 public class LenderData {
 	private Long id;
