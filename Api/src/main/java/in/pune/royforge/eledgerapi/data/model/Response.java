@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 public class Response {
 
 	private Date date;
-	
+
 	private Object data;
 
 	private String message;
@@ -20,7 +20,7 @@ public class Response {
 		this.message = message;
 		this.responseCode = errorCode;
 	}
-	
+
 	public Response(Date date, String message, HttpStatus errorCode, Object data) {
 		super();
 		this.date = date;
