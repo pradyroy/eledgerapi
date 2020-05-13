@@ -29,7 +29,8 @@ public interface WalletService {
 	public List<WalletData> findWalletsListByLenderId(@PathVariable(value = "lenderid") String lenderId);
 
 	@RequestMapping(value = "/lenderId/{lenderId}/borrowId/{borrowId}", method = RequestMethod.GET)
-	public WalletData getWalletDataByIds(@PathVariable(value = "lenderId") String lenderId, @PathVariable(value = "borrowId")String borrowId);
+	public WalletData getWalletDataByIds(@PathVariable(value = "lenderId") String lenderId,
+			@PathVariable(value = "borrowId") String borrowId);
 
 	@RequestMapping(value = "/walletId/{walletId}", method = RequestMethod.DELETE)
 	public boolean deleteWallet(@PathVariable(value = "walletId") Long walletId);
