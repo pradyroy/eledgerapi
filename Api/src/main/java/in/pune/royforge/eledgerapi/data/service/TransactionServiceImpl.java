@@ -29,9 +29,6 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public List<Transaction> transactionsByLenderId(String lenderId) throws RecordNotFoundException {
 		List<Transaction> transactions = transactionDAO.transactionsByLenderId(lenderId);
-		if (transactions.isEmpty()) {
-			throw new RecordNotFoundException("Lender Not Exist");
-		}
 		return transactions;
 	}
 

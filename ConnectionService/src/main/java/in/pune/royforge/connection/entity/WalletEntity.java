@@ -1,4 +1,4 @@
-package in.pune.royforge.eledgerapi.data.entity;
+package in.pune.royforge.connection.entity;
 
 import java.io.Serializable;
 import java.util.Date;
