@@ -3,6 +3,7 @@ package in.pune.royforge.connection.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,16 +17,19 @@ import in.pune.royforge.connection.model.WalletData;
 @Service
 public class RelationServiceImpl implements IRelationService {
 
+	@Autowired
+	TransactionService transactionService;
+
+	@Autowired
+	ICustomerService customerEntityService;
+	@Autowired
+	WalletService walletService;
+
 	@Override
 	public List<RelationCustomer> getUsers(String lenderId) {
-		RestTemplate resetemplate = new RestTemplate();
-		ResponseEntity<WalletData[]> responseWallet = resetemplate
-				.getForEntity("http://localhost:8080/wallet/lenderId/" + lenderId, WalletData[].class);
-		ResponseEntity<CustomerData[]> responseCustomer = resetemplate
-				.getForEntity("http://localhost:8081/customer/customers", CustomerData[].class);
+		List<WalletData> walletList = walletService.findWalletsListByLenderId(lenderId);
+		List<CustomerData> customerList = customerEntityService.getAllCustomers();
 
-		WalletData[] walletList = responseWallet.getBody();
-		CustomerData[] customerList = responseCustomer.getBody();
 		List<RelationCustomer> userList = new ArrayList<>();
 		if (null != lenderId) {
 			for (WalletData wallet : walletList) {
@@ -52,14 +56,8 @@ public class RelationServiceImpl implements IRelationService {
 
 	@Override
 	public List<RelationReport> getAllUsers(String lenderId) {
-		RestTemplate resetemplate = new RestTemplate();
-		ResponseEntity<Transaction[]> responseWallet = resetemplate
-				.getForEntity("http://localhost:8080/transaction/lenderId/" + lenderId, Transaction[].class);
-		ResponseEntity<CustomerData[]> responseCustomer = resetemplate
-				.getForEntity("http://localhost:8081/customer/allcustomers", CustomerData[].class);
-
-		Transaction[] transactionList = responseWallet.getBody();
-		CustomerData[] customerList = responseCustomer.getBody();
+		List<Transaction> transactionList = transactionService.transactionsByLenderId(lenderId);
+		List<CustomerData> customerList = customerEntityService.getAllCustomers();
 		List<RelationReport> userList = new ArrayList<>();
 		if (null != lenderId) {
 			for (Transaction transaction : transactionList) {
