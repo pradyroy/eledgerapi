@@ -49,6 +49,7 @@ public class LenderController {
 	public ResponseEntity<Response> createOrUpdateLender(@RequestBody LenderData lenderData) {
 		logger.info("calling /lender POST API");
 		return new ResponseEntity<>(
-				new Response(new Date(), "success", HttpStatus.OK, lenderDataService.save(lenderData)), HttpStatus.OK);
+				new Response(new Date(), "success", HttpStatus.CREATED, lenderDataService.save(lenderData)),
+				HttpStatus.CREATED);
 	}
 }
