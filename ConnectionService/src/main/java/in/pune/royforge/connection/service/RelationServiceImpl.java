@@ -27,24 +27,27 @@ public class RelationServiceImpl implements IRelationService {
 		WalletData[] walletList = responseWallet.getBody();
 		CustomerData[] customerList = responseCustomer.getBody();
 		List<RelationCustomer> userList = new ArrayList<>();
-
-		for (WalletData wallet : walletList) {
-			for (CustomerData customer : customerList) {
-				if (wallet.getBorrowId().equals(customer.getBorrowId())) {
-					RelationCustomer user = new RelationCustomer();
-					user.setWalletId(wallet.getWalletId());
-					user.setDate(wallet.getUpdatedDate());
-					user.setAmount(wallet.getBalance());
-					user.setBorrowId(customer.getBorrowId());
-					user.setId(customer.getId());
-					user.setLenderId(customer.getLenderId());
-					user.setName(customer.getName());
-					user.setPhone(customer.getPhone());
-					userList.add(user);
+		if (null != lenderId) {
+			for (WalletData wallet : walletList) {
+				for (CustomerData customer : customerList) {
+					if (wallet.getBorrowId().equals(customer.getBorrowId())) {
+						RelationCustomer user = new RelationCustomer();
+						user.setWalletId(wallet.getWalletId());
+						user.setDate(wallet.getUpdatedDate());
+						user.setAmount(wallet.getBalance());
+						user.setBorrowId(customer.getBorrowId());
+						user.setId(customer.getId());
+						user.setLenderId(customer.getLenderId());
+						user.setName(customer.getName());
+						user.setPhone(customer.getPhone());
+						userList.add(user);
+					}
 				}
 			}
+			return userList;
+		} else {
+			return null;
 		}
-		return userList;
 	}
 
 	@Override
@@ -58,20 +61,23 @@ public class RelationServiceImpl implements IRelationService {
 		Transaction[] transactionList = responseWallet.getBody();
 		CustomerData[] customerList = responseCustomer.getBody();
 		List<RelationReport> userList = new ArrayList<>();
-
-		for (Transaction transaction : transactionList) {
-			for (CustomerData customer : customerList) {
-				if (transaction.getBorrowerId().equals(customer.getBorrowId())) {
-					RelationReport user = new RelationReport();
-					user.setDate(transaction.getDate());
-					user.setAmount(transaction.getAmount());
-					user.setName(customer.getName());
-					user.setPhone(customer.getPhone());
-					user.setTxnType(transaction.getTxnType());
-					userList.add(user);
+		if (null != lenderId) {
+			for (Transaction transaction : transactionList) {
+				for (CustomerData customer : customerList) {
+					if (transaction.getBorrowerId().equals(customer.getBorrowId())) {
+						RelationReport user = new RelationReport();
+						user.setDate(transaction.getDate());
+						user.setAmount(transaction.getAmount());
+						user.setName(customer.getName());
+						user.setPhone(customer.getPhone());
+						user.setTxnType(transaction.getTxnType());
+						userList.add(user);
+					}
 				}
 			}
+			return userList;
+		} else {
+			return null;
 		}
-		return userList;
 	}
 }
