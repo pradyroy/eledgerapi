@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import in.pune.royforge.connection.model.CustomerData;
 import in.pune.royforge.connection.model.RelationCustomer;
@@ -22,6 +20,7 @@ public class RelationServiceImpl implements IRelationService {
 
 	@Autowired
 	ICustomerService customerEntityService;
+
 	@Autowired
 	WalletService walletService;
 
