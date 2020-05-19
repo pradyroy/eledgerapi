@@ -1,4 +1,4 @@
-package in.pune.royforge.eledgerapi.exceptionhandler;
+package in.pune.royforge.connection.exceptionhandler;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import in.pune.royforge.eledgerapi.data.model.Response;
+import in.pune.royforge.connection.model.Response;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
@@ -38,8 +38,7 @@ public class CustomExceptionHandler {
 	 */
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllException(Exception ex) {
-		return new ResponseEntity<Object>(
-				new Response(new Date(), ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR),
+		return new ResponseEntity<Object>(new Response(new Date(), ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

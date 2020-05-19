@@ -1,4 +1,4 @@
-package in.pune.royforge.eledgerapi.exceptionhandler;
+package in.pune.royforge.connection.exceptionhandler;
 
 public class RecordNotFoundException extends RuntimeException {
 	public RecordNotFoundException(String exception) {

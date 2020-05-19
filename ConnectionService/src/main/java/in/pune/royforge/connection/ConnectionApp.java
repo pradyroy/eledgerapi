@@ -1,7 +1,9 @@
-package in.pune.royforge.eledgerapi;
+package in.pune.royforge.connection;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 import springfox.documentation.builders.PathSelectors;
@@ -16,12 +18,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *
  */
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @EnableSwagger2
-public class EledgerapiApplication {
+@EnableFeignClients
+public class ConnectionApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EledgerapiApplication.class, args);
+		SpringApplication.run(ConnectionApp.class, args);
 	}
 
 	@Bean

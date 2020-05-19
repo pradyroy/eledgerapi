@@ -9,8 +9,6 @@ import in.pune.royforge.eledgerapi.data.dao.IWalletDAO;
 import in.pune.royforge.eledgerapi.data.entity.WalletEntity;
 import in.pune.royforge.eledgerapi.data.model.WalletData;
 import in.pune.royforge.eledgerapi.data.model.WalletTransaction;
-import in.pune.royforge.eledgerapi.exceptionhandler.InvalidArgumentException;
-import in.pune.royforge.eledgerapi.exceptionhandler.RecordNotFoundException;
 
 @Service
 public class WalletServiceImpl implements WalletService {
@@ -19,22 +17,13 @@ public class WalletServiceImpl implements WalletService {
 	private IWalletDAO walletEntityDAO;
 
 	@Override
-	public WalletEntity save(WalletTransaction walletTransaction) throws InvalidArgumentException {
-		if (null != walletTransaction.getLenderId() && null != walletTransaction.getAmount()
-				&& null != walletTransaction.getTxnType()) {
-			return walletEntityDAO.save(walletTransaction);
-		} else {
-			throw new InvalidArgumentException("Required Valid Input to Perform Operation");
-		}
+	public WalletEntity save(WalletTransaction walletTransaction) {
+		return walletEntityDAO.save(walletTransaction);
 	}
 
 	@Override
-	public WalletData getWallet(Long walletId) throws RecordNotFoundException {
-		WalletData walletData = walletEntityDAO.getWallet(walletId);
-		if (null == walletData) {
-			throw new RecordNotFoundException("walletId Not Found in Record");
-		}
-		return walletData;
+	public WalletData getWallet(Long walletId) {
+		return walletEntityDAO.getWallet(walletId);
 	}
 
 	@Override
@@ -43,29 +32,18 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
-	public List<WalletData> findWalletsListByLenderId(String lenderId) throws RecordNotFoundException {
-		List<WalletData> walletData = walletEntityDAO.findWalletsListByLenderId(lenderId);
-		if (walletData.isEmpty()) {
-			throw new RecordNotFoundException("List of Wallets not found for the given lender-ID");
-		}
-		return walletData;
+	public List<WalletData> findWalletsListByLenderId(String lenderId) {
+		return walletEntityDAO.findWalletsListByLenderId(lenderId);
 	}
 
 	@Override
-	public WalletData getWalletDataByIds(String lenderId, String borrowId) throws RecordNotFoundException {
-		WalletData walletData = walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
-		if (null == walletData) {
-			throw new RecordNotFoundException("Customer or Merchant or both Not Found");
-		}
-		return walletData;
+	public WalletData getWalletDataByIds(String lenderId, String borrowId) {
+		return walletEntityDAO.getWalletDataByIds(lenderId, borrowId);
 	}
 
 	@Override
 	public boolean deleteWallet(long walletId) {
-		boolean deleteWallet = walletEntityDAO.deleteWallet(walletId);
-		if (!deleteWallet) {
-			throw new RecordNotFoundException("Wallet Not Found");
-		}
-		return deleteWallet;
+		return walletEntityDAO.deleteWallet(walletId);
+
 	}
 }

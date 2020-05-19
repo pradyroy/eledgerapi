@@ -1,19 +1,35 @@
-package in.pune.royforge.eledgerapi.data.model;
+package in.pune.royforge.connection.entity;
 
-public class LenderData {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class LenderDataEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column
 	private String name;
 
-	private Long phone;
+	@Column
+	private String shopName;
 
-	private String password;
-
-	private String email;
-
+	@Column
 	private String lenderId;
 
-	private String shopName;
+	@Column
+	private Long phone;
+
+	@Column
+	private String password;
+
+	@Column
+	private String email;
 
 	public String getShopName() {
 		return shopName;
@@ -39,20 +55,20 @@ public class LenderData {
 		this.id = id;
 	}
 
-	public Long getPhone() {
-		return phone;
-	}
-
-	public void setPhone(Long phone) {
-		this.phone = phone;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Long phone) {
+		this.phone = phone;
 	}
 
 	public String getPassword() {
