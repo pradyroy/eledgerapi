@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.pune.royforge.connection.model.AuthRequest;
+import in.pune.royforge.connection.model.LenderData;
 import in.pune.royforge.connection.model.Response;
+import in.pune.royforge.connection.service.AuthenticationUserDetailsService;
 import in.pune.royforge.connection.util.JwtUtil;
 
 @RestController
@@ -28,6 +30,9 @@ public class AuthorizationController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private AuthenticationUserDetailsService authenticationUserDetailsService;
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Response> generateToken(@RequestBody AuthRequest authRequest) throws Exception {
 		try {
@@ -36,7 +41,9 @@ public class AuthorizationController {
 		} catch (Exception ex) {
 			throw new Exception("Invalid UserName/Password");
 		}
-		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.CREATED,
-				jwtUtil.generateToken(authRequest.getUsername())), HttpStatus.CREATED);
+		LenderData lender = authenticationUserDetailsService.getLenderDetails(authRequest.getUsername());
+		return new ResponseEntity<>(
+				new Response(new Date(), lender, jwtUtil.generateToken(authRequest.getUsername()), "success", HttpStatus.CREATED),
+				HttpStatus.CREATED);
 	}
 }
