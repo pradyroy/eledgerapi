@@ -52,4 +52,16 @@ public class LenderController {
 				new Response(new Date(), "success", HttpStatus.CREATED, lenderDataService.save(lenderData)),
 				HttpStatus.CREATED);
 	}
+
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ResponseEntity<Response> signUpLender(@RequestBody LenderData lenderData) {
+		logger.info("calling /lender/signup POST API");
+		boolean isUserCreated = lenderDataService.signUpLender(lenderData);
+		if (!isUserCreated) {
+			return new ResponseEntity<>(new Response(new Date(), "fail", HttpStatus.CONFLICT, isUserCreated),
+					HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.CREATED, isUserCreated),
+				HttpStatus.CREATED);
+	}
 }
