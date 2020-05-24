@@ -56,12 +56,15 @@ public class LenderController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ResponseEntity<Response> signUpLender(@RequestBody LenderData lenderData) {
 		logger.info("calling /lender/signup POST API");
-		boolean isUserCreated = lenderDataService.signUpLender(lenderData);
-		if (!isUserCreated) {
-			return new ResponseEntity<>(new Response(new Date(), "fail", HttpStatus.CONFLICT, isUserCreated),
+		String isUserCreated = lenderDataService.signUpLender(lenderData);
+		if (isUserCreated.equals("EMail Already Present")) {
+			return new ResponseEntity<>(new Response(new Date(), isUserCreated, HttpStatus.CONFLICT, "Fail"),
+					HttpStatus.CONFLICT);
+		} else if (isUserCreated.equals("Phone Already Present")) {
+			return new ResponseEntity<>(new Response(new Date(), isUserCreated, HttpStatus.CONFLICT, "Fail"),
 					HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.CREATED, isUserCreated),
+		return new ResponseEntity<>(new Response(new Date(), "Registration Done", HttpStatus.CREATED, isUserCreated),
 				HttpStatus.CREATED);
 	}
 }

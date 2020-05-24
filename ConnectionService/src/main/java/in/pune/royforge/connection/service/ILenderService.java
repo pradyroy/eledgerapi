@@ -24,5 +24,5 @@ public interface ILenderService {
 	public LenderDataEntity save(@RequestBody LenderData lenderData);
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public boolean signUpLender(@RequestBody LenderData lenderData);
+	public String signUpLender(@RequestBody LenderData lenderData);
 }
