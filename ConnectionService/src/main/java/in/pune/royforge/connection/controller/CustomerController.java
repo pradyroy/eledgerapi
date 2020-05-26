@@ -74,4 +74,11 @@ public class CustomerController {
 				new Response(new Date(), "success", HttpStatus.OK, customerEntityService.getAllCustomers()),
 				HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
+	public ResponseEntity<Response> getCustomerByLenderId(@PathVariable(value = "lenderId") String lenderId) {
+		logger.info("calling /customer/lenderId/ GET API");
+		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.OK,
+				customerEntityService.getCustomerByLenderId(lenderId)), HttpStatus.OK);
+	}
 }

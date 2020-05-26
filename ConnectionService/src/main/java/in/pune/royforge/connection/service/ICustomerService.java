@@ -29,4 +29,6 @@ public interface ICustomerService {
 	@RequestMapping(value = "/allcustomers", method = RequestMethod.GET)
 	List<CustomerData> getAllCustomers();
 
+	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
+	public List<CustomerData> getCustomerByLenderId(@PathVariable(value = "lenderId") String lenderId);
 }
