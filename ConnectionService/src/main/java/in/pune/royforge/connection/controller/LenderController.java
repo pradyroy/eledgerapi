@@ -52,4 +52,41 @@ public class LenderController {
 				new Response(new Date(), "success", HttpStatus.CREATED, lenderDataService.save(lenderData)),
 				HttpStatus.CREATED);
 	}
+
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ResponseEntity<Response> signUpLender(@RequestBody LenderData lenderData) {
+		logger.info("calling /lender/signup POST API");
+		String isUserCreated = lenderDataService.signUpLender(lenderData);
+		if (isUserCreated.equals("EMail Already Present")) {
+			return new ResponseEntity<>(new Response(new Date(), isUserCreated, HttpStatus.CONFLICT, "Fail"),
+					HttpStatus.CONFLICT);
+		} else if (isUserCreated.equals("Phone Already Present")) {
+			return new ResponseEntity<>(new Response(new Date(), isUserCreated, HttpStatus.CONFLICT, "Fail"),
+					HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<>(new Response(new Date(), "Registration Done", HttpStatus.CREATED, isUserCreated),
+				HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
+	public ResponseEntity<Response> getLenderByLenderId(@PathVariable(value = "lenderId") String lenderId) {
+		logger.info("calling  /lender/lenderId/ GET API");
+		if (lenderDataService.getLenderByLenderId(lenderId) == null) {
+			throw new RecordNotFoundException("Lender Not Found in Record");
+		}
+		return new ResponseEntity<>(
+				new Response(new Date(), "success", HttpStatus.OK, lenderDataService.getLenderByLenderId(lenderId)),
+				HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/validatePhoneOrEmail/{phoneOrEmail}", method = RequestMethod.GET)
+	public ResponseEntity<Response> getLenderByPhoneOrEmail(@PathVariable(value = "phoneOrEmail") String phoneOrEmail) {
+		logger.info("calling  /lender/validatePhoneOrEmail/ GET API");
+		if (lenderDataService.getLenderByPhoneOrEmail(phoneOrEmail) == null) {
+			return new ResponseEntity<>(new Response(new Date(), "fail", HttpStatus.NOT_FOUND,
+					lenderDataService.getLenderByPhoneOrEmail(phoneOrEmail)), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(new Response(new Date(), "success", HttpStatus.OK,
+				lenderDataService.getLenderByPhoneOrEmail(phoneOrEmail)), HttpStatus.OK);
+	}
 }

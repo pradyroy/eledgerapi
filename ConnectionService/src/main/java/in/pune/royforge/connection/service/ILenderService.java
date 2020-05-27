@@ -23,4 +23,12 @@ public interface ILenderService {
 	@RequestMapping(method = RequestMethod.POST)
 	public LenderDataEntity save(@RequestBody LenderData lenderData);
 
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String signUpLender(@RequestBody LenderData lenderData);
+
+	@RequestMapping(value = "/lenderId/{lenderId}", method = RequestMethod.GET)
+	public LenderData getLenderByLenderId(@PathVariable(value = "lenderId") String lenderId);
+
+	@RequestMapping(value = "/validatePhoneOrEmail/{phoneOrEmail}", method = RequestMethod.GET)
+	public LenderData getLenderByPhoneOrEmail(@PathVariable(value = "phoneOrEmail") String phoneOrEmail);
 }
