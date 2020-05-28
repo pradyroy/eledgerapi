@@ -7,11 +7,20 @@ import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 
+import eledger.model.AuthRequest;
 import eledger.model.LenderData;
-
 
 public class LenderImpl {
 	Response response;
+
+	public String jwtToken() {
+		AuthRequest auth = new AuthRequest();
+		auth.setUsername("8319972749");
+		auth.setPassword("@Sahil123");
+		response = SerenityRest.rest().given().contentType(ContentType.JSON).when().body(auth)
+				.post("http://localhost:8100/login");
+		return response.then().extract().path("token");
+	}
 
 	@Step
 	public void statusCodeCheck(int statusCode) {
@@ -26,18 +35,21 @@ public class LenderImpl {
 
 	@Step
 	public void getLendersList() {
-		response = SerenityRest.rest().given().when().get("http://localhost:8100/lender/lenders");
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).when()
+				.get("http://localhost:8100/lender/lenders");
 	}
 
 	@Step
 	public void getLenderByUserId(String path, int userId) {
-		response = SerenityRest.rest().given().with().pathParam("path", path).with().pathParam("id", userId).when()
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).with()
+				.pathParam("path", path).with().pathParam("id", userId).when()
 				.get("http://localhost:8100/lender/{path}/{id}");
 	}
 
 	@Step
 	public void getLenderByNonExistingUserId(String path, int userId) {
-		response = SerenityRest.rest().given().with().pathParam("path", path).with().pathParam("id", userId).when()
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).with()
+				.pathParam("path", path).with().pathParam("id", userId).when()
 				.get("http://localhost:8100/lender/{path}/{id}");
 	}
 
@@ -51,7 +63,7 @@ public class LenderImpl {
 		lender.setPhone(phone);
 		lender.setShopName(shopName);
 
-		return SerenityRest.rest().given().contentType(ContentType.JSON).when().body(lender)
-				.post("http://localhost:8100/lender");
+		return SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).contentType(ContentType.JSON)
+				.when().body(lender).post("http://localhost:8100/lender");
 	}
 }

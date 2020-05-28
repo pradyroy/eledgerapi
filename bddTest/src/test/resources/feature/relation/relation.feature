@@ -3,7 +3,7 @@ Feature: Test All Relation User APIs
 	@get_list_of_customer_users
   Scenario: User wants list of customer relational users
     Given User perform GET API for list of relation users
-    When User provides the required lenderId 'Mah9414315028'
+    When User provides the required lenderId 'Sah8319972749'
     Then User should have status code 200 and message 'success'
     
 	@get_list_of_customers_users_not_exist
@@ -15,7 +15,7 @@ Feature: Test All Relation User APIs
 	@get_list_of_report_users
   Scenario: User wants list of reports relational users
     Given User perform GET API for list of reports relation users
-    When User provides the required lenderId 'Mah9414315028' for transaction API
+    When User provides the required lenderId 'Sah8319972749' for transaction API
     Then Response should have status code 200 with  message 'success'
 
     

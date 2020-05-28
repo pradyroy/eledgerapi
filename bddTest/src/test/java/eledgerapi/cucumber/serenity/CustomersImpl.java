@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.junit.Assert;
 
+import eledger.model.AuthRequest;
 import eledger.model.CustomerData;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -16,6 +17,14 @@ import net.thucydides.core.annotations.Step;
 public class CustomersImpl {
 	Response response;
 	int id;
+
+	public String jwtToken() {
+		AuthRequest auth = new AuthRequest();
+		auth.setUsername("8319972749");
+		auth.setPassword("@Sahil123");
+		return SerenityRest.rest().given().contentType(ContentType.JSON).when().body(auth)
+				.post("http://localhost:8100/login").then().extract().path("token");
+	}
 
 	@Step
 	public void postCustomerData() {
@@ -40,26 +49,26 @@ public class CustomersImpl {
 
 	@Step
 	public void getListOfAllCustomers(String url) {
-		response = SerenityRest.rest().given().with().pathParam("url", url).when()
-				.get("http://localhost:8100/customer/{url}");
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).with()
+				.pathParam("url", url).when().get("http://localhost:8100/customer/{url}");
 	}
 
 	@Step
 	public void getListOfCustomers(String url) {
-		response = SerenityRest.rest().given().with().pathParam("url", url).when()
-				.get("http://localhost:8100/customer/{url}");
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).with()
+				.pathParam("url", url).when().get("http://localhost:8100/customer/{url}");
 	}
 
 	@Step
 	public void getCustomerById(String id) {
-		response = SerenityRest.rest().given().with().pathParam("id", id).when()
-				.get("http://localhost:8100/customer/customer/{id}");
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).with()
+				.pathParam("id", id).when().get("http://localhost:8100/customer/customer/{id}");
 	}
 
 	@Step
 	public void getCustomerByIdThatNotExisted(String id) {
-		response = SerenityRest.rest().given().with().pathParam("id", id).when()
-				.get("http://localhost:8100/customer/customer/{id}");
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).with()
+				.pathParam("id", id).when().get("http://localhost:8100/customer/customer/{id}");
 	}
 
 	@Step
@@ -71,13 +80,14 @@ public class CustomersImpl {
 	@Step
 	public void deleteCustomerById() {
 		id = response.then().extract().path("data.id");
-		response = SerenityRest.rest().given().when().delete("http://localhost:8100/customer/customer/" + id);
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).when()
+				.delete("http://localhost:8100/customer/customer/" + id);
 	}
 
 	@Step
 	public void deleteCustomerByIdThatNotExisted(String id) {
-		response = SerenityRest.rest().given().with().pathParam("id", id).when()
-				.delete("http://localhost:8100/customer/customer/{id}");
+		response = SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).with()
+				.pathParam("id", id).when().delete("http://localhost:8100/customer/customer/{id}");
 	}
 
 	// Method to push customer data to database
@@ -89,7 +99,7 @@ public class CustomersImpl {
 		customerData.setBorrowId(uuId.toString());
 		customerData.setLenderId(lenderId);
 		customerData.setIsDeleted(false);
-		return SerenityRest.rest().given().contentType(ContentType.JSON).when().body(customerData)
-				.post("http://localhost:8100/customer");
+		return SerenityRest.rest().given().header("Authorization", "Bearer " + jwtToken()).contentType(ContentType.JSON)
+				.when().body(customerData).post("http://localhost:8100/customer");
 	}
 }
